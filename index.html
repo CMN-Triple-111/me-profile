@@ -1,0 +1,774 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    <meta name="description" content="Matt Essentials - Senior Software Engineer crafting premium web experiences.">
+    <title>Matt Essentials Solutions</title>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="icon" href="/matt_logo.png" type="image/png">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Scripts -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest" defer></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        mono: ['ui-monospace', 'SFMono-Regular', 'Menlo', 'Monaco', 'Consolas', "Liberation Mono", "Courier New", 'monospace'],
+                    },
+                    colors: {
+                        brand: {
+                            100: '#dad2f4',
+                            200: '#fce38a',
+                            300: '#79d2a6'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        /* Base & Resets */
+        body { 
+            font-family: 'Inter', sans-serif; 
+            background: rgb(9, 9, 11);
+            color: white;
+            overflow-x: hidden;
+            /* Removed overflow-y: hidden to allow native scrolling and fix mobile UX */
+        }
+
+        /* Hide scrollbar but keep functionality */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #09090b; 
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #3f3f46; 
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #52525b; 
+        }
+
+        /* Custom Eye CSS */
+        .eye-box {
+            position: absolute;
+            top: 100px;
+            right: 10%;
+            display: flex;
+            gap: 10px;
+            z-index: 10;
+        }
+
+        .eye {
+            width: 50px;
+            height: 50px;
+            background: #fff;
+            border: 3px solid #000;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+        }
+
+        .pupil {
+            width: 20px;
+            height: 20px;
+            background: #000;
+            border-radius: 50%;
+            transition: transform 0.1s ease-out; /* Smoother transition */
+            position: relative;
+            will-change: transform;
+        }
+
+        .eyelid {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 0%;
+            background: #fff;
+            z-index: 2;
+            animation: blink 4s infinite;
+        }
+
+        @keyframes blink {
+            0%, 96%, 100% { height: 0%; }
+            97%, 99%      { height: 100%; }
+        }
+
+        .cross .pupil-left { transform: translate(5px, 0) !important; }
+        .cross .pupil-right { transform: translate(-5px, 0) !important; }
+
+        /* Section 4 Popups (We Create) */
+        #popup-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.95);
+            color: white;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.5s ease;
+        }
+
+        #popup-overlay.visible {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .scene {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            pointer-events: none;
+            overflow: hidden;
+        }
+
+        .scene1 {
+            display: grid;
+            grid-template-rows: repeat(4, 1fr);
+            text-transform: uppercase;
+            font-size: 8vw;
+            transform: rotate(-10deg);
+            opacity: 1;
+        }
+
+        .scene1-line {
+            white-space: nowrap;
+            position: relative;
+            animation: 2.5s linear infinite;
+            opacity: 0.85;
+            will-change: transform;
+        }
+
+        .diag-down-up { animation-name: diagDownUp; }
+        .diag-up-down { animation-name: diagUpDown; }
+
+        @keyframes diagDownUp {
+            0% { transform: translate(-20%, 20%); }
+            100% { transform: translate(20%, -20%); }
+        }
+        @keyframes diagUpDown {
+            0% { transform: translate(20%, -20%); }
+            100% { transform: translate(-20%, 20%); }
+        }
+        
+        .scene2 { font-size: 5vw; font-weight: bold; text-transform: uppercase; opacity: 0; }
+        .scene2.active { animation: fadeInOut 1.5s forwards; }
+
+        @keyframes fadeInOut {
+            0% { opacity: 0; }
+            20%, 80% { opacity: 1; }
+            100% { opacity: 0; }
+        }
+
+        .flash-text { position: absolute; }
+        .move-up { animation: moveAwayUp 1.2s ease-out forwards; }
+        .move-down { animation: moveAwayDown 1.2s ease-out forwards; }
+        .flash-center { animation: flashAnim 0.3s linear 4; }
+
+        @keyframes moveAwayUp {
+            0% { transform: translateY(0) scale(1); opacity: 1; }
+            100% { transform: translateY(-120%) scale(1.2); opacity: 0; }
+        }
+        @keyframes moveAwayDown {
+            0% { transform: translateY(0) scale(1); opacity: 1; }
+            100% { transform: translateY(120%) scale(1.2); opacity: 0; }
+        }
+        @keyframes flashAnim {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.1; }
+        }
+
+        /* Horizontal Scroll Elements */
+        .child-1-h1 {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .child-1-h1.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .design-video {
+            box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
+            will-change: transform;
+        }
+    </style>
+</head>
+<body class="min-h-screen bg-zinc-950 text-zinc-50 selection:bg-indigo-500 selection:text-white antialiased">
+
+    <!-- Navigation -->
+    <nav id="navbar" class="fixed w-full z-50 transition-all duration-300 py-6 bg-transparent">
+        <div class="max-w-7xl mx-auto px-6 md:px-12 flex justify-between items-center">
+            <div class="flex items-center gap-2 z-50 cursor-pointer" onclick="window.scrollTo(0,0)">
+                <div class=" flex items-center justify-center font-bold text-lg shadow-lg">
+                    <img src="/matt_logo.png" alt="Matt Essentials Logo" class="w-8 h-10" />
+                </div>
+                <span class="font-semibold text-lg tracking-tight hidden sm:block">Matt Essentials</span>
+            </div>
+
+            <!-- Desktop Nav -->
+            <div class="hidden md:flex items-center gap-8 text-sm font-medium text-zinc-400">
+                <a href="#work" class="hover:text-white transition-colors">Work</a>
+                <a href="#expertise" class="hover:text-white transition-colors">Expertise</a>
+                <a href="#about" class="hover:text-white transition-colors">About</a>
+                <a href="#contact" class="px-5 py-2.5 rounded-full bg-zinc-50 text-zinc-950 hover:bg-zinc-200 transition-all font-semibold flex items-center gap-2 shadow-lg shadow-white/5">
+                    Let's Talk <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                </a>
+            </div>
+
+            <!-- Mobile Menu Button -->
+            <button id="mobile-menu-btn" aria-label="Toggle Menu" class="md:hidden z-50 p-2 text-zinc-300 hover:text-white transition-colors">
+                <i data-lucide="menu" id="menu-icon" class="w-6 h-6"></i>
+                <i data-lucide="x" id="close-icon" class="w-6 h-6 hidden"></i>
+            </button>
+        </div>
+
+        <!-- Mobile Nav Dropdown -->
+        <div id="mobile-menu" class="fixed inset-0 bg-zinc-950/95 backdrop-blur-xl z-40 flex flex-col justify-center items-center gap-8 transition-transform duration-500 ease-in-out md:hidden translate-x-full">
+            <a href="#work" class="mobile-link text-4xl font-bold hover:text-indigo-400 transition-colors">Work</a>
+            <a href="#expertise" class="mobile-link text-4xl font-bold hover:text-indigo-400 transition-colors">Expertise</a>
+            <a href="#about" class="mobile-link text-4xl font-bold hover:text-indigo-400 transition-colors">About</a>
+            <a href="#contact" class="mobile-link text-4xl font-bold text-indigo-500 hover:text-indigo-400 transition-colors">Contact</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="relative pt-40 pb-20 md:pt-52 md:pb-32 px-6 md:px-12 max-w-7xl mx-auto" id="eyeContainer">
+        <!-- Abstract Background Elements -->
+        <div class="absolute top-0 right-0 w-[600px] h-[600px] bg-indigo-900/20 rounded-full blur-[120px] -z-10 pointer-events-none"></div>
+        <div class="absolute bottom-0 left-0 w-[400px] h-[400px] bg-purple-900/10 rounded-full blur-[100px] -z-10 pointer-events-none"></div>
+
+        <!-- Eyes Interaction -->
+        <div class="eye-box hidden md:flex" id="eyeBox">
+            <div class="eye"><div class="eyelid"></div><div class="pupil pupil-left"></div></div>
+            <div class="eye"><div class="eyelid"></div><div class="pupil pupil-right"></div></div>
+        </div>
+        
+        <div class="max-w-4xl relative z-10">
+            <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-zinc-900 border border-zinc-800 text-sm font-medium text-zinc-300 mb-8 shadow-sm">
+                <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse shadow-[0_0_8px_rgba(16,185,129,0.8)]"></span>
+                Available for new projects
+            </div>
+            
+            <h1 class="text-5xl md:text-7xl lg:text-8xl font-bold tracking-tighter leading-[1.05] mb-8">
+                Digital solutions.<br />
+                <span class="text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 to-purple-500">
+                    Engineered for scale.
+                </span>
+            </h1>
+            
+            <p class="text-lg md:text-2xl text-zinc-400 max-w-2xl font-light leading-relaxed mb-12">
+                I'm Matt, a senior software engineer crafting premium web experiences, robust backend architectures, and elegant user interfaces.
+            </p>
+            
+            <div class="flex flex-col sm:flex-row gap-4">
+                <a href="#work" class="px-8 py-4 rounded-full bg-white text-zinc-950 font-semibold text-center hover:bg-zinc-200 transition-all flex items-center justify-center gap-2 group">
+                    View Selected Work
+                    <i data-lucide="arrow-right" class="w-4 h-4 group-hover:translate-x-1 transition-transform"></i>
+                </a>
+                <a href="#contact" class="px-8 py-4 rounded-full bg-zinc-900 text-white font-semibold text-center hover:bg-zinc-800 border border-zinc-700 transition-all flex items-center justify-center gap-2">
+                    <i data-lucide="github" class="w-4 h-4"></i>
+                    GitHub Profile
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Expertise / Services Section -->
+    <section id="expertise" class="py-24 px-6 md:px-12 bg-zinc-900/30 border-y border-zinc-800/50">
+        <div class="max-w-7xl mx-auto">
+            <div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-16 gap-6">
+                <div>
+                    <h2 class="text-3xl md:text-5xl font-bold tracking-tight mb-4">Core Expertise</h2>
+                    <p class="text-zinc-400 max-w-lg text-lg">Delivering end-to-end solutions with a focus on performance, scalability, and modern design principles.</p>
+                </div>
+                <a href="#contact" class="text-indigo-400 hover:text-indigo-300 font-medium flex items-center gap-1 group whitespace-nowrap">
+                    Discuss your project <i data-lucide="arrow-up-right" class="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform"></i>
+                </a>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Service Cards -->
+                <div class="bg-zinc-900 border border-zinc-800 p-8 rounded-3xl hover:-translate-y-2 hover:border-zinc-700 transition-all duration-300 group">
+                    <div class="mb-6 p-4 bg-zinc-950 rounded-2xl inline-block group-hover:scale-110 transition-transform text-indigo-400 shadow-inner">
+                        <i data-lucide="layout" class="w-8 h-8"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3">Frontend Development</h3>
+                    <p class="text-zinc-400 leading-relaxed text-sm">React, Next.js, Vue. Crafting pixel-perfect, responsive, and highly interactive user interfaces.</p>
+                </div>
+                
+                <div class="bg-zinc-900 border border-zinc-800 p-8 rounded-3xl hover:-translate-y-2 hover:border-zinc-700 transition-all duration-300 group">
+                    <div class="mb-6 p-4 bg-zinc-950 rounded-2xl inline-block group-hover:scale-110 transition-transform text-purple-400 shadow-inner">
+                        <i data-lucide="database" class="w-8 h-8"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3">Backend Architecture</h3>
+                    <p class="text-zinc-400 leading-relaxed text-sm">Node.js, Python, PostgreSQL. Building secure, scalable APIs and robust database structures.</p>
+                </div>
+                
+                <div class="bg-zinc-900 border border-zinc-800 p-8 rounded-3xl hover:-translate-y-2 hover:border-zinc-700 transition-all duration-300 group">
+                    <div class="mb-6 p-4 bg-zinc-950 rounded-2xl inline-block group-hover:scale-110 transition-transform text-pink-400 shadow-inner">
+                        <i data-lucide="smartphone" class="w-8 h-8"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3">Mobile Optimization</h3>
+                    <p class="text-zinc-400 leading-relaxed text-sm">Ensuring flawless performance and adaptive layouts across all devices and screen sizes.</p>
+                </div>
+                
+                <div class="bg-zinc-900 border border-zinc-800 p-8 rounded-3xl hover:-translate-y-2 hover:border-zinc-700 transition-all duration-300 group">
+                    <div class="mb-6 p-4 bg-zinc-950 rounded-2xl inline-block group-hover:scale-110 transition-transform text-emerald-400 shadow-inner">
+                        <i data-lucide="code" class="w-8 h-8"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3">Clean Code Practices</h3>
+                    <p class="text-zinc-400 leading-relaxed text-sm">TypeScript, testing, and CI/CD pipelines for maintainable, enterprise-grade software.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Optimized Horizontal Scroll Section (Native Sticky) -->
+    <!-- h-[300vh] defines the scroll distance. 3 panels = 3 screens -->
+    <section id="horizontal-wrapper" class="relative h-[300vh] hidden md:block">
+        <div class="sticky top-0 h-screen w-full overflow-hidden bg-zinc-950">
+            <!-- The track that moves left -->
+            <div id="horiz-track" class="flex h-full w-[300vw] will-change-transform">
+                
+                <!-- Panel 1 -->
+                <div class="w-screen h-full flex flex-col items-center justify-center bg-white text-zinc-950 shrink-0">
+                    <h1 class="child-1-h1 text-5xl md:text-7xl font-bold max-w-3xl text-center leading-tight">
+                        What About Matt Essentials?
+                    </h1>
+                </div>
+
+                <!-- Panel 2 -->
+                <div class="w-screen h-full flex items-center justify-center bg-brand-100 shrink-0 p-12">
+                    <div class="relative w-full max-w-7xl h-[80vh] rounded-[3rem] overflow-hidden flex flex-col justify-end p-12">
+                        <!-- Replaced broken local video with placeholder -->
+                        <video id="designVideo1" class="design-video absolute top-12 left-12 w-[600px] h-[300px] object-cover rounded-[2rem] z-10" autoplay muted loop playsinline>
+                            <source src="/Q1.mp4" type="video/mp4" />
+                        </video>
+                        <div class="relative z-20 w-3/4">
+                            <h2 class="text-4xl md:text-6xl font-bold text-zinc-900 ">We help our clients to shine online</h2>
+                            <p class="text-2xl text-zinc-700 max-w-2xl">We collaborate as a collective of individuals bringing their whole self to a project.</p>
+                        </div>
+                        <h4 class="absolute bottom-12 right-12 text-7xl font-bold text-zinc-900/20 z-0">01</h4>
+                    </div>
+                </div>
+
+                <!-- Panel 3 -->
+                <div class="w-screen h-full flex items-center justify-center bg-brand-200 shrink-0 p-12">
+                    <div class="relative w-full max-w-7xl h-[80vh] rounded-[3rem] overflow-hidden flex flex-col justify-end p-12">
+                         <!-- Replaced broken local video with placeholder -->
+                        <video id="designVideo2" class="design-video absolute top-12 left-12 w-[600px] h-[300px] object-cover rounded-[2rem] z-10" autoplay muted loop playsinline>
+                            <source src="/Q2_3.mp4" type="video/mp4" />
+                        </video>
+                        <div class="relative z-20 w-3/4">
+                            <h2 class="text-4xl md:text-6xl font-bold text-zinc-900">We translate research into solutions</h2>
+                            <p class="text-2xl text-zinc-700 max-w-2xl">We offer a complete process from discovery, branding, design, launch to post-launch optimization and testing.</p>
+                        </div>
+                        <h4 class="absolute bottom-12 right-12 text-7xl font-bold text-zinc-900/20 z-0">02</h4>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Invisible trigger for the animation popup -->
+    <div id="trigger-section4" class="h-10 w-full bg-zinc-950"></div>
+
+    <!-- The Animation Popup Overlay (Converted from original fixed code) -->
+    <div id="popup-overlay">
+        <div class="scene scene1" id="scene1">
+            <div class="scene1-line diag-down-up">We Create • We Create • We Create • We Create •</div>
+            <div class="scene1-line diag-up-down">We Create • We Create • We Create • We Create •</div>
+            <div class="scene1-line diag-down-up">We Create • We Create • We Create • We Create •</div>
+            <div class="scene1-line diag-up-down">We Create • We Create • We Create • We Create •</div>
+        </div>
+        <div class="scene scene2" id="scene2">
+            <div class="flash-text move-up" style="top:20%;">We Create</div>
+            <div class="flash-text move-up" style="top:40%;">We Create</div>
+            <div class="flash-text move-down" style="bottom:40%;">We Create</div>
+            <div class="flash-text move-down" style="bottom:20%;">We Create</div>
+            <div class="flash-center">We Create</div>
+        </div>
+    </div>
+
+    <!-- Selected Work Section -->
+    <section id="work" class="py-24 md:py-32 px-6 md:px-12 max-w-7xl mx-auto relative z-10 bg-zinc-950">
+        <h2 class="text-4xl md:text-6xl font-bold tracking-tight mb-16 text-center">Selected Work</h2>
+        
+        <div class="flex flex-col gap-16 md:gap-24">
+            <!-- Project 1 -->
+            <div class="group flex flex-col lg:flex-row gap-8 items-center">
+                <div class="w-full lg:w-3/5 overflow-hidden rounded-[2rem] bg-zinc-900 border border-zinc-800 relative aspect-video flex items-center justify-center">
+                    <iframe src="https://gns-corporation.com" class="absolute inset-0 w-full h-full border-0 bg-white" title="GNS Corporations" loading="lazy"></iframe>
+                    <div class="absolute inset-0 bg-gradient-to-br from-indigo-500/20 to-purple-600/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-10 pointer-events-none"></div>
+                </div>
+                <div class="w-full lg:w-2/5 flex flex-col gap-6">
+                    <div class="flex flex-wrap gap-2">
+                        <span class="px-3 py-1 text-xs font-medium border border-zinc-700 rounded-full text-zinc-300 bg-zinc-800/50">Corporate</span>
+                        <span class="px-3 py-1 text-xs font-medium border border-zinc-700 rounded-full text-zinc-300 bg-zinc-800/50">Web Design</span>
+                    </div>
+                    <h3 class="text-3xl md:text-4xl font-bold">GNS Corporations</h3>
+                    <p class="text-zinc-400 text-lg leading-relaxed">
+                        A modern corporate web presence built for scale, showcasing business services with a sleek, responsive design and intuitive navigation.
+                    </p>
+                    <a href="https://gns-corporation.com/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 text-white font-semibold mt-2 hover:text-indigo-400 transition-colors w-fit group-hover:underline decoration-indigo-400 underline-offset-4">
+                        Visit Website <i data-lucide="external-link" class="w-4 h-4"></i>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Project 2 (Reversed) -->
+            <div class="group flex flex-col lg:flex-row-reverse gap-8 items-center">
+                <div class="w-full lg:w-3/5 overflow-hidden rounded-[2rem] bg-zinc-900 border border-zinc-800 relative aspect-video flex items-center justify-center">
+                    <iframe src="https://zyoa.org" class="absolute inset-0 w-full h-full border-0 bg-white" title="ZYOA" loading="lazy"></iframe>
+                    <div class="absolute inset-0 bg-gradient-to-bl from-emerald-500/20 to-teal-600/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-10 pointer-events-none"></div>
+                </div>
+                <div class="w-full lg:w-2/5 flex flex-col gap-6 lg:pr-8">
+                    <div class="flex flex-wrap gap-2">
+                        <span class="px-3 py-1 text-xs font-medium border border-zinc-700 rounded-full text-zinc-300 bg-zinc-800/50">Platform</span>
+                        <span class="px-3 py-1 text-xs font-medium border border-zinc-700 rounded-full text-zinc-300 bg-zinc-800/50">CMS</span>
+                    </div>
+                    <h3 class="text-3xl md:text-4xl font-bold">ZYOA Organization</h3>
+                    <p class="text-zinc-400 text-lg leading-relaxed">
+                        A comprehensive digital platform designed to support community initiatives, featuring dynamic content management and accessible UI.
+                    </p>
+                    <a href="https://zyoa.org" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 text-white font-semibold mt-2 hover:text-emerald-400 transition-colors w-fit group-hover:underline decoration-emerald-400 underline-offset-4">
+                        Visit Website <i data-lucide="external-link" class="w-4 h-4"></i>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Project 3 -->
+            <div class="group flex flex-col lg:flex-row gap-8 items-center">
+                <div class="w-full lg:w-3/5 overflow-hidden rounded-[2rem] bg-zinc-900 border border-zinc-800 relative aspect-video flex items-center justify-center">
+                    <iframe src="https://stmovensschool.com" class="absolute inset-0 w-full h-full border-0 bg-white" title="St. Moven's School" loading="lazy"></iframe>
+                    <div class="absolute inset-0 bg-gradient-to-br from-pink-500/20 to-orange-600/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-10 pointer-events-none"></div>
+                </div>
+                <div class="w-full lg:w-2/5 flex flex-col gap-6">
+                    <div class="flex flex-wrap gap-2">
+                        <span class="px-3 py-1 text-xs font-medium border border-zinc-700 rounded-full text-zinc-300 bg-zinc-800/50">Education</span>
+                        <span class="px-3 py-1 text-xs font-medium border border-zinc-700 rounded-full text-zinc-300 bg-zinc-800/50">Portal</span>
+                    </div>
+                    <h3 class="text-3xl md:text-4xl font-bold">St. Moven's School</h3>
+                    <p class="text-zinc-400 text-lg leading-relaxed">
+                        An engaging educational portal connecting students, parents, and faculty with streamlined resource access and event tracking.
+                    </p>
+                    <a href="https://stmovensschool.com" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 text-white font-semibold mt-2 hover:text-pink-400 transition-colors w-fit group-hover:underline decoration-pink-400 underline-offset-4">
+                        Visit Website <i data-lucide="external-link" class="w-4 h-4"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="mt-20 flex justify-center">
+            <button class="px-8 py-4 rounded-full bg-zinc-900 border border-zinc-700 text-white hover:bg-zinc-800 hover:scale-105 transition-all font-medium shadow-lg">
+                View All Projects
+            </button>
+        </div>
+    </section>
+
+    <!-- Tech Stack Marquee -->
+    <div class="py-12 border-y border-zinc-800/50 bg-zinc-900/30 flex items-center justify-center relative z-10">
+        <div class="flex flex-wrap justify-center gap-8 md:gap-16 px-6 max-w-7xl mx-auto opacity-50 grayscale hover:grayscale-0 transition-all duration-500">
+            <span class="text-xl md:text-2xl font-bold tracking-widest text-zinc-500 hover:text-blue-400 transition-colors">React</span>
+            <span class="text-xl md:text-2xl font-bold tracking-widest text-zinc-500 hover:text-blue-500 transition-colors">TypeScript</span>
+            <span class="text-xl md:text-2xl font-bold tracking-widest text-zinc-500 hover:text-green-500 transition-colors">Node.js</span>
+            <span class="text-xl md:text-2xl font-bold tracking-widest text-zinc-500 hover:text-white transition-colors">Next.js</span>
+            <span class="text-xl md:text-2xl font-bold tracking-widest text-zinc-500 hover:text-blue-400 transition-colors">PostgreSQL</span>
+            <span class="text-xl md:text-2xl font-bold tracking-widest text-zinc-500 hover:text-teal-400 transition-colors">Tailwind</span>
+            <span class="text-xl md:text-2xl font-bold tracking-widest text-zinc-500 hover:text-orange-400 transition-colors">AWS</span>
+        </div>
+    </div>
+
+    <!-- About Section -->
+    <section id="about" class="py-24 md:py-32 px-6 md:px-12 max-w-7xl mx-auto relative z-10">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+            <div>
+                <h2 class="text-4xl md:text-5xl font-bold tracking-tight mb-8">Engineering with intention.</h2>
+                <div class="space-y-6 text-lg text-zinc-400 leading-relaxed">
+                    <p>At Matt Essentials Solutions, the philosophy is simple: write code that not only works but is a joy to read, maintain, and scale.</p>
+                    <p>With over 8 years of experience building digital products for startups and enterprise clients alike, I bridge the gap between complex technical requirements and stunning, intuitive user experiences.</p>
+                    <p>I don't just build websites; I engineer robust software solutions that drive business growth and elevate brand presence in a digital-first world.</p>
+                </div>
+                
+                <div class="mt-10 grid grid-cols-2 gap-8 border-t border-zinc-800/50 pt-10">
+                    <div>
+                        <h4 class="text-5xl font-bold text-white mb-2">50+</h4>
+                        <p class="text-sm text-zinc-400 uppercase tracking-wider font-semibold">Projects Delivered</p>
+                    </div>
+                    <div>
+                        <h4 class="text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-teal-500 mb-2">100%</h4>
+                        <p class="text-sm text-zinc-400 uppercase tracking-wider font-semibold">Client Satisfaction</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Code visual -->
+            <div class="relative group">
+                <div class="aspect-square rounded-[3rem] bg-zinc-900 border border-zinc-800 p-8 relative overflow-hidden shadow-2xl transition-transform duration-500 group-hover:-translate-y-2">
+                    <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-indigo-900/30 via-zinc-900/50 to-zinc-900/80"></div>
+                    <div class="h-full w-full border border-zinc-800/50 rounded-2xl p-6 md:p-8 flex flex-col gap-4 relative z-10 font-mono text-sm md:text-base text-indigo-300/70 shadow-inner bg-zinc-950/50">
+                        <div class="flex gap-2 mb-4">
+                            <div class="w-3 h-3 rounded-full bg-red-500/80"></div>
+                            <div class="w-3 h-3 rounded-full bg-yellow-500/80"></div>
+                            <div class="w-3 h-3 rounded-full bg-green-500/80"></div>
+                        </div>
+                        <p><span class="text-pink-400">const</span> <span class="text-blue-300">developer</span> = {</p>
+                        <p class="pl-4">name: <span class="text-emerald-300">'Matt'</span>,</p>
+                        <p class="pl-4">role: <span class="text-emerald-300">'Full Stack Engineer'</span>,</p>
+                        <p class="pl-4">passion: <span class="text-emerald-300">'Pixel Perfection'</span>,</p>
+                        <p class="pl-4">coffeeLevel: <span class="text-orange-300">9999</span></p>
+                        <p>};</p>
+                        <br/>
+                        <p><span class="text-pink-400">while</span> (<span class="text-blue-300">alive</span>) {</p>
+                        <p class="pl-4 text-zinc-300">code();</p>
+                        <p class="pl-4 text-zinc-300">deploy();</p>
+                        <p class="pl-4 text-zinc-300">innovate();</p>
+                        <p>}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer / CTA -->
+    <footer id="contact" class="bg-zinc-950 pt-24 pb-12 border-t border-zinc-800 relative z-10">
+        <div class="max-w-7xl mx-auto px-6 md:px-12 text-center flex flex-col items-center">
+            <h2 class="text-5xl md:text-8xl font-bold tracking-tighter mb-8 max-w-4xl hover:text-indigo-400 transition-colors cursor-default">
+                Have an idea? <br/>Let's build it.
+            </h2>
+            <p class="text-xl text-zinc-400 mb-12 max-w-2xl">
+                Currently accepting new projects. Reach out to discuss how Matt Essentials Solutions can help you achieve your technical goals.
+            </p>
+            
+            <a href="mailto:hello@mattessentials.online" class="px-10 py-5 rounded-full bg-white text-zinc-950 font-bold text-lg hover:bg-zinc-200 transition-transform hover:-translate-y-1 flex items-center gap-3 shadow-[0_0_40px_rgba(255,255,255,0.1)] mb-24">
+                <i data-lucide="mail" class="w-6 h-6"></i>
+                hello@mattessentials.online
+            </a>
+            
+            <div class="w-full flex flex-col md:flex-row justify-between items-center gap-6 pt-12 border-t border-zinc-800/50">
+                <div class="flex items-center gap-2">
+                    <div class="flex items-center justify-center ">
+                        <img src="/matt_logo.png" alt="Matt Essentials Logo" class="w-8 h-12" />
+                    </div>
+                    <span class="font-semibold text-sm">Matt Essentials Solutions</span>
+                </div>
+                
+                <div class="flex gap-6">
+                    <a href="#" aria-label="Github" class="text-zinc-400 hover:text-white transition-colors">
+                        <i data-lucide="github" class="w-5 h-5"></i>
+                    </a>
+                    <a href="#" aria-label="LinkedIn" class="text-zinc-400 hover:text-white transition-colors">
+                        <i data-lucide="linkedin" class="w-5 h-5"></i>
+                    </a>
+                </div>
+                
+                <p class="text-zinc-500 text-sm" id="copyright-year"></p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Optimized Scripts Section -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // 1. Initialize Icons & Dates
+            if(window.lucide) lucide.createIcons();
+            document.getElementById('copyright-year').textContent = `© ${new Date().getFullYear()} Matt Essentials Solutions. All rights reserved.`;
+
+            // 2. Navigation & Mobile Menu Logic
+            const navbar = document.getElementById('navbar');
+            const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const menuIcon = document.getElementById('menu-icon');
+            const closeIcon = document.getElementById('close-icon');
+            let isMenuOpen = false;
+
+            const toggleMenu = () => {
+                isMenuOpen = !isMenuOpen;
+                mobileMenu.classList.toggle('translate-x-full', !isMenuOpen);
+                mobileMenu.classList.toggle('translate-x-0', isMenuOpen);
+                menuIcon.classList.toggle('hidden', isMenuOpen);
+                closeIcon.classList.toggle('hidden', !isMenuOpen);
+            };
+
+            mobileMenuBtn.addEventListener('click', toggleMenu);
+            document.querySelectorAll('.mobile-link').forEach(link => link.addEventListener('click', toggleMenu));
+
+            // 3. Eye Tracking Logic (Optimized with requestAnimationFrame)
+            const container = document.getElementById('eyeContainer');
+            const eyes = document.querySelectorAll('.eye');
+            const pupils = document.querySelectorAll('.pupil');
+            const eyeBox = document.getElementById('eyeBox');
+            let mouseX = 0, mouseY = 0, ticking = false;
+
+            if(container && eyeBox) {
+                container.addEventListener('mousemove', (e) => {
+                    mouseX = e.clientX; mouseY = e.clientY;
+                    if (!ticking) {
+                        requestAnimationFrame(updateEyes);
+                        ticking = true;
+                    }
+                });
+
+                container.addEventListener('mouseleave', () => {
+                    if (eyeBox.classList.contains('cross')) return;
+                    pupils.forEach(pupil => pupil.style.transform = 'translate(0, 0)');
+                });
+
+                container.addEventListener('click', () => {
+                    eyeBox.classList.toggle('cross');
+                    if (!eyeBox.classList.contains('cross')) {
+                        pupils.forEach(pupil => pupil.style.transform = 'translate(0, 0)');
+                    }
+                });
+
+                function updateEyes() {
+                    if (eyeBox.classList.contains('cross')) { ticking = false; return; }
+                    eyes.forEach((eye, index) => {
+                        const pupil = pupils[index];
+                        const rect = eye.getBoundingClientRect();
+                        const centerX = rect.left + rect.width / 2;
+                        const centerY = rect.top + rect.height / 2;
+                        const deltaX = mouseX - centerX;
+                        const deltaY = mouseY - centerY;
+                        const angle = Math.atan2(deltaY, deltaX);
+                        const distance = Math.min(12, Math.hypot(deltaX, deltaY)); // Max eye travel distance
+                        const x = Math.cos(angle) * distance;
+                        const y = Math.sin(angle) * distance;
+                        pupil.style.transform = `translate(${x}px, ${y}px)`;
+                    });
+                    ticking = false;
+                }
+            }
+
+            // 4. Scroll Tracking Logic (Nav Style, Horizontal Section, Animations)
+            const horizWrapper = document.getElementById('horizontal-wrapper');
+            const horizTrack = document.getElementById('horiz-track');
+            const child1h1 = document.querySelector('.child-1-h1');
+            const v1 = document.getElementById('designVideo1');
+            const v2 = document.getElementById('designVideo2');
+            let scrollTicking = false;
+
+            window.addEventListener('scroll', () => {
+                if (!scrollTicking) {
+                    window.requestAnimationFrame(() => {
+                        handleScroll();
+                        scrollTicking = false;
+                    });
+                    scrollTicking = true;
+                }
+            });
+
+            function handleScroll() {
+                const scrollY = window.scrollY;
+                
+                // Navbar styles
+                if (scrollY > 50) {
+                    navbar.classList.add('py-4', 'bg-zinc-950/80', 'backdrop-blur-lg', 'border-b', 'border-zinc-800');
+                    navbar.classList.remove('py-6', 'bg-transparent');
+                } else {
+                    navbar.classList.add('py-6', 'bg-transparent');
+                    navbar.classList.remove('py-4', 'bg-zinc-950/80', 'backdrop-blur-lg', 'border-b', 'border-zinc-800');
+                }
+
+                // Horizontal Scroll Logic (Native Sticky Calculation)
+                if(horizWrapper && horizTrack && window.innerWidth >= 768) { // Only run on md+ screens
+                    const rect = horizWrapper.getBoundingClientRect();
+                    const winH = window.innerHeight;
+                    const containerHeight = rect.height - winH;
+                    
+                    // Are we inside the sticky scrolling area?
+                    if (rect.top <= 0 && rect.bottom >= winH) {
+                        const progress = Math.abs(rect.top) / containerHeight;
+                        
+                        // 1. Move track horizontally (0 to -200vw for 3 panels)
+                        const moveX = progress * 200; 
+                        horizTrack.style.transform = `translateX(-${moveX}vw)`;
+                        
+                        // 2. Text animation for panel 1
+                        if(progress > 0.05) child1h1.classList.add('visible');
+                        else child1h1.classList.remove('visible');
+
+                        // 3. Parallax effect for videos inside their panels
+                        // Panel 2 is active mostly between progress 0.33 and 0.66
+                        if(v1) {
+                            const v1Prog = Math.max(0, Math.min(1, (progress - 0.2) * 2));
+                            v1.style.transform = `translateX(${v1Prog * 60}px) scale(${1 + v1Prog * 0.05})`;
+                        }
+                        // Panel 3 is active mostly between progress 0.66 and 1.0
+                        if(v2) {
+                            const v2Prog = Math.max(0, Math.min(1, (progress - 0.6) * 2));
+                            v2.style.transform = `translateX(${v2Prog * 60}px) scale(${1 + v2Prog * 0.05})`;
+                        }
+                    } else if (rect.top > 0) {
+                        horizTrack.style.transform = `translateX(0vw)`;
+                    } else {
+                        horizTrack.style.transform = `translateX(-200vw)`;
+                    }
+                }
+            }
+            
+            // Initial call to set positions
+            handleScroll(); 
+
+            // 5. Popup Interaction Observer (Replaces buggy scroll trigger)
+            const popupOverlay = document.getElementById('popup-overlay');
+            const scene2 = document.getElementById('scene2');
+            const trigger = document.getElementById('trigger-section4');
+            let popupTriggered = false;
+
+            if(trigger && popupOverlay) {
+                const popupObserver = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting && !popupTriggered) {
+                            popupTriggered = true;
+                            
+                            // Show Overlay
+                            popupOverlay.classList.add('visible');
+                            
+                            // Trigger scene 2 animation after 800ms
+                            setTimeout(() => {
+                                document.getElementById('scene1').style.opacity = 0;
+                                scene2.classList.add('active');
+                            }, 800);
+
+                            // Hide popup completely and resume flow
+                            setTimeout(() => {
+                                popupOverlay.classList.remove('visible');
+                            }, 2300);
+                        }
+                    });
+                }, { threshold: 0.5 });
+                
+                popupObserver.observe(trigger);
+            }
+        });
+    </script>
+</body>
+</html>
