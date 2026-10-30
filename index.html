@@ -3,16 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
-    <meta name="description" content="Matt Essentials - Senior Software Engineer crafting premium web experiences.">
-    <title>Matt Essentials Solutions</title>
-    
-    <!-- Fonts -->
+    <meta name="description" content="Matt Essentials Solutions — Creative Digital Engineering & Design Studio crafting holistic, scalable web platforms, backend architectures, and interactive digital products.">
+    <meta property="og:title" content="Matt Essentials Solutions | Creative Engineering & Design Agency">
+    <meta property="og:description" content="Global-standard digital engineering studio creating holistic, well-balanced software solutions for inspiring brands.">
+    <meta property="og:image" content="/matt_logo.png">
+    <meta property="og:type" content="website">
+    <title>Matt Essentials Solutions | Creative Engineering & Design Studio</title>
+
+    <!-- Fonts: Plus Jakarta Sans (QClay primary typeface), Syne, JetBrains Mono -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="icon" href="/matt_logo.png" type="image/png">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    
-    <!-- Scripts -->
+    <link rel="icon" href="matt_logo.png" type="image/png">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+
+    <!-- Tailwind & Lucide Icons -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/lucide@latest" defer></script>
     <script>
@@ -20,777 +24,2291 @@
             theme: {
                 extend: {
                     fontFamily: {
-                        sans: ['Inter', 'sans-serif'],
-                        mono: ['ui-monospace', 'SFMono-Regular', 'Menlo', 'Monaco', 'Consolas', "Liberation Mono", "Courier New", 'monospace'],
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+                        display: ['"Plus Jakarta Sans"', '"Syne"', 'sans-serif'],
+                        mono: ['"JetBrains Mono"', 'monospace'],
                     },
                     colors: {
-                        brand: {
-                            100: '#dad2f4',
-                            200: '#fce38a',
-                            300: '#79d2a6'
+                        qclay: {
+                            black: '#070709',
+                            dark: '#0c0c10',
+                            card: '#121218',
+                            purple: '#dad2f4',
+                            purpleDeep: '#b0a8d5',
+                            blush: '#f7f4f4',
+                            peach: '#f7c3b4',
+                            mint: '#effbf9',
+                            mintAccent: '#79d2a6',
+                            amber: '#fce38a',
+                            lime: '#8de746',
+                            blue: '#42a4ff',
                         }
                     }
                 }
             }
         }
     </script>
-    
+
     <style>
-        /* Base & Resets */
-        body { 
-            font-family: 'Inter', sans-serif; 
-            background: rgb(9, 9, 11);
-            color: white;
-            overflow-x: hidden;
-            /* Removed overflow-y: hidden to allow native scrolling and fix mobile UX */
+        :root {
+            --color-white-100: #ffffff;
+            --color-black-100: #070709;
+            --color-green-700: #8de746;
+            --color-green-100: #effbf9;
+            --color-pink-300: #f7c3b4;
+            --color-pink-100: #f7f4f4;
+            --color-purple-100: #f2edf4;
+            --color-purple-300: #f4eded;
+            --color-purple-500: #dad2f4;
+            --color-purple-600: #b0a8d5;
+            --color-blue-700: #42a4ff;
+            --color-amber-200: #fce38a;
         }
 
-        /* Hide scrollbar but keep functionality */
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: var(--color-black-100);
+            color: #fafafa;
+            overflow-x: hidden;
+            selection-background-color: #dad2f4;
+            selection-color: #070709;
+        }
+
+        ::selection {
+            background: #dad2f4;
+            color: #070709;
+        }
+
+        /* Custom Scrollbar */
         ::-webkit-scrollbar {
             width: 8px;
             height: 8px;
         }
         ::-webkit-scrollbar-track {
-            background: #09090b; 
+            background: #070709;
         }
         ::-webkit-scrollbar-thumb {
-            background: #3f3f46; 
-            border-radius: 4px;
+            background: #27272a;
+            border-radius: 9999px;
         }
         ::-webkit-scrollbar-thumb:hover {
-            background: #52525b; 
+            background: #dad2f4;
         }
 
-        /* Custom Eye CSS */
-        .eye-box {
-            position: absolute;
-            top: 100px;
-            right: 10%;
-            display: flex;
-            gap: 10px;
-            z-index: 10;
+        /* QClay Custom Cursor */
+        @media (pointer: fine) {
+            .custom-cursor {
+                position: fixed;
+                top: 0;
+                left: 0;
+                pointer-events: none;
+                z-index: 9999;
+                mix-blend-mode: normal;
+            }
+            .custom-cursor__point {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 8px;
+                height: 8px;
+                background: #8de746;
+                border-radius: 50%;
+                transform: translate(-50%, -50%);
+                pointer-events: none;
+                z-index: 10000;
+                transition: width 0.25s ease, height 0.25s ease, background-color 0.25s ease, opacity 0.25s ease;
+            }
+            .custom-cursor__ring {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 40px;
+                height: 40px;
+                border: 1.5px solid rgba(218, 210, 244, 0.55);
+                border-radius: 9999px;
+                transform: translate(-50%, -50%);
+                pointer-events: none;
+                z-index: 9999;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                transition: width 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+                            height 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+                            background-color 0.3s ease,
+                            border-color 0.3s ease;
+                backdrop-filter: blur(2px);
+            }
+            .custom-cursor__label {
+                font-size: 11px;
+                font-weight: 700;
+                letter-spacing: 0.04em;
+                text-transform: uppercase;
+                color: #070709;
+                opacity: 0;
+                transform: scale(0.7);
+                transition: opacity 0.2s ease, transform 0.2s ease;
+                white-space: nowrap;
+            }
+            body.cursor-hover .custom-cursor__ring {
+                width: 68px;
+                height: 68px;
+                background-color: rgba(218, 210, 244, 0.16);
+                border-color: #dad2f4;
+            }
+            body.cursor-hover .custom-cursor__point {
+                width: 12px;
+                height: 12px;
+                background: #dad2f4;
+            }
+            body.cursor-labeled .custom-cursor__ring {
+                width: 96px;
+                height: 96px;
+                background-color: #8de746;
+                border-color: #8de746;
+                box-shadow: 0 12px 30px rgba(141, 231, 70, 0.35);
+            }
+            body.cursor-labeled .custom-cursor__point {
+                opacity: 0;
+            }
+            body.cursor-labeled .custom-cursor__label {
+                opacity: 1;
+                transform: scale(1);
+            }
         }
 
-        .eye {
-            width: 50px;
-            height: 50px;
-            background: #fff;
-            border: 3px solid #000;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+        /* QClay Rolling Link Effect (.animate-link) */
+        .q-roll-link {
             position: relative;
+            display: inline-flex;
             overflow: hidden;
-            cursor: pointer;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+            line-height: 1.25;
         }
-
-        .pupil {
-            width: 20px;
-            height: 20px;
-            background: #000;
-            border-radius: 50%;
-            transition: transform 0.1s ease-out; /* Smoother transition */
-            position: relative;
-            will-change: transform;
+        .q-roll-link span {
+            display: inline-block;
+            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
         }
-
-        .eyelid {
-            content: "";
+        .q-roll-link::after {
+            content: attr(data-text);
             position: absolute;
-            top: 0;
+            top: 100%;
+            left: 0;
+            color: #dad2f4;
+            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .q-roll-link:hover span,
+        .q-roll-link:hover::after {
+            transform: translateY(-100%);
+        }
+
+        /* QClay Header Talk Button (.talk-button) */
+        .talk-button {
+            align-items: center;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1.5px solid rgba(255, 255, 255, 0.22);
+            border-radius: 9999px;
+            color: #ffffff;
+            cursor: pointer;
+            display: inline-flex;
+            gap: 10px;
+            padding: 9px 18px 9px 14px;
+            position: relative;
+            transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .talk-button:hover {
+            background: #ffffff;
+            color: #070709;
+            border-color: #ffffff;
+            box-shadow: 0 0 30px rgba(218, 210, 244, 0.35);
+        }
+        .talk-button .dot {
+            background-color: var(--color-green-700);
+            border-radius: 50%;
+            height: 8px;
+            width: 8px;
+            box-shadow: 0 0 10px #8de746;
+            animation: pulseDot 2s infinite;
+        }
+        @keyframes pulseDot {
+            0%, 100% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.35); opacity: 0.75; }
+        }
+
+        /* QClay Burger Button (.button-burger) */
+        .button-burger {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            height: 42px;
+            padding: 0 14px;
+            border-radius: 9999px;
+            border: 1px solid rgba(255,255,255,0.12);
+            background: rgba(255,255,255,0.03);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .button-burger:hover {
+            border-color: rgba(218, 210, 244, 0.5);
+            background: rgba(218, 210, 244, 0.08);
+        }
+        .burger-lines {
+            position: relative;
+            width: 26px;
+            height: 16px;
+        }
+        .burger-lines .line {
+            position: absolute;
             left: 0;
             width: 100%;
-            height: 0%;
-            background: #fff;
-            z-index: 2;
-            animation: blink 4s infinite;
+            height: 2px;
+            background: currentColor;
+            border-radius: 2px;
+            transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), top 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .burger-lines .line:first-child {
+            top: 3px;
+        }
+        .burger-lines .line:last-child {
+            top: 11px;
+        }
+        .button-burger.open .burger-lines .line:first-child {
+            top: 7px;
+            transform: rotate(45deg);
+        }
+        .button-burger.open .burger-lines .line:last-child {
+            top: 7px;
+            transform: rotate(-45deg);
         }
 
-        @keyframes blink {
-            0%, 96%, 100% { height: 0%; }
-            97%, 99%      { height: 100%; }
+        /* Full-Screen QClay Menu Modal */
+        #qclay-menu {
+            clip-path: circle(0% at calc(100% - 4rem) 2.5rem);
+            transition: clip-path 0.75s cubic-bezier(0.77, 0, 0.175, 1), visibility 0.75s;
+            visibility: hidden;
+        }
+        #qclay-menu.open {
+            clip-path: circle(150% at calc(100% - 4rem) 2.5rem);
+            visibility: visible;
         }
 
-        .cross .pupil-left { transform: translate(5px, 0) !important; }
-        .cross .pupil-right { transform: translate(-5px, 0) !important; }
-
-        /* Section 4 Popups (We Create) */
-        #popup-overlay {
-            position: fixed;
-            inset: 0;
-            background: rgba(0, 0, 0, 0.95);
-            color: white;
-            z-index: 1000;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+        /* Staggered Hero Line Reveal */
+        .hero-line-wrap {
+            overflow: hidden;
+            display: block;
+        }
+        .hero-line {
+            display: block;
+            transform: translateY(105%);
             opacity: 0;
-            pointer-events: none;
-            transition: opacity 0.5s ease;
+            animation: revealLine 0.9s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+        .hero-line-1 { animation-delay: 0.1s; }
+        .hero-line-2 { animation-delay: 0.22s; }
+        .hero-line-3 { animation-delay: 0.34s; }
+
+        @keyframes revealLine {
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
         }
 
-        #popup-overlay.visible {
-            opacity: 1;
-            pointer-events: auto;
+        /* QClay SVG Eye Blink & Spin */
+        .qclay-eye-orbit {
+            animation: spinSlow 16s linear infinite;
+        }
+        @keyframes spinSlow {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        .qclay-eyelid-top {
+            transform-origin: center top;
+            animation: qclayBlinkTop 4.5s infinite ease-in-out;
+        }
+        .qclay-eyelid-bottom {
+            transform-origin: center bottom;
+            animation: qclayBlinkBottom 4.5s infinite ease-in-out;
+        }
+        @keyframes qclayBlinkTop {
+            0%, 92%, 100% { transform: scaleY(0.15); opacity: 0.25; }
+            95%, 97% { transform: scaleY(1.05); opacity: 1; }
+        }
+        @keyframes qclayBlinkBottom {
+            0%, 92%, 100% { transform: scaleY(0.15); opacity: 0.25; }
+            95%, 97% { transform: scaleY(1.05); opacity: 1; }
         }
 
-        .scene {
-            position: absolute;
-            inset: 0;
+        /* QClay About Card Decorative Circles & Pill Video */
+        .qclay-about-card {
+            border-radius: 2.75rem;
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.5s ease;
+        }
+        .qclay-circle-pair {
             display: flex;
             align-items: center;
-            justify-content: center;
             pointer-events: none;
+        }
+        .qclay-circle {
+            width: 220px;
+            height: 220px;
+            border-radius: 50%;
+            border: 1.5px solid rgba(7, 7, 9, 0.12);
+            flex-shrink: 0;
+        }
+        .qclay-circle + .qclay-circle {
+            margin-left: -48px;
+        }
+        .qclay-pill-video {
+            border-radius: 9999px;
+            overflow: hidden;
+            box-shadow: 0 24px 60px -12px rgba(7, 7, 9, 0.28);
+            will-change: transform;
+            transition: transform 0.15s ease-out;
+        }
+
+        /* Kinetic "WE CREATE" Marquee */
+        @keyframes marqueeLeft {
+            0% { transform: translate3d(0%, 0, 0); }
+            100% { transform: translate3d(-50%, 0, 0); }
+        }
+        @keyframes marqueeRight {
+            0% { transform: translate3d(-50%, 0, 0); }
+            100% { transform: translate3d(0%, 0, 0); }
+        }
+        .animate-marquee-left {
+            display: flex;
+            width: max-content;
+            animation: marqueeLeft 26s linear infinite;
+        }
+        .animate-marquee-right {
+            display: flex;
+            width: max-content;
+            animation: marqueeRight 26s linear infinite;
+        }
+
+        /* Floating Designer/Engineer Cursors in "WE CREATE" section */
+        @keyframes floatCursor1 {
+            0%, 100% { transform: translate3d(0, 0, 0); }
+            50% { transform: translate3d(28px, -18px, 0); }
+        }
+        @keyframes floatCursor2 {
+            0%, 100% { transform: translate3d(0, 0, 0); }
+            50% { transform: translate3d(-32px, 22px, 0); }
+        }
+        @keyframes floatCursor3 {
+            0%, 100% { transform: translate3d(0, 0, 0); }
+            50% { transform: translate3d(20px, 26px, 0); }
+        }
+        .cursor-float-1 { animation: floatCursor1 5s ease-in-out infinite; }
+        .cursor-float-2 { animation: floatCursor2 6.2s ease-in-out infinite; }
+        .cursor-float-3 { animation: floatCursor3 5.6s ease-in-out infinite; }
+
+        /* QClay Choice Pill Inputs (Contact Form) */
+        .qclay-pill-label {
+            cursor: pointer;
+            user-select: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 11px 22px;
+            border-radius: 9999px;
+            border: 1.5px solid rgba(255, 255, 255, 0.16);
+            background: rgba(255, 255, 255, 0.02);
+            color: #d4d4d8;
+            font-size: 0.925rem;
+            font-weight: 500;
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            position: relative;
             overflow: hidden;
         }
-
-        .scene1 {
-            display: grid;
-            grid-template-rows: repeat(4, 1fr);
-            text-transform: uppercase;
-            font-size: 8vw;
-            transform: rotate(-10deg);
-            opacity: 1;
+        .qclay-pill-label:hover {
+            border-color: rgba(218, 210, 244, 0.65);
+            color: #ffffff;
+            transform: translateY(-2px);
+        }
+        .qclay-pill-input:checked + .qclay-pill-label {
+            background: #dad2f4;
+            border-color: #dad2f4;
+            color: #070709;
+            font-weight: 700;
+            box-shadow: 0 8px 25px -4px rgba(218, 210, 244, 0.45);
         }
 
-        .scene1-line {
-            white-space: nowrap;
-            position: relative;
-            animation: 2.5s linear infinite;
-            opacity: 0.85;
-            will-change: transform;
-        }
-
-        .diag-down-up { animation-name: diagDownUp; }
-        .diag-up-down { animation-name: diagUpDown; }
-
-        @keyframes diagDownUp {
-            0% { transform: translate(-20%, 20%); }
-            100% { transform: translate(20%, -20%); }
-        }
-        @keyframes diagUpDown {
-            0% { transform: translate(20%, -20%); }
-            100% { transform: translate(-20%, 20%); }
-        }
-        
-        .scene2 { font-size: 5vw; font-weight: bold; text-transform: uppercase; opacity: 0; }
-        .scene2.active { animation: fadeInOut 1.5s forwards; }
-
-        @keyframes fadeInOut {
-            0% { opacity: 0; }
-            20%, 80% { opacity: 1; }
-            100% { opacity: 0; }
-        }
-
-        .flash-text { position: absolute; }
-        .move-up { animation: moveAwayUp 1.2s ease-out forwards; }
-        .move-down { animation: moveAwayDown 1.2s ease-out forwards; }
-        .flash-center { animation: flashAnim 0.3s linear 4; }
-
-        @keyframes moveAwayUp {
-            0% { transform: translateY(0) scale(1); opacity: 1; }
-            100% { transform: translateY(-120%) scale(1.2); opacity: 0; }
-        }
-        @keyframes moveAwayDown {
-            0% { transform: translateY(0) scale(1); opacity: 1; }
-            100% { transform: translateY(120%) scale(1.2); opacity: 0; }
-        }
-        @keyframes flashAnim {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.1; }
-        }
-
-        /* Horizontal Scroll Elements */
-        .child-1-h1 {
+        /* QClay Thank-You Modal (.modal) */
+        .qclay-modal {
             opacity: 0;
-            transform: translateY(30px);
-            transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+            visibility: hidden;
+            transform: translate(4%, -12%) rotate(4deg) scale(1.08);
+            transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.4s ease, visibility 0.6s;
         }
-        .child-1-h1.visible {
+        .qclay-modal.active {
+            opacity: 1;
+            visibility: visible;
+            transform: translate(0, 0) rotate(0deg) scale(1);
+        }
+
+        /* Scroll Reveal Utility */
+        .reveal-up {
+            opacity: 0;
+            transform: translateY(36px);
+            transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .reveal-up.in-view {
             opacity: 1;
             transform: translateY(0);
         }
-        
-        .design-video {
-            box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
-            will-change: transform;
-        }
     </style>
 </head>
-<body class="min-h-screen bg-zinc-950 text-zinc-50 selection:bg-indigo-500 selection:text-white antialiased">
+<body class="min-h-screen bg-qclay-black text-zinc-50 antialiased">
 
-    <!-- Navigation -->
-    <nav id="navbar" class="fixed w-full z-50 transition-all duration-300 py-6 bg-transparent">
-        <div class="max-w-7xl mx-auto px-6 md:px-12 flex justify-between items-center">
-            <div class="flex items-center gap-2 z-50 cursor-pointer" onclick="window.scrollTo(0,0)">
-                <div class=" flex items-center justify-center font-bold text-lg shadow-lg">
-                    <img src="/matt_logo.png" alt="Matt Essentials Logo" class="w-8 h-10" />
-                </div>
-                <span class="font-semibold text-lg tracking-tight hidden sm:block">Matt Essentials</span>
-            </div>
-
-            <!-- Desktop Nav -->
-            <div class="hidden md:flex items-center gap-8 text-sm font-medium text-zinc-400">
-                <a href="#work" class="hover:text-white transition-colors">Work</a>
-                <a href="#expertise" class="hover:text-white transition-colors">Expertise</a>
-                <a href="#about" class="hover:text-white transition-colors">About</a>
-                <a href="#contact" class="px-5 py-2.5 rounded-full bg-zinc-50 text-zinc-950 hover:bg-zinc-200 transition-all font-semibold flex items-center gap-2 shadow-lg shadow-white/5">
-                    Let's Talk <i data-lucide="arrow-right" class="w-4 h-4"></i>
-                </a>
-            </div>
-
-            <!-- Mobile Menu Button -->
-            <button id="mobile-menu-btn" aria-label="Toggle Menu" class="md:hidden z-50 p-2 text-zinc-300 hover:text-white transition-colors">
-                <i data-lucide="menu" id="menu-icon" class="w-6 h-6"></i>
-                <i data-lucide="x" id="close-icon" class="w-6 h-6 hidden"></i>
-            </button>
-        </div>
-
-        <!-- Mobile Nav Dropdown -->
-        <div id="mobile-menu" class="fixed inset-0 bg-zinc-950/95 backdrop-blur-xl z-40 flex flex-col justify-center items-center gap-8 transition-transform duration-500 ease-in-out md:hidden translate-x-full">
-            <a href="#work" class="mobile-link text-4xl font-bold hover:text-indigo-400 transition-colors">Work</a>
-            <a href="#expertise" class="mobile-link text-4xl font-bold hover:text-indigo-400 transition-colors">Expertise</a>
-            <a href="#about" class="mobile-link text-4xl font-bold hover:text-indigo-400 transition-colors">About</a>
-            <a href="#contact" class="mobile-link text-4xl font-bold text-indigo-500 hover:text-indigo-400 transition-colors">Contact</a>
-        </div>
-    </nav>
-
-    <!-- Hero Section -->
-    <section class="relative pt-40 pb-20 md:pt-52 md:pb-32 px-6 md:px-12 max-w-7xl mx-auto" id="eyeContainer">
-        <!-- Abstract Background Elements -->
-        <div class="absolute top-0 right-0 w-[600px] h-[600px] bg-indigo-900/20 rounded-full blur-[120px] -z-10 pointer-events-none"></div>
-        <div class="absolute bottom-0 left-0 w-[400px] h-[400px] bg-purple-900/10 rounded-full blur-[100px] -z-10 pointer-events-none"></div>
-
-        <!-- Eyes Interaction -->
-        <div class="eye-box hidden md:flex" id="eyeBox">
-            <div class="eye"><div class="eyelid"></div><div class="pupil pupil-left"></div></div>
-            <div class="eye"><div class="eyelid"></div><div class="pupil pupil-right"></div></div>
-        </div>
-        
-        <div class="max-w-4xl relative z-10">
-            <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-zinc-900 border border-zinc-800 text-sm font-medium text-zinc-300 mb-8 shadow-sm">
-                <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse shadow-[0_0_8px_rgba(16,185,129,0.8)]"></span>
-                Available for new projects
-            </div>
-            
-            <h1 class="text-5xl md:text-7xl lg:text-8xl font-bold tracking-tighter leading-[1.05] mb-8">
-                Digital solutions.<br />
-                <span class="text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 to-purple-500">
-                    Engineered for scale.
-                </span>
-            </h1>
-            
-            <p class="text-lg md:text-2xl text-zinc-400 max-w-2xl font-light leading-relaxed mb-12">
-                I'm Matt, a senior software engineer crafting premium web experiences, robust backend architectures, and elegant user interfaces.
-            </p>
-            
-            <div class="flex flex-col sm:flex-row gap-4">
-                <a href="#work" class="px-8 py-4 rounded-full bg-white text-zinc-950 font-semibold text-center hover:bg-zinc-200 transition-all flex items-center justify-center gap-2 group">
-                    View Selected Work
-                    <i data-lucide="arrow-right" class="w-4 h-4 group-hover:translate-x-1 transition-transform"></i>
-                </a>
-                <a href="#contact" class="px-8 py-4 rounded-full bg-zinc-900 text-white font-semibold text-center hover:bg-zinc-800 border border-zinc-700 transition-all flex items-center justify-center gap-2">
-                    <i data-lucide="github" class="w-4 h-4"></i>
-                    GitHub Profile
-                </a>
-            </div>
-        </div>
-    </section>
-
-    <!-- Expertise / Services Section -->
-    <section id="expertise" class="py-24 px-6 md:px-12 bg-zinc-900/30 border-y border-zinc-800/50">
-        <div class="max-w-7xl mx-auto">
-            <div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-16 gap-6">
-                <div>
-                    <h2 class="text-3xl md:text-5xl font-bold tracking-tight mb-4">Core Expertise</h2>
-                    <p class="text-zinc-400 max-w-lg text-lg">Delivering end-to-end solutions with a focus on performance, scalability, and modern design principles.</p>
-                </div>
-                <a href="#contact" class="text-indigo-400 hover:text-indigo-300 font-medium flex items-center gap-1 group whitespace-nowrap">
-                    Discuss your project <i data-lucide="arrow-up-right" class="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform"></i>
-                </a>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                <!-- Service Cards -->
-                <div class="bg-zinc-900 border border-zinc-800 p-8 rounded-3xl hover:-translate-y-2 hover:border-zinc-700 transition-all duration-300 group">
-                    <div class="mb-6 p-4 bg-zinc-950 rounded-2xl inline-block group-hover:scale-110 transition-transform text-indigo-400 shadow-inner">
-                        <i data-lucide="layout" class="w-8 h-8"></i>
-                    </div>
-                    <h3 class="text-xl font-semibold mb-3">Frontend Development</h3>
-                    <p class="text-zinc-400 leading-relaxed text-sm">React, Next.js, Vue. Crafting pixel-perfect, responsive, and highly interactive user interfaces.</p>
-                </div>
-                
-                <div class="bg-zinc-900 border border-zinc-800 p-8 rounded-3xl hover:-translate-y-2 hover:border-zinc-700 transition-all duration-300 group">
-                    <div class="mb-6 p-4 bg-zinc-950 rounded-2xl inline-block group-hover:scale-110 transition-transform text-purple-400 shadow-inner">
-                        <i data-lucide="database" class="w-8 h-8"></i>
-                    </div>
-                    <h3 class="text-xl font-semibold mb-3">Backend Architecture</h3>
-                    <p class="text-zinc-400 leading-relaxed text-sm">Node.js, Python, PostgreSQL. Building secure, scalable APIs and robust database structures.</p>
-                </div>
-                
-                <div class="bg-zinc-900 border border-zinc-800 p-8 rounded-3xl hover:-translate-y-2 hover:border-zinc-700 transition-all duration-300 group">
-                    <div class="mb-6 p-4 bg-zinc-950 rounded-2xl inline-block group-hover:scale-110 transition-transform text-pink-400 shadow-inner">
-                        <i data-lucide="smartphone" class="w-8 h-8"></i>
-                    </div>
-                    <h3 class="text-xl font-semibold mb-3">Mobile Optimization</h3>
-                    <p class="text-zinc-400 leading-relaxed text-sm">Ensuring flawless performance and adaptive layouts across all devices and screen sizes.</p>
-                </div>
-                
-                <div class="bg-zinc-900 border border-zinc-800 p-8 rounded-3xl hover:-translate-y-2 hover:border-zinc-700 transition-all duration-300 group">
-                    <div class="mb-6 p-4 bg-zinc-950 rounded-2xl inline-block group-hover:scale-110 transition-transform text-emerald-400 shadow-inner">
-                        <i data-lucide="code" class="w-8 h-8"></i>
-                    </div>
-                    <h3 class="text-xl font-semibold mb-3">Clean Code Practices</h3>
-                    <p class="text-zinc-400 leading-relaxed text-sm">TypeScript, testing, and CI/CD pipelines for maintainable, enterprise-grade software.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Optimized Horizontal Scroll Section (Native Sticky) -->
-    <!-- h-[300vh] defines the scroll distance. 3 panels = 3 screens -->
-    <section id="horizontal-wrapper" class="relative h-[300vh] hidden md:block">
-        <div class="sticky top-0 h-screen w-full overflow-hidden bg-zinc-950">
-            <!-- The track that moves left -->
-            <div id="horiz-track" class="flex h-full w-[300vw] will-change-transform">
-                
-                <!-- Panel 1 -->
-                <div class="w-screen h-full flex flex-col items-center justify-center bg-white text-zinc-950 shrink-0">
-                    <h1 class="child-1-h1 text-5xl md:text-7xl font-bold max-w-3xl text-center leading-tight">
-                        What About Matt Essentials?
-                    </h1>
-                </div>
-
-                <!-- Panel 2 -->
-                <div class="w-screen h-full flex items-center justify-center bg-brand-100 shrink-0 p-12">
-                    <div class="relative w-full max-w-7xl h-[80vh] rounded-[3rem] overflow-hidden flex flex-col justify-end p-12">
-                        <!-- Replaced broken local video with placeholder -->
-                        <video id="designVideo1" class="design-video absolute top-12 left-12 w-[600px] h-[300px] object-cover rounded-[2rem] z-10" autoplay muted loop playsinline>
-                            <source src="/Q1.mp4" type="video/mp4" />
-                        </video>
-                        <div class="relative z-20 w-3/4">
-                            <h2 class="text-4xl md:text-6xl font-bold text-zinc-900 ">We help our clients to shine online</h2>
-                            <p class="text-2xl text-zinc-700 max-w-2xl">We collaborate as a collective of individuals bringing their whole self to a project.</p>
-                        </div>
-                        <h4 class="absolute bottom-12 right-12 text-7xl font-bold text-zinc-900/20 z-0">01</h4>
-                    </div>
-                </div>
-
-                <!-- Panel 3 -->
-                <div class="w-screen h-full flex items-center justify-center bg-brand-200 shrink-0 p-12">
-                    <div class="relative w-full max-w-7xl h-[80vh] rounded-[3rem] overflow-hidden flex flex-col justify-end p-12">
-                         <!-- Replaced broken local video with placeholder -->
-                        <video id="designVideo2" class="design-video absolute top-12 left-12 w-[600px] h-[300px] object-cover rounded-[2rem] z-10" autoplay muted loop playsinline>
-                            <source src="/Q2.mp4" type="video/mp4" />
-                        </video>
-                        <div class="relative z-20 w-3/4">
-                            <h2 class="text-4xl md:text-6xl font-bold text-zinc-900">We translate research into solutions</h2>
-                            <p class="text-2xl text-zinc-700 max-w-2xl">We offer a complete process from discovery, branding, design, launch to post-launch optimization and testing.</p>
-                        </div>
-                        <h4 class="absolute bottom-12 right-12 text-7xl font-bold text-zinc-900/20 z-0">02</h4>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-    </section>
-
-    <!-- Invisible trigger for the animation popup -->
-    <div id="trigger-section4" class="h-10 w-full bg-zinc-950"></div>
-
-    <!-- The Animation Popup Overlay (Converted from original fixed code) -->
-    <div id="popup-overlay">
-        <div class="scene scene1" id="scene1">
-            <div class="scene1-line diag-down-up">We Create • We Create • We Create • We Create •</div>
-            <div class="scene1-line diag-up-down">We Create • We Create • We Create • We Create •</div>
-            <div class="scene1-line diag-down-up">We Create • We Create • We Create • We Create •</div>
-            <div class="scene1-line diag-up-down">We Create • We Create • We Create • We Create •</div>
-        </div>
-        <div class="scene scene2" id="scene2">
-            <div class="flash-text move-up" style="top:20%;">We Create</div>
-            <div class="flash-text move-up" style="top:40%;">We Create</div>
-            <div class="flash-text move-down" style="bottom:40%;">We Create</div>
-            <div class="flash-text move-down" style="bottom:20%;">We Create</div>
-            <div class="flash-center">We Create</div>
+    <!-- 1. QCLAY CUSTOM CURSOR -->
+    <div class="custom-cursor hidden lg:block" aria-hidden="true">
+        <div id="cursor-point" class="custom-cursor__point"></div>
+        <div id="cursor-ring" class="custom-cursor__ring">
+            <span id="cursor-label" class="custom-cursor__label">Explore</span>
         </div>
     </div>
 
-    <!-- Selected Work Section -->
-    <section id="work" class="py-24 md:py-32 px-6 md:px-12 max-w-7xl mx-auto relative z-10 bg-zinc-950">
-        <h2 class="text-4xl md:text-6xl font-bold tracking-tight mb-16 text-center">Selected Work</h2>
-        
-        <div class="flex flex-col gap-16 md:gap-24">
-            <!-- Project 1 -->
-            <div class="group flex flex-col lg:flex-row gap-8 items-center">
-                <div class="w-full lg:w-3/5 overflow-hidden rounded-[2rem] bg-zinc-900 border border-zinc-800 relative aspect-video flex items-center justify-center">
-                    <iframe src="https://gns-corporation.com" class="absolute inset-0 w-full h-full border-0 bg-white" title="GNS Corporations" loading="lazy"></iframe>
-                    <div class="absolute inset-0 bg-gradient-to-br from-indigo-500/20 to-purple-600/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-10 pointer-events-none"></div>
-                </div>
-                <div class="w-full lg:w-2/5 flex flex-col gap-6">
-                    <div class="flex flex-wrap gap-2">
-                        <span class="px-3 py-1 text-xs font-medium border border-zinc-700 rounded-full text-zinc-300 bg-zinc-800/50">Corporate</span>
-                        <span class="px-3 py-1 text-xs font-medium border border-zinc-700 rounded-full text-zinc-300 bg-zinc-800/50">Web Design</span>
-                    </div>
-                    <h3 class="text-3xl md:text-4xl font-bold">GNS Corporations</h3>
-                    <p class="text-zinc-400 text-lg leading-relaxed">
-                        A modern corporate web presence built for scale, showcasing business services with a sleek, responsive design and intuitive navigation.
-                    </p>
-                    <a href="https://gns-corporation.com/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 text-white font-semibold mt-2 hover:text-indigo-400 transition-colors w-fit group-hover:underline decoration-indigo-400 underline-offset-4">
-                        Visit Website <i data-lucide="external-link" class="w-4 h-4"></i>
-                    </a>
-                </div>
-            </div>
-
-            <!-- Project 2 (Reversed) -->
-            <div class="group flex flex-col lg:flex-row-reverse gap-8 items-center">
-                <div class="w-full lg:w-3/5 overflow-hidden rounded-[2rem] bg-zinc-900 border border-zinc-800 relative aspect-video flex items-center justify-center">
-                    <iframe src="https://zyoa.org" class="absolute inset-0 w-full h-full border-0 bg-white" title="ZYOA" loading="lazy"></iframe>
-                    <div class="absolute inset-0 bg-gradient-to-bl from-emerald-500/20 to-teal-600/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-10 pointer-events-none"></div>
-                </div>
-                <div class="w-full lg:w-2/5 flex flex-col gap-6 lg:pr-8">
-                    <div class="flex flex-wrap gap-2">
-                        <span class="px-3 py-1 text-xs font-medium border border-zinc-700 rounded-full text-zinc-300 bg-zinc-800/50">Platform</span>
-                        <span class="px-3 py-1 text-xs font-medium border border-zinc-700 rounded-full text-zinc-300 bg-zinc-800/50">CMS</span>
-                    </div>
-                    <h3 class="text-3xl md:text-4xl font-bold">ZYOA Organization</h3>
-                    <p class="text-zinc-400 text-lg leading-relaxed">
-                        A comprehensive digital platform designed to support community initiatives, featuring dynamic content management and accessible UI.
-                    </p>
-                    <a href="https://zyoa.org" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 text-white font-semibold mt-2 hover:text-emerald-400 transition-colors w-fit group-hover:underline decoration-emerald-400 underline-offset-4">
-                        Visit Website <i data-lucide="external-link" class="w-4 h-4"></i>
-                    </a>
-                </div>
-            </div>
-
-            <!-- Project 3 -->
-            <div class="group flex flex-col lg:flex-row gap-8 items-center">
-                <div class="w-full lg:w-3/5 overflow-hidden rounded-[2rem] bg-zinc-900 border border-zinc-800 relative aspect-video flex items-center justify-center">
-                    <iframe src="https://stmovensschool.com" class="absolute inset-0 w-full h-full border-0 bg-white" title="St. Moven's School" loading="lazy"></iframe>
-                    <div class="absolute inset-0 bg-gradient-to-br from-pink-500/20 to-orange-600/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-10 pointer-events-none"></div>
-                </div>
-                <div class="w-full lg:w-2/5 flex flex-col gap-6">
-                    <div class="flex flex-wrap gap-2">
-                        <span class="px-3 py-1 text-xs font-medium border border-zinc-700 rounded-full text-zinc-300 bg-zinc-800/50">Education</span>
-                        <span class="px-3 py-1 text-xs font-medium border border-zinc-700 rounded-full text-zinc-300 bg-zinc-800/50">Portal</span>
-                    </div>
-                    <h3 class="text-3xl md:text-4xl font-bold">St. Moven's School</h3>
-                    <p class="text-zinc-400 text-lg leading-relaxed">
-                        An engaging educational portal connecting students, parents, and faculty with streamlined resource access and event tracking.
-                    </p>
-                    <a href="https://stmovensschool.com" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 text-white font-semibold mt-2 hover:text-pink-400 transition-colors w-fit group-hover:underline decoration-pink-400 underline-offset-4">
-                        Visit Website <i data-lucide="external-link" class="w-4 h-4"></i>
-                    </a>
-                </div>
-            </div>
-
-            <!-- Project 4 (Reversed) -->
-            <div class="group flex flex-col lg:flex-row-reverse gap-8 items-center">
-                <div class="w-full lg:w-3/5 overflow-hidden rounded-[2rem] bg-zinc-900 border border-zinc-800 relative aspect-video flex items-center justify-center">
-                    <iframe src="https://ewanaenvironmental.com/" class="absolute inset-0 w-full h-full border-0 bg-white" title="ZYOA" loading="lazy"></iframe>
-                    <div class="absolute inset-0 bg-gradient-to-bl from-emerald-500/20 to-teal-600/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-10 pointer-events-none"></div>
-                </div>
-                <div class="w-full lg:w-2/5 flex flex-col gap-6 lg:pr-8">
-                    <div class="flex flex-wrap gap-2">
-                        <span class="px-3 py-1 text-xs font-medium border border-zinc-700 rounded-full text-zinc-300 bg-zinc-800/50">Platform</span>
-                        <span class="px-3 py-1 text-xs font-medium border border-zinc-700 rounded-full text-zinc-300 bg-zinc-800/50">CMS</span>
-                    </div>
-                    <h3 class="text-3xl md:text-4xl font-bold">Ewana Enviromential Consultant</h3>
-                    <p class="text-zinc-400 text-lg leading-relaxed">
-                        An Environmental Consulting Limited dedicated in creating sustainable solutions for a rapidly changing world. Integrate engineering, hydrogeology, industrial supply, and regulatory defense for sustainability.
-                    </p>
-                    <a href="https://ewanaenvironmental.com/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 text-white font-semibold mt-2 hover:text-emerald-400 transition-colors w-fit group-hover:underline decoration-emerald-400 underline-offset-4">
-                        Visit Website <i data-lucide="external-link" class="w-4 h-4"></i>
-                    </a>
-                </div>
-            </div>
-            
-        </div>
-        
-        <div class="mt-20 flex justify-center">
-            <button class="px-8 py-4 rounded-full bg-zinc-900 border border-zinc-700 text-white hover:bg-zinc-800 hover:scale-105 transition-all font-medium shadow-lg">
-                View All Projects
-            </button>
-        </div>
-    </section>
-
-    <!-- Tech Stack Marquee -->
-    <div class="py-12 border-y border-zinc-800/50 bg-zinc-900/30 flex items-center justify-center relative z-10">
-        <div class="flex flex-wrap justify-center gap-8 md:gap-16 px-6 max-w-7xl mx-auto opacity-50 grayscale hover:grayscale-0 transition-all duration-500">
-            <span class="text-xl md:text-2xl font-bold tracking-widest text-zinc-500 hover:text-blue-400 transition-colors">React</span>
-            <span class="text-xl md:text-2xl font-bold tracking-widest text-zinc-500 hover:text-blue-500 transition-colors">TypeScript</span>
-            <span class="text-xl md:text-2xl font-bold tracking-widest text-zinc-500 hover:text-green-500 transition-colors">Node.js</span>
-            <span class="text-xl md:text-2xl font-bold tracking-widest text-zinc-500 hover:text-white transition-colors">Next.js</span>
-            <span class="text-xl md:text-2xl font-bold tracking-widest text-zinc-500 hover:text-blue-400 transition-colors">PostgreSQL</span>
-            <span class="text-xl md:text-2xl font-bold tracking-widest text-zinc-500 hover:text-teal-400 transition-colors">Tailwind</span>
-            <span class="text-xl md:text-2xl font-bold tracking-widest text-zinc-500 hover:text-orange-400 transition-colors">AWS</span>
-        </div>
+    <!-- 2. FLOATING QUICK CONTROLS (.fixed-controls from QClay) -->
+    <div class="fixed bottom-6 right-6 z-40 flex items-center gap-2.5">
+        <a href="cv.html"
+           data-cursor-label="Founder CV"
+           title="View Founder CV & Portfolio (Chiiko Nswana)"
+           class="group flex items-center gap-2 px-4 py-3 rounded-full bg-zinc-900/90 hover:bg-qclay-purple hover:text-zinc-950 text-zinc-200 border border-zinc-700/80 backdrop-blur-xl shadow-2xl transition-all duration-300 hover:scale-105">
+            <i data-lucide="file-badge" class="w-4 h-4 text-qclay-purple group-hover:text-zinc-950 transition-colors"></i>
+            <span class="text-xs font-bold tracking-wide hidden sm:inline">Founder CV</span>
+        </a>
+        <a href="mailto:hello@mattessentials.online"
+           data-cursor-label="Email Us"
+           title="Email hello@mattessentials.online"
+           class="w-11 h-11 rounded-full bg-zinc-900/90 hover:bg-qclay-blue hover:text-zinc-950 text-zinc-200 border border-zinc-700/80 backdrop-blur-xl flex items-center justify-center shadow-2xl transition-all duration-300 hover:scale-110">
+            <i data-lucide="mail" class="w-4 h-4"></i>
+        </a>
+        <a href="#contact"
+           data-cursor-label="Book Call"
+           class="flex items-center gap-2 px-5 py-3 rounded-full bg-qclay-lime text-zinc-950 font-extrabold text-xs uppercase tracking-wider shadow-[0_10px_30px_rgba(141,231,70,0.35)] hover:scale-105 transition-all duration-300">
+            <i data-lucide="calendar" class="w-4 h-4"></i>
+            <span>Book a Call</span>
+        </a>
     </div>
 
-    <!-- About Section -->
-    <section id="about" class="py-24 md:py-32 px-6 md:px-12 max-w-7xl mx-auto relative z-10">
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-            <div>
-                <h2 class="text-4xl md:text-5xl font-bold tracking-tight mb-8">Engineering with intention.</h2>
-                <div class="space-y-6 text-lg text-zinc-400 leading-relaxed">
-                    <p>At Matt Essentials Solutions, the philosophy is simple: write code that not only works but is a joy to read, maintain, and scale.</p>
-                    <p>With over 8 years of experience building digital products for startups and enterprise clients alike, I bridge the gap between complex technical requirements and stunning, intuitive user experiences.</p>
-                    <p>I don't just build websites; I engineer robust software solutions that drive business growth and elevate brand presence in a digital-first world.</p>
+    <!-- 3. QCLAY NAVIGATION HEADER -->
+    <header id="navbar" class="fixed top-0 left-0 w-full z-50 transition-all duration-500 py-5">
+        <div class="max-w-[1440px] mx-auto px-6 md:px-12 flex justify-between items-center">
+            <!-- Brand Logo -->
+            <a href="#home" class="flex items-center gap-3 z-50 group" data-magnetic>
+                <div class="w-10 h-10 rounded-xl bg-zinc-900/90 border border-zinc-800 flex items-center justify-center p-1.5 group-hover:border-qclay-purple transition-colors shadow-lg">
+                    <img src="matt_logo.png" alt="Matt Essentials Logo" class="w-7 h-8 object-contain" />
                 </div>
-                
-                <div class="mt-10 grid grid-cols-2 gap-8 border-t border-zinc-800/50 pt-10">
-                    <div>
-                        <h4 class="text-5xl font-bold text-white mb-2">50+</h4>
-                        <p class="text-sm text-zinc-400 uppercase tracking-wider font-semibold">Projects Delivered</p>
-                    </div>
-                    <div>
-                        <h4 class="text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-teal-500 mb-2">100%</h4>
-                        <p class="text-sm text-zinc-400 uppercase tracking-wider font-semibold">Client Satisfaction</p>
-                    </div>
+                <div class="flex flex-col">
+                    <span class="font-extrabold text-lg tracking-tight leading-none text-white group-hover:text-qclay-purple transition-colors">Matt Essentials</span>
+                    <span class="text-[10px] font-mono uppercase tracking-[0.2em] text-zinc-400">Solutions Studio</span>
                 </div>
-            </div>
-            
-            <!-- Code visual -->
-            <div class="relative group">
-                <div class="aspect-square rounded-[3rem] bg-zinc-900 border border-zinc-800 p-8 relative overflow-hidden shadow-2xl transition-transform duration-500 group-hover:-translate-y-2">
-                    <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-indigo-900/30 via-zinc-900/50 to-zinc-900/80"></div>
-                    <div class="h-full w-full border border-zinc-800/50 rounded-2xl p-6 md:p-8 flex flex-col gap-4 relative z-10 font-mono text-sm md:text-base text-indigo-300/70 shadow-inner bg-zinc-950/50">
-                        <div class="flex gap-2 mb-4">
-                            <div class="w-3 h-3 rounded-full bg-red-500/80"></div>
-                            <div class="w-3 h-3 rounded-full bg-yellow-500/80"></div>
-                            <div class="w-3 h-3 rounded-full bg-green-500/80"></div>
-                        </div>
-                        <p><span class="text-pink-400">const</span> <span class="text-blue-300">developer</span> = {</p>
-                        <p class="pl-4">name: <span class="text-emerald-300">'Matt'</span>,</p>
-                        <p class="pl-4">role: <span class="text-emerald-300">'Full Stack Engineer'</span>,</p>
-                        <p class="pl-4">passion: <span class="text-emerald-300">'Pixel Perfection'</span>,</p>
-                        <p class="pl-4">coffeeLevel: <span class="text-orange-300">9999</span></p>
-                        <p>};</p>
-                        <br/>
-                        <p><span class="text-pink-400">while</span> (<span class="text-blue-300">alive</span>) {</p>
-                        <p class="pl-4 text-zinc-300">code();</p>
-                        <p class="pl-4 text-zinc-300">deploy();</p>
-                        <p class="pl-4 text-zinc-300">innovate();</p>
-                        <p>}</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer / CTA -->
-    <footer id="contact" class="bg-zinc-950 pt-24 pb-12 border-t border-zinc-800 relative z-10">
-        <div class="max-w-7xl mx-auto px-6 md:px-12 text-center flex flex-col items-center">
-            <h2 class="text-5xl md:text-8xl font-bold tracking-tighter mb-8 max-w-4xl hover:text-indigo-400 transition-colors cursor-default">
-                Have an idea? <br/>Let's build it.
-            </h2>
-            <p class="text-xl text-zinc-400 mb-12 max-w-2xl">
-                Currently accepting new projects. Reach out to discuss how Matt Essentials Solutions can help you achieve your technical goals.
-            </p>
-            
-            <a href="mailto:hello@mattessentials.online" class="px-10 py-5 rounded-full bg-white text-zinc-950 font-bold text-lg hover:bg-zinc-200 transition-transform hover:-translate-y-1 flex items-center gap-3 shadow-[0_0_40px_rgba(255,255,255,0.1)] mb-24">
-                <i data-lucide="mail" class="w-6 h-6"></i>
-                hello@mattessentials.online
             </a>
-            
-            <div class="w-full flex flex-col md:flex-row justify-between items-center gap-6 pt-12 border-t border-zinc-800/50">
-                <div class="flex items-center gap-2">
-                    <div class="flex items-center justify-center ">
-                        <img src="/matt_logo.png" alt="Matt Essentials Logo" class="w-8 h-12" />
+
+            <!-- Center Desktop Links (QClay Rolling Typography) -->
+            <nav class="hidden lg:flex items-center gap-9 text-sm font-semibold text-zinc-300">
+                <a href="#home" class="q-roll-link" data-text="Home"><span>Home</span></a>
+                <a href="#about-cards" class="q-roll-link" data-text="What We Do"><span>What We Do</span></a>
+                <a href="#expertise" class="q-roll-link" data-text="We Create"><span>We Create</span></a>
+                <a href="#work" class="q-roll-link" data-text="Our Works"><span>Our Works</span></a>
+                <a href="#about" class="q-roll-link" data-text="Studio"><span>Studio</span></a>
+                <a href="cv.html" class="q-roll-link text-qclay-purple" data-text="Founder CV ↗"><span>Founder CV ↗</span></a>
+            </nav>
+
+            <!-- Right Buttons: QClay Talk Button + Burger Trigger -->
+            <div class="flex items-center gap-3 z-50">
+                <a href="#contact" class="talk-button" data-magnetic data-cursor-label="Let's Talk!">
+                    <div class="dot"></div>
+                    <span class="text-sm font-bold tracking-tight">Let's Talk!</span>
+                    <div class="w-7 h-7 rounded-full overflow-hidden border border-zinc-700 hidden sm:block">
+                        <video src="Q1.mp4" autoplay loop muted playsinline class="w-full h-full object-cover"></video>
                     </div>
-                    <span class="font-semibold text-sm">Matt Essentials Solutions</span>
-                </div>
-                
-                <div class="flex gap-6">
-                    <a href="#" aria-label="Github" class="text-zinc-400 hover:text-white transition-colors">
-                        <i data-lucide="github" class="w-5 h-5"></i>
-                    </a>
-                    <a href="#" aria-label="LinkedIn" class="text-zinc-400 hover:text-white transition-colors">
-                        <i data-lucide="linkedin" class="w-5 h-5"></i>
-                    </a>
-                </div>
-                
-                <p class="text-zinc-500 text-sm" id="copyright-year"></p>
+                </a>
+
+                <button id="burger-btn" aria-label="Toggle Menu" class="button-burger text-white" data-magnetic>
+                    <span id="burger-label" class="text-sm font-semibold hidden sm:inline">menu</span>
+                    <div class="burger-lines">
+                        <span class="line"></span>
+                        <span class="line"></span>
+                    </div>
+                </button>
             </div>
         </div>
-    </footer>
+    </header>
 
-    <!-- Optimized Scripts Section -->
+    <!-- 4. QCLAY FULL-SCREEN INTERACTIVE MENU OVERLAY -->
+    <div id="qclay-menu" class="fixed inset-0 bg-zinc-950/98 backdrop-blur-2xl z-40 flex flex-col justify-between pt-28 pb-10 px-6 md:px-16 overflow-y-auto">
+        <div class="max-w-[1440px] w-full mx-auto my-auto grid grid-cols-1 lg:grid-cols-12 gap-12 items-center py-8">
+            <!-- Left: Socials & Direct Links -->
+            <div class="lg:col-span-3 flex flex-col gap-4 order-2 lg:order-1">
+                <span class="text-xs font-mono uppercase tracking-[0.25em] text-zinc-500 mb-2">Social & Profiles</span>
+                <a href="https://github.com/CMN-Triple-111/" target="_blank" rel="noopener noreferrer" class="text-lg font-semibold text-zinc-300 hover:text-qclay-lime flex items-center gap-2 transition-colors w-fit">
+                    GitHub <i data-lucide="arrow-up-right" class="w-4 h-4"></i>
+                </a>
+                <a href="cv.html" class="text-lg font-semibold text-zinc-300 hover:text-qclay-purple flex items-center gap-2 transition-colors w-fit">
+                    Chiiko Nswana — Portfolio <i data-lucide="file-text" class="w-4 h-4"></i>
+                </a>
+                <a href="mailto:hello@mattessentials.online" class="text-lg font-semibold text-zinc-300 hover:text-qclay-blue flex items-center gap-2 transition-colors w-fit">
+                    hello@mattessentials.online <i data-lucide="mail" class="w-4 h-4"></i>
+                </a>
+
+                <div class="mt-6 p-5 rounded-3xl bg-zinc-900/80 border border-zinc-800">
+                    <div class="flex items-center gap-2 text-xs font-mono text-qclay-lime mb-1">
+                        <span class="w-2 h-2 rounded-full bg-qclay-lime animate-pulse"></span>
+                        AVAILABLE FOR Q4 / 2026
+                    </div>
+                    <p class="text-xs text-zinc-400 leading-relaxed">
+                        Full-cycle web platforms, enterprise software, and UI/UX engineering.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Center: QClay Dynamic Hover Preview Card -->
+            <div class="lg:col-span-4 hidden lg:flex justify-center order-2">
+                <div id="menu-preview-card" class="w-full max-w-sm aspect-[4/3] rounded-[2.5rem] bg-qclay-purple p-6 flex flex-col justify-between text-zinc-950 transition-all duration-500 shadow-2xl overflow-hidden relative">
+                    <div class="flex justify-between items-center relative z-10">
+                        <span id="menu-preview-tag" class="px-3 py-1 rounded-full bg-zinc-950/10 text-xs font-extrabold uppercase tracking-wider">01 / Overview</span>
+                        <span class="w-8 h-8 rounded-full bg-zinc-950 text-white flex items-center justify-center">
+                            <i data-lucide="sparkles" class="w-4 h-4"></i>
+                        </span>
+                    </div>
+                    <div class="my-auto rounded-2xl overflow-hidden shadow-lg border border-black/10 aspect-video relative z-10">
+                        <video id="menu-preview-video" src="Q1.mp4" autoplay loop muted playsinline class="w-full h-full object-cover"></video>
+                    </div>
+                    <p id="menu-preview-title" class="font-extrabold text-xl tracking-tight relative z-10">
+                        Engineered Digital Products
+                    </p>
+                </div>
+            </div>
+
+            <!-- Right: Big Navigation Links -->
+            <div class="lg:col-span-5 flex flex-col gap-3 order-1 lg:order-3">
+                <span class="text-xs font-mono uppercase tracking-[0.25em] text-zinc-500 mb-2">Navigation</span>
+                <a href="#home" data-preview-color="#dad2f4" data-preview-tag="01 / Home" data-preview-title="Digital Solutions Engineered for Scale" data-preview-video="Q1.mp4" class="menu-nav-item text-4xl sm:text-6xl font-extrabold tracking-tight hover:text-qclay-purple hover:translate-x-3 transition-all duration-300 flex items-baseline gap-4">
+                    <span class="text-sm font-mono text-zinc-500">01</span> About Us
+                </a>
+                <a href="#about-cards" data-preview-color="#effbf9" data-preview-tag="02 / Philosophy" data-preview-title="How We Help Clients Shine Online" data-preview-video="Q2.mp4" class="menu-nav-item text-4xl sm:text-6xl font-extrabold tracking-tight hover:text-qclay-mintAccent hover:translate-x-3 transition-all duration-300 flex items-baseline gap-4">
+                    <span class="text-sm font-mono text-zinc-500">02</span> What We Do
+                </a>
+                <a href="#expertise" data-preview-color="#fce38a" data-preview-tag="03 / Capabilities" data-preview-title="Full-Stack Architecture & UI/UX" data-preview-video="Q1.mp4" class="menu-nav-item text-4xl sm:text-6xl font-extrabold tracking-tight hover:text-qclay-amber hover:translate-x-3 transition-all duration-300 flex items-baseline gap-4">
+                    <span class="text-sm font-mono text-zinc-500">03</span> We Create
+                </a>
+                <a href="#work" data-preview-color="#f7c3b4" data-preview-tag="04 / Case Studies" data-preview-title="Live Production Client Platforms" data-preview-video="Q2.mp4" class="menu-nav-item text-4xl sm:text-6xl font-extrabold tracking-tight hover:text-qclay-peach hover:translate-x-3 transition-all duration-300 flex items-baseline gap-4">
+                    <span class="text-sm font-mono text-zinc-500">04</span> Our Works
+                </a>
+                <a href="#contact" data-preview-color="#8de746" data-preview-tag="05 / Collaborate" data-preview-title="Bring Your Great Idea To Life" data-preview-video="Q1.mp4" class="menu-nav-item text-4xl sm:text-6xl font-extrabold tracking-tight hover:text-qclay-lime hover:translate-x-3 transition-all duration-300 flex items-baseline gap-4">
+                    <span class="text-sm font-mono text-zinc-500">05</span> Contact Us
+                </a>
+            </div>
+        </div>
+
+        <!-- Menu Footer -->
+        <div class="max-w-[1440px] w-full mx-auto pt-6 border-t border-zinc-800/80 flex flex-col sm:flex-row justify-between items-center gap-4 text-sm text-zinc-400">
+            <div class="flex items-center gap-3">
+                <span>Want to work with us?</span>
+                <a href="mailto:hello@mattessentials.online" class="text-white font-bold underline decoration-qclay-purple underline-offset-4 hover:text-qclay-purple">
+                    hello@mattessentials.online
+                </a>
+            </div>
+            <div class="flex items-center gap-6">
+                <a href="cv.html" class="hover:text-white transition-colors">Founder Portfolio (Chiiko Nswana)</a>
+                <span>© Matt Essentials Solutions <span class="year-span"></span></span>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===================================================================== -->
+    <!-- 5. HERO SECTION (#home — QClay .main structure)                       -->
+    <!-- ===================================================================== -->
+    <section id="home" class="relative pt-32 pb-16 md:pt-40 md:pb-24 px-6 md:px-12 max-w-[1440px] mx-auto overflow-hidden">
+        <!-- Ambient QClay Glows -->
+        <div class="absolute -top-24 right-1/4 w-[550px] h-[550px] bg-qclay-purple/15 rounded-full blur-[140px] -z-10 pointer-events-none"></div>
+        <div class="absolute top-1/3 -left-24 w-[420px] h-[420px] bg-indigo-600/10 rounded-full blur-[130px] -z-10 pointer-events-none"></div>
+
+        <!-- Top Status Bar -->
+        <div class="flex flex-wrap items-center justify-between gap-4 mb-8">
+            <div class="inline-flex items-center gap-2.5 px-4 py-2 rounded-full bg-zinc-900/90 border border-zinc-800 text-xs sm:text-sm font-semibold text-zinc-200 shadow-sm">
+                <span class="w-2.5 h-2.5 rounded-full bg-qclay-lime animate-pulse shadow-[0_0_10px_#8de746]"></span>
+                <span>Available for new projects • Enterprise & Startup Ready</span>
+            </div>
+            <div class="hidden md:flex items-center gap-3 text-xs font-mono uppercase tracking-widest text-zinc-400">
+                <span>LUSAKA, ZAMBIA</span>
+                <span class="text-qclay-purple">•</span>
+                <span>SERVING GLOBAL BRANDS</span>
+            </div>
+        </div>
+
+        <!-- QClay Hero Main Content Grid -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-end mb-14">
+            <div class="lg:col-span-9">
+                <h1 class="text-4xl sm:text-6xl lg:text-[4.65rem] xl:text-[5.25rem] font-extrabold tracking-[-0.035em] leading-[1.04] text-white">
+                    <span class="hero-line-wrap">
+                        <span class="hero-line hero-line-1">Digital engineering studio</span>
+                    </span>
+                    <span class="hero-line-wrap">
+                        <span class="hero-line hero-line-2">creating <span class="text-transparent bg-clip-text bg-gradient-to-r from-qclay-purple via-indigo-300 to-qclay-mintAccent">holistic, scalable</span></span>
+                    </span>
+                    <span class="hero-line-wrap">
+                        <span class="hero-line hero-line-3">solutions for inspiring brands.</span>
+                    </span>
+                </h1>
+
+                <!-- QClay .main__row: Clutch/Rating Badge + Slash Service Ticker -->
+                <div class="mt-10 pt-8 border-t border-zinc-800/80 flex flex-col sm:flex-row sm:items-center gap-8">
+                    <!-- Rating Badge (QClay .clutch equivalent) -->
+                    <a href="#work" class="flex items-center gap-4 px-5 py-3.5 rounded-2xl bg-zinc-900/90 border border-zinc-800 hover:border-qclay-purple/60 transition-all group shrink-0 w-fit">
+                        <div class="w-11 h-11 rounded-xl bg-qclay-purple text-zinc-950 font-black text-lg flex items-center justify-center shadow-md group-hover:scale-105 transition-transform">
+                            M
+                        </div>
+                        <div>
+                            <div class="flex items-center gap-1 text-amber-400 text-xs mb-0.5">
+                                <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+                                <span class="text-white font-bold ml-1">5.0</span>
+                            </div>
+                            <p class="text-xs font-medium text-zinc-400">50+ Delivered • 100% Satisfaction</p>
+                        </div>
+                    </a>
+
+                    <!-- Service Slash List (QClay .subtitle) -->
+                    <div class="flex flex-col gap-1 font-mono text-xs sm:text-sm tracking-wider text-zinc-400 uppercase leading-relaxed">
+                        <span>WEB DEVELOPMENT / BACKEND ARCHITECTURE / UX & UI DESIGN /</span>
+                        <span class="text-zinc-300">ENTERPRISE SYSTEMS / PROCESS AUTOMATION / BRAND STRATEGY</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Column: QClay Signature SVG Eye + Capabilities Deck Link (.points) -->
+            <div class="lg:col-span-3 flex flex-row lg:flex-col items-center lg:items-end justify-between gap-6">
+                <!-- Interactive QClay SVG Eye with Rotating Text & Realistic Eyelashes -->
+                <div id="qclay-eye-widget"
+                     data-cursor-label="Blink / Wink"
+                     title="Move mouse to track • Click to toggle cross-eye"
+                     class="relative w-36 h-36 sm:w-40 sm:h-40 flex items-center justify-center cursor-pointer select-none group">
+                    <!-- Rotating Circular Text Badge -->
+                    <svg viewBox="0 0 160 160" class="w-full h-full qclay-eye-orbit absolute inset-0">
+                        <defs>
+                            <path id="eyeTextCircle" d="M 80, 80 m -62, 0 a 62,62 0 1,1 124,0 a 62,62 0 1,1 -124,0" />
+                        </defs>
+                        <text fill="#d4d4d8" font-size="10.2" font-weight="700" letter-spacing="2.55" class="font-mono uppercase">
+                            <textPath href="#eyeTextCircle">
+                                • MATT ESSENTIALS • ENGINEERED FOR SCALE
+                            </textPath>
+                        </text>
+                    </svg>
+
+                    <!-- QClay Eye Center SVG -->
+                    <svg width="110" height="110" viewBox="0 0 133 130" fill="none" xmlns="http://www.w3.org/2000/svg" class="relative z-10 transition-transform duration-300 group-hover:scale-105">
+                        <!-- Eyelashes (Authentic QClay SVG paths) -->
+                        <path d="M71.9811 43.6721C72.1605 43.3833 72.3275 43.0836 72.4433 42.8104C73.1008 41.2592 72.8811 38.7379 72.7701 37.8114C72.7455 37.6059 72.8696 37.4102 73.0674 37.3496C73.2887 37.2818 73.5215 37.4064 73.5811 37.63C73.8422 38.6092 74.4634 41.1623 74.3671 42.9563C74.3377 43.5029 74.2311 44.1785 74.1219 44.7593C73.9907 45.4568 73.2647 45.8505 72.5959 45.6132C71.8186 45.3373 71.5456 44.3726 71.9811 43.6721Z" fill="#dad2f4"/>
+                        <path d="M95.9168 53.0736C96.2306 52.9425 96.5405 52.7953 96.7933 52.64C98.2288 51.7582 99.5129 49.5773 99.9602 48.7583C100.059 48.5767 100.274 48.4893 100.47 48.5547C100.69 48.6279 100.807 48.8644 100.726 49.0811C100.37 50.0301 99.3948 52.4699 98.2754 53.8751C97.9343 54.3033 97.4555 54.7916 97.0295 55.2013C96.518 55.6932 95.6982 55.5926 95.2913 55.0112C94.8183 54.3355 95.1557 53.3915 95.9168 53.0736Z" fill="#dad2f4"/>
+                        <path d="M58.8332 44.3817C58.6928 44.1559 58.5622 43.9215 58.4717 43.7078C57.9575 42.4948 58.1293 40.523 58.2161 39.7985C58.2353 39.6378 58.1383 39.4848 57.9836 39.4374C57.8105 39.3844 57.6285 39.4817 57.5819 39.6566C57.3777 40.4224 56.8919 42.419 56.9672 43.8219C56.9902 44.2494 57.0736 44.7777 57.159 45.2319C57.2615 45.7774 57.8293 46.0853 58.3523 45.8997C58.9602 45.6839 59.1737 44.9295 58.8332 44.3817Z" fill="#dad2f4"/>
+                        <path d="M84.8531 47.7005C85.0636 47.538 85.2679 47.3641 85.4274 47.1956C86.3333 46.2389 86.8619 44.3315 87.0339 43.6224C87.0721 43.4651 87.2165 43.3557 87.378 43.3654C87.5587 43.3762 87.6951 43.5311 87.6777 43.7113C87.6012 44.5001 87.3581 46.5405 86.797 47.8285C86.626 48.221 86.3631 48.6868 86.1242 49.0825C85.8374 49.5576 85.1978 49.6475 84.7728 49.2907C84.2787 48.876 84.3425 48.0946 84.8531 47.7005Z" fill="#dad2f4"/>
+                        <path d="M45.2232 49.6423C45.0043 49.3553 44.7974 49.0554 44.6474 48.7783C43.7956 47.2053 43.7726 44.5181 43.7961 43.5276C43.8014 43.3079 43.6504 43.1136 43.4352 43.0696C43.1944 43.0203 42.961 43.1755 42.9206 43.4179C42.7438 44.4793 42.3455 47.2408 42.6288 49.1272C42.7151 49.702 42.8962 50.4053 43.0704 51.0081C43.2796 51.7321 44.0868 52.0748 44.7697 51.7562C45.5634 51.386 45.7543 50.3388 45.2232 49.6423Z" fill="#dad2f4"/>
+                        <path d="M35.4839 56.502C35.2401 56.4015 34.9995 56.2886 34.8031 56.1696C33.6823 55.4905 32.6798 53.8109 32.3307 53.1804C32.2531 53.0403 32.0872 52.9729 31.9351 53.0229C31.7627 53.0796 31.6707 53.2654 31.7352 53.435C32.0146 54.17 32.7744 56.0415 33.646 57.1206C33.9155 57.4544 34.2953 57.8356 34.6309 58.1534C35.0258 58.5275 35.6529 58.4503 35.9677 58.0067C36.3392 57.4832 36.0773 56.7468 35.4839 56.502Z" fill="#dad2f4"/>
+                        <!-- Eye Sclera (#DAD2F4) -->
+                        <path d="M66.7888 49.0268C52.8776 49.3513 36.5274 62.6537 36.5273 67.838C36.5273 73.0223 53.2557 84.4417 66.7888 84.7408C80.883 85.0523 98.6861 73.0222 98.6861 67.838C98.6861 62.6537 81.2464 48.6895 66.7888 49.0268Z" fill="#DAD2F4"/>
+                        <!-- Tracking Pupil + Specular Glint -->
+                        <g id="qclay-pupil-group" style="transition: transform 0.08s ease-out;">
+                            <circle cx="67.3339" cy="66.7414" r="11.5" fill="#070709"/>
+                            <circle cx="62.8858" cy="62.5316" r="2.2" fill="#ffffff"/>
+                        </g>
+                        <!-- Blinking Eyelids -->
+                        <path class="qclay-eyelid-top" d="M66.4336 49.027C52.5224 49.3515 36.1721 62.6539 36.1721 67.8382C36.1721 73.0225 39.867 61.5001 66.4336 61.5001C93.0002 61.5001 98.3309 73.0224 98.3309 67.8382C98.3309 62.654 80.8912 48.6898 66.4336 49.027Z" fill="#f7c3b4"/>
+                        <path class="qclay-eyelid-bottom" d="M66.4336 76.0002C42.367 76.0002 36.1721 62.654 36.1721 67.8383C36.1721 73.0226 52.9005 84.442 66.4336 84.7411C80.5277 85.0526 98.3309 73.0225 98.3309 67.8383C98.3309 62.654 90.5002 76.0002 66.4336 76.0002Z" fill="#f7c3b4"/>
+                    </svg>
+                </div>
+
+                <!-- QClay "Our Capabilities" Link -->
+                <a href="cv.html"
+                   data-cursor-label="Founder Profile"
+                   class="inline-flex items-center gap-2 text-sm font-bold text-qclay-purple hover:text-white underline decoration-qclay-purple/60 underline-offset-8 transition-colors">
+                    <span>Founder Portfolio & Profile</span>
+                    <i data-lucide="arrow-up-right" class="w-4 h-4"></i>
+                </a>
+            </div>
+        </div>
+
+        <!-- QClay Scroll-Scaling Showreel Container (.main__image) -->
+        <div id="hero-reel-wrapper" class="relative w-full pt-2">
+            <div id="hero-reel-card"
+                 data-cursor-label="Play Reel!"
+                 onclick="openReelModal()"
+                 class="relative w-full aspect-[16/9] md:aspect-[21/9] rounded-[2rem] md:rounded-[3rem] overflow-hidden border border-zinc-800/80 shadow-[0_30px_100px_rgba(0,0,0,0.75)] cursor-pointer group origin-center transition-transform duration-150 ease-out"
+                 style="transform: scale(0.92);">
+                <video id="hero-reel-video" src="Q1.mp4" autoplay loop muted playsinline class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"></video>
+
+                <!-- Gradient Overlay -->
+                <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent flex flex-col justify-between p-6 sm:p-10">
+                    <div class="flex justify-between items-center">
+                        <span class="px-4 py-1.5 rounded-full bg-black/60 backdrop-blur-md border border-white/15 text-xs font-mono uppercase tracking-widest text-zinc-200">
+                            Showreel • Motion & Engineering Craft
+                        </span>
+                        <span class="px-4 py-1.5 rounded-full bg-qclay-purple text-zinc-950 font-extrabold text-xs uppercase tracking-wider">
+                            Click to Expand
+                        </span>
+                    </div>
+
+                    <!-- Center Floating Play Button (QClay .vimeo-play-btn) -->
+                    <div class="my-auto mx-auto flex items-center gap-4 px-7 py-4 rounded-full bg-white/95 text-zinc-950 font-extrabold text-base sm:text-lg shadow-2xl group-hover:bg-qclay-lime group-hover:scale-110 transition-all duration-300">
+                        <span class="w-9 h-9 rounded-full bg-zinc-950 text-white flex items-center justify-center">
+                            <i data-lucide="play" class="w-4 h-4 fill-current ml-0.5"></i>
+                        </span>
+                        <span>Play Showreel!</span>
+                    </div>
+
+                    <div class="flex flex-col sm:flex-row justify-between items-start sm:items-end gap-4">
+                        <p class="text-sm sm:text-base text-zinc-200 max-w-md font-medium">
+                            Our work is best experienced in motion — combining full-stack reliability with high-impact interactive design.
+                        </p>
+                        <div class="flex gap-3">
+                            <span class="text-xs font-mono text-zinc-400">01 / DESIGN SYSTEMS</span>
+                            <span class="text-xs font-mono text-zinc-400">02 / PRODUCTION PLATFORMS</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===================================================================== -->
+    <!-- 6. "WHAT ABOUT MATT ESSENTIALS?" HORIZONTAL SCROLL CARDS (#about-cards)-->
+    <!--    Faithful to QClay's `about` section with 3 pastel cards & pill video-->
+    <!-- ===================================================================== -->
+    <section id="about-cards" class="relative md:h-[340vh] py-20 md:py-0">
+        <div class="md:sticky md:top-0 md:h-screen w-full overflow-hidden flex items-center bg-qclay-black">
+            <!-- Horizontal Track on Desktop / Vertical Stack on Mobile -->
+            <div id="about-horiz-track" class="flex flex-col md:flex-row items-stretch md:items-center gap-8 md:gap-12 px-6 md:px-16 w-full md:w-max will-change-transform">
+
+                <!-- Intro Title Panel (QClay "What About QClay?") -->
+                <div class="w-full md:w-[42vw] lg:w-[36vw] shrink-0 flex flex-col justify-center py-8 md:py-0">
+                    <span class="text-xs font-mono uppercase tracking-[0.25em] text-qclay-purple mb-4">01 / Studio Identity</span>
+                    <h2 class="text-5xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight leading-[1.03] mb-6">
+                        What About<br />
+                        <span class="text-qclay-purple">Matt Essentials?</span>
+                    </h2>
+                    <p class="text-zinc-400 text-lg leading-relaxed max-w-md mb-8">
+                        We blend rigorous software engineering with agency-grade visual craft to turn ambitious concepts into market-leading digital products.
+                    </p>
+                    <div class="hidden md:flex items-center gap-3 text-xs font-mono uppercase tracking-widest text-zinc-500">
+                        <span class="w-8 h-[1px] bg-zinc-700"></span>
+                        <span>Scroll to explore our 3 pillars</span>
+                        <i data-lucide="arrow-right" class="w-4 h-4 text-qclay-purple"></i>
+                    </div>
+                </div>
+
+                <!-- CARD 01: Soft Lavender (#dad2f4) -->
+                <article class="qclay-about-card w-full md:w-[76vw] lg:w-[64vw] xl:w-[56vw] md:h-[78vh] shrink-0 bg-[#dad2f4] text-zinc-950 p-8 sm:p-12 flex flex-col justify-between shadow-2xl">
+                    <!-- Top Area: Decorative Double Circles + Sliding Pill Video -->
+                    <div class="relative h-56 sm:h-64 flex items-center justify-between overflow-hidden">
+                        <div class="qclay-circle-pair opacity-60">
+                            <div class="qclay-circle"></div>
+                            <div class="qclay-circle"></div>
+                        </div>
+                        <div class="qclay-pill-video about-pill-video w-64 sm:w-96 h-44 sm:h-56 relative z-10 border-4 border-zinc-950/10" data-card-index="1">
+                            <video src="Q1.mp4" autoplay loop muted playsinline class="w-full h-full object-cover"></video>
+                        </div>
+                    </div>
+
+                    <!-- Bottom Content (QClay .card__content-bottom) -->
+                    <div class="pt-6 border-t border-zinc-950/10">
+                        <div class="inline-block px-3 py-1 rounded-full bg-zinc-950/10 text-xs font-mono font-bold uppercase tracking-wider mb-4">
+                            Pillar 01 • Digital Presence
+                        </div>
+                        <h3 class="text-3xl sm:text-5xl font-extrabold tracking-tight leading-tight mb-4 max-w-2xl">
+                            We help our clients to shine online
+                        </h3>
+                        <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-6">
+                            <p class="text-base sm:text-xl text-zinc-800 max-w-xl leading-relaxed font-medium">
+                                We collaborate as a collective bringing our whole engineering and design craft to a project — creating high-performing platforms that stand out in any industry.
+                            </p>
+                            <span class="text-6xl sm:text-8xl font-black tracking-tighter text-zinc-950/20 leading-none select-none">01</span>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- CARD 02: Mint Ice (#effbf9) -->
+                <article class="qclay-about-card w-full md:w-[76vw] lg:w-[64vw] xl:w-[56vw] md:h-[78vh] shrink-0 bg-[#effbf9] text-zinc-950 p-8 sm:p-12 flex flex-col justify-between shadow-2xl">
+                    <!-- Top Area: Decorative Double Circles + Sliding Pill Video -->
+                    <div class="relative h-56 sm:h-64 flex items-center justify-between overflow-hidden">
+                        <div class="qclay-circle-pair opacity-60">
+                            <div class="qclay-circle"></div>
+                            <div class="qclay-circle"></div>
+                        </div>
+                        <div class="qclay-pill-video about-pill-video w-64 sm:w-96 h-44 sm:h-56 relative z-10 border-4 border-zinc-950/10" data-card-index="2">
+                            <video src="Q2.mp4" autoplay loop muted playsinline class="w-full h-full object-cover"></video>
+                        </div>
+                    </div>
+
+                    <!-- Bottom Content -->
+                    <div class="pt-6 border-t border-zinc-950/10">
+                        <div class="inline-block px-3 py-1 rounded-full bg-zinc-950/10 text-xs font-mono font-bold uppercase tracking-wider mb-4">
+                            Pillar 02 • Full-Cycle Execution
+                        </div>
+                        <h3 class="text-3xl sm:text-5xl font-extrabold tracking-tight leading-tight mb-4 max-w-2xl">
+                            We translate research into solutions
+                        </h3>
+                        <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-6">
+                            <p class="text-base sm:text-xl text-zinc-800 max-w-xl leading-relaxed font-medium">
+                                We offer a complete end-to-end process from discovery, database architecture, UI/UX prototyping, and launch to post-launch optimization and automated testing.
+                            </p>
+                            <span class="text-6xl sm:text-8xl font-black tracking-tighter text-zinc-950/20 leading-none select-none">02</span>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- CARD 03: Warm Blush/Amber (#fce38a) -->
+                <article class="qclay-about-card w-full md:w-[76vw] lg:w-[64vw] xl:w-[56vw] md:h-[78vh] shrink-0 bg-[#fce38a] text-zinc-950 p-8 sm:p-12 flex flex-col justify-between shadow-2xl">
+                    <!-- Top Area: Decorative Double Circles + Interactive Code/Metrics Pill -->
+                    <div class="relative h-56 sm:h-64 flex items-center justify-between overflow-hidden">
+                        <div class="qclay-circle-pair opacity-60">
+                            <div class="qclay-circle"></div>
+                            <div class="qclay-circle"></div>
+                        </div>
+                        <div class="qclay-pill-video about-pill-video w-64 sm:w-96 h-44 sm:h-56 bg-zinc-950 text-white p-6 flex flex-col justify-center relative z-10" data-card-index="3">
+                            <div class="flex items-center gap-2 text-qclay-lime text-xs font-mono mb-2">
+                                <span class="w-2 h-2 rounded-full bg-qclay-lime"></span>
+                                FINANCE + TECH ARCHITECTURE
+                            </div>
+                            <p class="font-extrabold text-xl sm:text-2xl leading-snug mb-1">99.9% Uptime & Precision</p>
+                            <p class="text-xs text-zinc-400 font-mono">PostgreSQL • React • C# WPF • VBA</p>
+                        </div>
+                    </div>
+
+                    <!-- Bottom Content -->
+                    <div class="pt-6 border-t border-zinc-950/10">
+                        <div class="inline-block px-3 py-1 rounded-full bg-zinc-950/10 text-xs font-mono font-bold uppercase tracking-wider mb-4">
+                            Pillar 03 • Analytical Rigor
+                        </div>
+                        <h3 class="text-3xl sm:text-5xl font-extrabold tracking-tight leading-tight mb-4 max-w-2xl">
+                            Bridging finance & global technology
+                        </h3>
+                        <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-6">
+                            <p class="text-base sm:text-xl text-zinc-800 max-w-xl leading-relaxed font-medium">
+                                Backed by an analytical foundation in Finance, Accounting, and Full-Stack Engineering, we streamline complex workflows and build software that drives measurable ROI.
+                            </p>
+                            <span class="text-6xl sm:text-8xl font-black tracking-tighter text-zinc-950/20 leading-none select-none">03</span>
+                        </div>
+                    </div>
+                </article>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ===================================================================== -->
+    <!-- 7. "WE CREATE" KINETIC MARQUEE & INTERACTIVE INTERFACE STAGE          -->
+    <!--    Replaces the old 1-shot popup with QClay's `what-create` showcase  -->
+    <!-- ===================================================================== -->
+    <section id="expertise" class="py-24 md:py-32 bg-zinc-950 border-y border-zinc-800/70 relative overflow-hidden">
+        <!-- Kinetic Diagonal Marquee Bands (QClay "WE CREATE") -->
+        <div class="mb-20 -rotate-1 select-none pointer-events-none opacity-90">
+            <div class="py-3 bg-qclay-purple text-zinc-950 font-black text-2xl sm:text-4xl uppercase tracking-tight overflow-hidden">
+                <div class="animate-marquee-left">
+                    <span class="mx-6">WE CREATE • WE ENGINEER • WE DESIGN • WE AUTOMATE • WE SCALE •</span>
+                    <span class="mx-6">WE CREATE • WE ENGINEER • WE DESIGN • WE AUTOMATE • WE SCALE •</span>
+                </div>
+            </div>
+            <div class="py-3 bg-zinc-900 text-zinc-200 border-y border-zinc-800 font-black text-xl sm:text-3xl uppercase tracking-tight overflow-hidden">
+                <div class="animate-marquee-right">
+                    <span class="mx-6">WEB PLATFORMS • UX/UI PROTOTYPING • DATABASE ARCHITECTURE • PROCESS AUTOMATION • BRANDING •</span>
+                    <span class="mx-6">WEB PLATFORMS • UX/UI PROTOTYPING • DATABASE ARCHITECTURE • PROCESS AUTOMATION • BRANDING •</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="max-w-[1440px] mx-auto px-6 md:px-12">
+            <!-- Section Header -->
+            <div class="flex flex-col lg:flex-row justify-between items-start lg:items-end mb-14 gap-8">
+                <div>
+                    <span class="text-xs font-mono uppercase tracking-[0.25em] text-qclay-lime mb-3 block">02 / What We Create</span>
+                    <h2 class="text-4xl sm:text-6xl font-extrabold tracking-tight leading-[1.06]">
+                        Interactive Craft.<br />
+                        <span class="text-zinc-400">From Wireframe to Scale.</span>
+                    </h2>
+                </div>
+
+                <!-- QClay Stage Switcher Pills (Graphic / UX / UI / App) -->
+                <div class="flex flex-wrap gap-2 bg-zinc-900/90 p-2 rounded-full border border-zinc-800">
+                    <button type="button" onclick="setCreateStage(0)" class="stage-btn px-5 py-2.5 rounded-full text-xs sm:text-sm font-bold transition-all bg-qclay-purple text-zinc-950" data-stage="0">
+                        01. UX & Wireframe
+                    </button>
+                    <button type="button" onclick="setCreateStage(1)" class="stage-btn px-5 py-2.5 rounded-full text-xs sm:text-sm font-bold transition-all text-zinc-300 hover:text-white" data-stage="1">
+                        02. Holistic UI System
+                    </button>
+                    <button type="button" onclick="setCreateStage(2)" class="stage-btn px-5 py-2.5 rounded-full text-xs sm:text-sm font-bold transition-all text-zinc-300 hover:text-white" data-stage="2">
+                        03. Full-Stack & Mobile
+                    </button>
+                </div>
+            </div>
+
+            <!-- QClay Interactive Multi-Stage Interface Deconstruction (.interface) -->
+            <div class="relative rounded-[2.5rem] bg-gradient-to-b from-zinc-900/90 to-zinc-950 border border-zinc-800 p-6 sm:p-10 lg:p-14 mb-24 overflow-hidden shadow-2xl">
+                <!-- Background Subtle Grid -->
+                <div class="absolute inset-0 bg-[linear-gradient(to_right,#27272a22_1px,transparent_1px),linear-gradient(to_bottom,#27272a22_1px,transparent_1px)] bg-[size:36px_36px] pointer-events-none"></div>
+
+                <!-- Floating QClay Collaborator Cursors (.what-create__cursors) -->
+                <div class="hidden md:flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-qclay-lime text-zinc-950 text-xs font-extrabold shadow-lg absolute top-10 left-12 z-30 cursor-float-1 pointer-events-none">
+                    <i data-lucide="mouse-pointer" class="w-3.5 h-3.5 fill-current"></i>
+                    <span>@Matt • Lead Architect</span>
+                </div>
+                <div class="hidden md:flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-qclay-purple text-zinc-950 text-xs font-extrabold shadow-lg absolute top-16 right-16 z-30 cursor-float-2 pointer-events-none">
+                    <i data-lucide="mouse-pointer" class="w-3.5 h-3.5 fill-current"></i>
+                    <span>@Chawy • UI/UX System</span>
+                </div>
+                <div class="hidden md:flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-qclay-amber text-zinc-950 text-xs font-extrabold shadow-lg absolute bottom-12 right-24 z-30 cursor-float-3 pointer-events-none">
+                    <i data-lucide="mouse-pointer" class="w-3.5 h-3.5 fill-current"></i>
+                    <span>@Backend • API & DB Sync</span>
+                </div>
+
+                <!-- Active Stage Tag Banner (.interface__tag) -->
+                <div class="flex justify-center mb-8 relative z-20">
+                    <div id="create-stage-badge" class="px-5 py-2 rounded-full bg-zinc-950 border border-qclay-purple/50 text-qclay-purple font-mono text-xs uppercase tracking-[0.2em] shadow-lg">
+                        STAGE 01 • INTUITIVE UX & SYSTEM ARCHITECTURE
+                    </div>
+                </div>
+
+                <!-- Interactive Mockup Canvas -->
+                <div id="create-canvas" class="relative max-w-5xl mx-auto transition-all duration-500">
+                    <!-- Stage 0: Wireframe / Architecture Blueprint -->
+                    <div id="stage-panel-0" class="stage-panel grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
+                        <div class="lg:col-span-4 rounded-2xl bg-zinc-950/90 border border-dashed border-zinc-700 p-6 flex flex-col justify-between">
+                            <div>
+                                <div class="text-xs font-mono text-zinc-500 mb-2">WIREFRAME // DISCOVERY</div>
+                                <h4 class="text-xl font-bold text-white mb-3">User Flows & Schema Design</h4>
+                                <p class="text-sm text-zinc-400 leading-relaxed mb-6">
+                                    Before writing a single line of UI, we map entity relationships, API contracts, and frictionless user journeys.
+                                </p>
+                            </div>
+                            <div class="space-y-3 font-mono text-xs">
+                                <div class="p-3 rounded-xl bg-zinc-900 border border-zinc-800 text-qclay-purple">01. Information Architecture</div>
+                                <div class="p-3 rounded-xl bg-zinc-900 border border-zinc-800 text-zinc-300">02. Normalized SQL Schemas</div>
+                                <div class="p-3 rounded-xl bg-zinc-900 border border-zinc-800 text-zinc-300">03. Interactive Figma Prototypes</div>
+                            </div>
+                        </div>
+                        <div class="lg:col-span-8 rounded-2xl bg-zinc-950/90 border border-dashed border-zinc-700 p-6 flex flex-col justify-between">
+                            <div class="flex items-center justify-between border-b border-zinc-800 pb-4 mb-6">
+                                <div class="flex gap-2">
+                                    <span class="w-3 h-3 rounded-full bg-zinc-700"></span>
+                                    <span class="w-3 h-3 rounded-full bg-zinc-700"></span>
+                                    <span class="w-3 h-3 rounded-full bg-zinc-700"></span>
+                                </div>
+                                <span class="text-xs font-mono text-zinc-500">blueprint_v1.fig</span>
+                            </div>
+                            <div class="grid grid-cols-3 gap-4 mb-6">
+                                <div class="h-24 rounded-xl border border-dashed border-zinc-700 bg-zinc-900/50 p-4 flex flex-col justify-between">
+                                    <div class="w-8 h-2 bg-zinc-700 rounded"></div>
+                                    <div class="w-16 h-4 bg-qclay-purple/40 rounded"></div>
+                                </div>
+                                <div class="h-24 rounded-xl border border-dashed border-zinc-700 bg-zinc-900/50 p-4 flex flex-col justify-between">
+                                    <div class="w-8 h-2 bg-zinc-700 rounded"></div>
+                                    <div class="w-20 h-4 bg-qclay-lime/40 rounded"></div>
+                                </div>
+                                <div class="h-24 rounded-xl border border-dashed border-zinc-700 bg-zinc-900/50 p-4 flex flex-col justify-between">
+                                    <div class="w-8 h-2 bg-zinc-700 rounded"></div>
+                                    <div class="w-14 h-4 bg-qclay-amber/40 rounded"></div>
+                                </div>
+                            </div>
+                            <div class="h-44 rounded-xl border border-dashed border-qclay-purple/40 bg-zinc-900/60 p-5 flex items-center justify-between gap-6">
+                                <div class="space-y-3 flex-1">
+                                    <div class="w-1/3 h-3 bg-qclay-purple/50 rounded"></div>
+                                    <div class="w-3/4 h-6 bg-zinc-700 rounded"></div>
+                                    <div class="w-1/2 h-3 bg-zinc-800 rounded"></div>
+                                </div>
+                                <div class="w-40 h-28 rounded-xl overflow-hidden border border-zinc-700 shrink-0">
+                                    <video src="Q1.mp4" autoplay loop muted playsinline class="w-full h-full object-cover opacity-80"></video>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Stage 1: Holistic UI System (Hidden by default) -->
+                    <div id="stage-panel-1" class="stage-panel hidden grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
+                        <div class="lg:col-span-7 rounded-2xl bg-qclay-purple text-zinc-950 p-8 flex flex-col justify-between">
+                            <div>
+                                <span class="px-3 py-1 rounded-full bg-zinc-950/10 text-xs font-mono font-bold uppercase">Design System • Tokenized UI</span>
+                                <h4 class="text-3xl font-extrabold mt-4 mb-2">Pixel-Perfect Component Library</h4>
+                                <p class="text-zinc-800 text-sm sm:text-base">
+                                    Every button, typography scale, motion curve, and dark/light surface is engineered for visual harmony and accessibility.
+                                </p>
+                            </div>
+                            <div class="mt-6 rounded-2xl overflow-hidden shadow-xl border border-black/10 aspect-video">
+                                <video src="Q2.mp4" autoplay loop muted playsinline class="w-full h-full object-cover"></video>
+                            </div>
+                        </div>
+                        <div class="lg:col-span-5 flex flex-col gap-6">
+                            <div class="rounded-2xl bg-zinc-900 border border-zinc-800 p-6 flex-1 flex flex-col justify-between">
+                                <span class="text-xs font-mono text-qclay-amber uppercase">Color & Contrast Tokens</span>
+                                <div class="grid grid-cols-4 gap-3 my-4">
+                                    <div class="h-14 rounded-xl bg-[#dad2f4]" title="#dad2f4"></div>
+                                    <div class="h-14 rounded-xl bg-[#8de746]" title="#8de746"></div>
+                                    <div class="h-14 rounded-xl bg-[#fce38a]" title="#fce38a"></div>
+                                    <div class="h-14 rounded-xl bg-[#effbf9]" title="#effbf9"></div>
+                                </div>
+                                <p class="text-xs text-zinc-400">WCAG AA/AAA compliant contrast ratios paired with fluid micro-interactions.</p>
+                            </div>
+                            <div class="rounded-2xl bg-zinc-900 border border-zinc-800 p-6 flex-1 flex flex-col justify-between">
+                                <span class="text-xs font-mono text-qclay-lime uppercase">Motion Choreography</span>
+                                <p class="text-lg font-bold text-white mt-2">60fps Hardware-Accelerated Transitions</p>
+                                <p class="text-xs text-zinc-400 mt-1">Custom lerp cursors, sticky scroll tracks, and responsive layout shifts.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Stage 2: Full-Stack & Mobile Adaptive (Hidden by default) -->
+                    <div id="stage-panel-2" class="stage-panel hidden grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
+                        <div class="lg:col-span-4 rounded-3xl bg-zinc-950 border-2 border-zinc-800 p-5 flex flex-col justify-between max-w-xs mx-auto w-full shadow-2xl">
+                            <div class="w-16 h-1.5 bg-zinc-800 rounded-full mx-auto mb-4"></div>
+                            <div class="rounded-2xl overflow-hidden aspect-[9/12] relative border border-zinc-800">
+                                <video src="Q1.mp4" autoplay loop muted playsinline class="w-full h-full object-cover"></video>
+                                <div class="absolute bottom-3 inset-x-3 p-3 rounded-xl bg-black/80 backdrop-blur-md text-xs">
+                                    <p class="font-bold text-white">Mobile-First Adaptive</p>
+                                    <p class="text-zinc-400 text-[11px]">100/100 Lighthouse UX Score</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="lg:col-span-8 rounded-2xl bg-zinc-900 border border-zinc-800 p-8 flex flex-col justify-between">
+                            <div>
+                                <span class="text-xs font-mono text-qclay-lime uppercase tracking-widest">PRODUCTION STACK // DEPLOYMENT</span>
+                                <h4 class="text-2xl sm:text-3xl font-extrabold text-white mt-2 mb-4">Engineered for High-Traffic Scale</h4>
+                                <p class="text-zinc-400 text-sm sm:text-base leading-relaxed mb-6">
+                                    From React/Next.js frontends and Node.js/PHP backends to PostgreSQL/MySQL databases and automated Excel VBA / C# enterprise tools, every layer is built to last.
+                                </p>
+                            </div>
+                            <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
+                                <div class="p-4 rounded-2xl bg-zinc-950 border border-zinc-800">
+                                    <p class="text-2xl font-extrabold text-qclay-purple">React</p>
+                                    <p class="text-xs text-zinc-500 mt-1">Next.js & TypeScript</p>
+                                </div>
+                                <div class="p-4 rounded-2xl bg-zinc-950 border border-zinc-800">
+                                    <p class="text-2xl font-extrabold text-qclay-lime">Node & PHP</p>
+                                    <p class="text-xs text-zinc-500 mt-1">REST & GraphQL APIs</p>
+                                </div>
+                                <div class="p-4 rounded-2xl bg-zinc-950 border border-zinc-800">
+                                    <p class="text-2xl font-extrabold text-qclay-amber">SQL</p>
+                                    <p class="text-xs text-zinc-500 mt-1">PostgreSQL & MySQL</p>
+                                </div>
+                                <div class="p-4 rounded-2xl bg-zinc-950 border border-zinc-800">
+                                    <p class="text-2xl font-extrabold text-qclay-blue">C# / VBA</p>
+                                    <p class="text-xs text-zinc-500 mt-1">WPF & Automation</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 6 Core Expertise Bento Grid (Combining Matt Essentials + Chiiko Nswana CV capabilities) -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="reveal-up bg-zinc-900/70 border border-zinc-800/90 p-8 rounded-[2rem] hover:-translate-y-2 hover:border-qclay-purple/60 transition-all duration-300 group">
+                    <div class="flex justify-between items-start mb-6">
+                        <div class="p-4 bg-zinc-950 rounded-2xl text-qclay-purple group-hover:bg-qclay-purple group-hover:text-zinc-950 transition-colors">
+                            <i data-lucide="layout" class="w-7 h-7"></i>
+                        </div>
+                        <span class="font-mono text-xs text-zinc-500">01</span>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-3">Frontend & Web Platforms</h3>
+                    <p class="text-zinc-400 leading-relaxed text-sm mb-6">
+                        React, Next.js, TypeScript, and Three.js. Crafting pixel-perfect, responsive, and highly interactive single-page applications and corporate portals.
+                    </p>
+                    <div class="flex flex-wrap gap-2 text-xs font-mono text-zinc-300">
+                        <span class="px-3 py-1 rounded-full bg-zinc-950 border border-zinc-800">React / Next.js</span>
+                        <span class="px-3 py-1 rounded-full bg-zinc-950 border border-zinc-800">Tailwind CSS</span>
+                        <span class="px-3 py-1 rounded-full bg-zinc-950 border border-zinc-800">Three.js</span>
+                    </div>
+                </div>
+
+                <div class="reveal-up bg-zinc-900/70 border border-zinc-800/90 p-8 rounded-[2rem] hover:-translate-y-2 hover:border-qclay-lime/60 transition-all duration-300 group">
+                    <div class="flex justify-between items-start mb-6">
+                        <div class="p-4 bg-zinc-950 rounded-2xl text-qclay-lime group-hover:bg-qclay-lime group-hover:text-zinc-950 transition-colors">
+                            <i data-lucide="database" class="w-7 h-7"></i>
+                        </div>
+                        <span class="font-mono text-xs text-zinc-500">02</span>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-3">Backend & Database Architecture</h3>
+                    <p class="text-zinc-400 leading-relaxed text-sm mb-6">
+                        Node.js, Python, PHP, PostgreSQL, and MySQL. Designing optimized, high-traffic database schemas, secure authentication, and scalable APIs.
+                    </p>
+                    <div class="flex flex-wrap gap-2 text-xs font-mono text-zinc-300">
+                        <span class="px-3 py-1 rounded-full bg-zinc-950 border border-zinc-800">PostgreSQL</span>
+                        <span class="px-3 py-1 rounded-full bg-zinc-950 border border-zinc-800">Node.js</span>
+                        <span class="px-3 py-1 rounded-full bg-zinc-950 border border-zinc-800">PHP & MySQL</span>
+                    </div>
+                </div>
+
+                <div class="reveal-up bg-zinc-900/70 border border-zinc-800/90 p-8 rounded-[2rem] hover:-translate-y-2 hover:border-qclay-amber/60 transition-all duration-300 group">
+                    <div class="flex justify-between items-start mb-6">
+                        <div class="p-4 bg-zinc-950 rounded-2xl text-qclay-amber group-hover:bg-qclay-amber group-hover:text-zinc-950 transition-colors">
+                            <i data-lucide="figma" class="w-7 h-7"></i>
+                        </div>
+                        <span class="font-mono text-xs text-zinc-500">03</span>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-3">UI/UX & Brand Identity</h3>
+                    <p class="text-zinc-400 leading-relaxed text-sm mb-6">
+                        Designing custom interface controls, interactive Figma prototypes, comprehensive logo concepts, and cohesive brand systems through Chawy Designs.
+                    </p>
+                    <div class="flex flex-wrap gap-2 text-xs font-mono text-zinc-300">
+                        <span class="px-3 py-1 rounded-full bg-zinc-950 border border-zinc-800">Figma Systems</span>
+                        <span class="px-3 py-1 rounded-full bg-zinc-950 border border-zinc-800">Brand Strategy</span>
+                        <span class="px-3 py-1 rounded-full bg-zinc-950 border border-zinc-800">Motion UX</span>
+                    </div>
+                </div>
+
+                <div class="reveal-up bg-zinc-900/70 border border-zinc-800/90 p-8 rounded-[2rem] hover:-translate-y-2 hover:border-qclay-blue/60 transition-all duration-300 group">
+                    <div class="flex justify-between items-start mb-6">
+                        <div class="p-4 bg-zinc-950 rounded-2xl text-qclay-blue group-hover:bg-qclay-blue group-hover:text-zinc-950 transition-colors">
+                            <i data-lucide="cpu" class="w-7 h-7"></i>
+                        </div>
+                        <span class="font-mono text-xs text-zinc-500">04</span>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-3">Process & Financial Automation</h3>
+                    <p class="text-zinc-400 leading-relaxed text-sm mb-6">
+                        Engineering custom C# WPF desktop applications and advanced Excel VBA pipelines synchronized with Access/SQL databases to automate enterprise workflows.
+                    </p>
+                    <div class="flex flex-wrap gap-2 text-xs font-mono text-zinc-300">
+                        <span class="px-3 py-1 rounded-full bg-zinc-950 border border-zinc-800">C# & WPF</span>
+                        <span class="px-3 py-1 rounded-full bg-zinc-950 border border-zinc-800">Excel VBA</span>
+                        <span class="px-3 py-1 rounded-full bg-zinc-950 border border-zinc-800">FinTech Logic</span>
+                    </div>
+                </div>
+
+                <div class="reveal-up bg-zinc-900/70 border border-zinc-800/90 p-8 rounded-[2rem] hover:-translate-y-2 hover:border-qclay-peach/60 transition-all duration-300 group">
+                    <div class="flex justify-between items-start mb-6">
+                        <div class="p-4 bg-zinc-950 rounded-2xl text-qclay-peach group-hover:bg-qclay-peach group-hover:text-zinc-950 transition-colors">
+                            <i data-lucide="smartphone" class="w-7 h-7"></i>
+                        </div>
+                        <span class="font-mono text-xs text-zinc-500">05</span>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-3">Mobile Optimization</h3>
+                    <p class="text-zinc-400 leading-relaxed text-sm mb-6">
+                        Ensuring flawless responsiveness, fast First Contentful Paint, and adaptive touch interactions across smartphones, tablets, and ultra-wide displays.
+                    </p>
+                    <div class="flex flex-wrap gap-2 text-xs font-mono text-zinc-300">
+                        <span class="px-3 py-1 rounded-full bg-zinc-950 border border-zinc-800">Responsive UI</span>
+                        <span class="px-3 py-1 rounded-full bg-zinc-950 border border-zinc-800">Core Web Vitals</span>
+                        <span class="px-3 py-1 rounded-full bg-zinc-950 border border-zinc-800">PWA Ready</span>
+                    </div>
+                </div>
+
+                <div class="reveal-up bg-zinc-900/70 border border-zinc-800/90 p-8 rounded-[2rem] hover:-translate-y-2 hover:border-emerald-400/60 transition-all duration-300 group">
+                    <div class="flex justify-between items-start mb-6">
+                        <div class="p-4 bg-zinc-950 rounded-2xl text-emerald-400 group-hover:bg-emerald-400 group-hover:text-zinc-950 transition-colors">
+                            <i data-lucide="server" class="w-7 h-7"></i>
+                        </div>
+                        <span class="font-mono text-xs text-zinc-500">06</span>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-3">Cloud, Hosting & Clean Code</h3>
+                    <p class="text-zinc-400 leading-relaxed text-sm mb-6">
+                        TypeScript, CI/CD pipelines, AWS & Bluehost server configuration, SSL security, and maintainable enterprise codebases built for long-term evolution.
+                    </p>
+                    <div class="flex flex-wrap gap-2 text-xs font-mono text-zinc-300">
+                        <span class="px-3 py-1 rounded-full bg-zinc-950 border border-zinc-800">AWS & Cloud</span>
+                        <span class="px-3 py-1 rounded-full bg-zinc-950 border border-zinc-800">CI/CD</span>
+                        <span class="px-3 py-1 rounded-full bg-zinc-950 border border-zinc-800">Server Ops</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===================================================================== -->
+    <!-- 8. SELECTED WORK / PORTFOLIO SECTION (#work)                          -->
+    <!--    With QClay bold lead-in statement + Interactive Live Preview Frames-->
+    <!-- ===================================================================== -->
+    <section id="work" class="py-24 md:py-36 px-6 md:px-12 max-w-[1440px] mx-auto relative z-10">
+        <!-- QClay "few-people" Inspired Bold Lead-in Statement -->
+        <div class="max-w-5xl mb-20 reveal-up">
+            <span class="text-xs font-mono uppercase tracking-[0.25em] text-qclay-purple mb-4 block">03 / Selected Works & Live Deployments</span>
+            <h2 class="text-3xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight leading-[1.08] mb-6">
+                Anyone can launch a template, <span class="text-zinc-500">but only true engineering craft builds platforms that perform in production.</span>
+            </h2>
+            <div class="flex flex-wrap items-center justify-between gap-6 pt-6 border-t border-zinc-800/80">
+                <p class="text-zinc-400 text-lg max-w-2xl">
+                    Explore our live production systems below. Click <span class="text-white font-semibold">"Interact with Live Preview"</span> on any browser frame to test the live site directly, or open it in a new tab.
+                </p>
+                <!-- Filter Pills -->
+                <div class="flex flex-wrap gap-2">
+                    <button type="button" onclick="filterProjects('all')" class="work-filter-btn px-4 py-2 rounded-full text-xs font-bold uppercase tracking-wider bg-white text-zinc-950 transition-all" data-filter="all">All (04)</button>
+                    <button type="button" onclick="filterProjects('corporate')" class="work-filter-btn px-4 py-2 rounded-full text-xs font-bold uppercase tracking-wider bg-zinc-900 text-zinc-400 hover:text-white border border-zinc-800 transition-all" data-filter="corporate">Corporate</button>
+                    <button type="button" onclick="filterProjects('platform')" class="work-filter-btn px-4 py-2 rounded-full text-xs font-bold uppercase tracking-wider bg-zinc-900 text-zinc-400 hover:text-white border border-zinc-800 transition-all" data-filter="platform">Platform & CMS</button>
+                    <button type="button" onclick="filterProjects('education')" class="work-filter-btn px-4 py-2 rounded-full text-xs font-bold uppercase tracking-wider bg-zinc-900 text-zinc-400 hover:text-white border border-zinc-800 transition-all" data-filter="education">Education</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Portfolio Cards Stack -->
+        <div class="flex flex-col gap-20 md:gap-28" id="portfolio-grid">
+
+            <!-- PROJECT 01: GNS Corporations -->
+            <article class="project-card reveal-up group grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center" data-category="corporate">
+                <div class="lg:col-span-7">
+                    <div class="rounded-[2rem] bg-zinc-900 border border-zinc-800 overflow-hidden shadow-2xl">
+                        <!-- Browser Chrome Bar -->
+                        <div class="px-5 py-3.5 bg-zinc-950 border-b border-zinc-800 flex items-center justify-between gap-4">
+                            <div class="flex items-center gap-2">
+                                <span class="w-3 h-3 rounded-full bg-rose-500/80"></span>
+                                <span class="w-3 h-3 rounded-full bg-amber-500/80"></span>
+                                <span class="w-3 h-3 rounded-full bg-emerald-500/80"></span>
+                            </div>
+                            <div class="flex-1 max-w-sm px-3 py-1 rounded-lg bg-zinc-900 border border-zinc-800 text-xs font-mono text-zinc-400 truncate text-center">
+                                https://gns-corporation.com
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <button type="button" onclick="toggleIframeLock(this)" class="px-3 py-1 rounded-md bg-qclay-purple/15 text-qclay-purple hover:bg-qclay-purple hover:text-zinc-950 text-xs font-bold transition-colors">
+                                    Unlock Scroll
+                                </button>
+                                <a href="https://gns-corporation.com/" target="_blank" rel="noopener noreferrer" title="Open in new tab" class="p-1.5 text-zinc-400 hover:text-white">
+                                    <i data-lucide="external-link" class="w-4 h-4"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <!-- Live Preview Viewport -->
+                        <div class="relative aspect-video bg-zinc-950 overflow-hidden">
+                            <iframe src="https://gns-corporation.com" class="w-full h-full border-0 bg-white pointer-events-none" title="GNS Corporations" loading="lazy"></iframe>
+                            <!-- Scroll-safe interactive overlay -->
+                            <div onclick="enableIframeInteraction(this)"
+                                 data-cursor-label="Interact"
+                                 class="iframe-shield absolute inset-0 bg-gradient-to-t from-black/70 via-black/15 to-transparent flex items-end justify-between p-6 cursor-pointer transition-opacity duration-300">
+                                <span class="px-4 py-2 rounded-full bg-black/75 backdrop-blur-md border border-white/15 text-xs font-semibold text-white flex items-center gap-2">
+                                    <i data-lucide="mouse-pointer-click" class="w-4 h-4 text-qclay-lime"></i>
+                                    Click to Interact with Live Site
+                                </span>
+                                <span class="px-3 py-1 rounded-full bg-qclay-purple text-zinc-950 font-mono text-xs font-extrabold">01</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="lg:col-span-5 flex flex-col gap-5">
+                    <div class="flex items-center justify-between">
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-3.5 py-1 text-xs font-bold uppercase tracking-wider rounded-full bg-qclay-purple/15 text-qclay-purple border border-qclay-purple/30">Corporate</span>
+                            <span class="px-3.5 py-1 text-xs font-bold uppercase tracking-wider rounded-full bg-zinc-900 text-zinc-300 border border-zinc-800">Web Architecture</span>
+                        </div>
+                        <span class="font-mono text-4xl font-black text-zinc-800">01</span>
+                    </div>
+                    <h3 class="text-3xl sm:text-4xl font-extrabold tracking-tight">GNS Corporations</h3>
+                    <p class="text-zinc-400 text-base sm:text-lg leading-relaxed">
+                        A modern corporate web presence built for scale, showcasing multi-sector business services with a sleek, responsive design system, high-speed page transitions, and intuitive navigation.
+                    </p>
+                    <div class="grid grid-cols-2 gap-4 py-4 border-y border-zinc-800/80 text-xs font-mono">
+                        <div>
+                            <span class="text-zinc-500 block">DELIVERABLES</span>
+                            <span class="text-zinc-200 font-semibold">UI/UX, Frontend, Hosting</span>
+                        </div>
+                        <div>
+                            <span class="text-zinc-500 block">STATUS</span>
+                            <span class="text-qclay-lime font-semibold">● Live in Production</span>
+                        </div>
+                    </div>
+                    <div class="flex flex-wrap gap-4 pt-2">
+                        <a href="https://gns-corporation.com/" target="_blank" rel="noopener noreferrer" data-cursor-label="Visit Site ↗" class="px-7 py-3.5 rounded-full bg-white text-zinc-950 font-extrabold text-sm hover:bg-qclay-purple transition-all inline-flex items-center gap-2">
+                            <span>Visit Live Website</span>
+                            <i data-lucide="arrow-up-right" class="w-4 h-4"></i>
+                        </a>
+                    </div>
+                </div>
+            </article>
+
+            <!-- PROJECT 02: ZYOA Organization (Reversed) -->
+            <article class="project-card reveal-up group grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center" data-category="platform">
+                <div class="lg:col-span-5 flex flex-col gap-5 order-2 lg:order-1">
+                    <div class="flex items-center justify-between">
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-3.5 py-1 text-xs font-bold uppercase tracking-wider rounded-full bg-qclay-lime/15 text-qclay-lime border border-qclay-lime/30">Platform</span>
+                            <span class="px-3.5 py-1 text-xs font-bold uppercase tracking-wider rounded-full bg-zinc-900 text-zinc-300 border border-zinc-800">Dynamic CMS</span>
+                        </div>
+                        <span class="font-mono text-4xl font-black text-zinc-800">02</span>
+                    </div>
+                    <h3 class="text-3xl sm:text-4xl font-extrabold tracking-tight">ZYOA Organization</h3>
+                    <p class="text-zinc-400 text-base sm:text-lg leading-relaxed">
+                        A comprehensive digital platform engineered to power community initiatives, featuring dynamic content management, member engagement workflows, and an accessible, mobile-first interface.
+                    </p>
+                    <div class="grid grid-cols-2 gap-4 py-4 border-y border-zinc-800/80 text-xs font-mono">
+                        <div>
+                            <span class="text-zinc-500 block">DELIVERABLES</span>
+                            <span class="text-zinc-200 font-semibold">Full-Stack CMS, UI/UX</span>
+                        </div>
+                        <div>
+                            <span class="text-zinc-500 block">STATUS</span>
+                            <span class="text-qclay-lime font-semibold">● Live in Production</span>
+                        </div>
+                    </div>
+                    <div class="flex flex-wrap gap-4 pt-2">
+                        <a href="https://zyoa.org" target="_blank" rel="noopener noreferrer" data-cursor-label="Visit Site ↗" class="px-7 py-3.5 rounded-full bg-white text-zinc-950 font-extrabold text-sm hover:bg-qclay-lime transition-all inline-flex items-center gap-2">
+                            <span>Visit Live Website</span>
+                            <i data-lucide="arrow-up-right" class="w-4 h-4"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="lg:col-span-7 order-1 lg:order-2">
+                    <div class="rounded-[2rem] bg-zinc-900 border border-zinc-800 overflow-hidden shadow-2xl">
+                        <div class="px-5 py-3.5 bg-zinc-950 border-b border-zinc-800 flex items-center justify-between gap-4">
+                            <div class="flex items-center gap-2">
+                                <span class="w-3 h-3 rounded-full bg-rose-500/80"></span>
+                                <span class="w-3 h-3 rounded-full bg-amber-500/80"></span>
+                                <span class="w-3 h-3 rounded-full bg-emerald-500/80"></span>
+                            </div>
+                            <div class="flex-1 max-w-sm px-3 py-1 rounded-lg bg-zinc-900 border border-zinc-800 text-xs font-mono text-zinc-400 truncate text-center">
+                                https://zyoa.org
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <button type="button" onclick="toggleIframeLock(this)" class="px-3 py-1 rounded-md bg-qclay-lime/15 text-qclay-lime hover:bg-qclay-lime hover:text-zinc-950 text-xs font-bold transition-colors">
+                                    Unlock Scroll
+                                </button>
+                                <a href="https://zyoa.org" target="_blank" rel="noopener noreferrer" title="Open in new tab" class="p-1.5 text-zinc-400 hover:text-white">
+                                    <i data-lucide="external-link" class="w-4 h-4"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="relative aspect-video bg-zinc-950 overflow-hidden">
+                            <iframe src="https://zyoa.org" class="w-full h-full border-0 bg-white pointer-events-none" title="ZYOA Organization" loading="lazy"></iframe>
+                            <div onclick="enableIframeInteraction(this)"
+                                 data-cursor-label="Interact"
+                                 class="iframe-shield absolute inset-0 bg-gradient-to-t from-black/70 via-black/15 to-transparent flex items-end justify-between p-6 cursor-pointer transition-opacity duration-300">
+                                <span class="px-4 py-2 rounded-full bg-black/75 backdrop-blur-md border border-white/15 text-xs font-semibold text-white flex items-center gap-2">
+                                    <i data-lucide="mouse-pointer-click" class="w-4 h-4 text-qclay-lime"></i>
+                                    Click to Interact with Live Site
+                                </span>
+                                <span class="px-3 py-1 rounded-full bg-qclay-lime text-zinc-950 font-mono text-xs font-extrabold">02</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </article>
+
+            <!-- PROJECT 03: St. Moven's School -->
+            <article class="project-card reveal-up group grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center" data-category="education">
+                <div class="lg:col-span-7">
+                    <div class="rounded-[2rem] bg-zinc-900 border border-zinc-800 overflow-hidden shadow-2xl">
+                        <div class="px-5 py-3.5 bg-zinc-950 border-b border-zinc-800 flex items-center justify-between gap-4">
+                            <div class="flex items-center gap-2">
+                                <span class="w-3 h-3 rounded-full bg-rose-500/80"></span>
+                                <span class="w-3 h-3 rounded-full bg-amber-500/80"></span>
+                                <span class="w-3 h-3 rounded-full bg-emerald-500/80"></span>
+                            </div>
+                            <div class="flex-1 max-w-sm px-3 py-1 rounded-lg bg-zinc-900 border border-zinc-800 text-xs font-mono text-zinc-400 truncate text-center">
+                                https://stmovensschool.com
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <button type="button" onclick="toggleIframeLock(this)" class="px-3 py-1 rounded-md bg-qclay-peach/15 text-qclay-peach hover:bg-qclay-peach hover:text-zinc-950 text-xs font-bold transition-colors">
+                                    Unlock Scroll
+                                </button>
+                                <a href="https://stmovensschool.com" target="_blank" rel="noopener noreferrer" title="Open in new tab" class="p-1.5 text-zinc-400 hover:text-white">
+                                    <i data-lucide="external-link" class="w-4 h-4"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="relative aspect-video bg-zinc-950 overflow-hidden">
+                            <iframe src="https://stmovensschool.com" class="w-full h-full border-0 bg-white pointer-events-none" title="St. Moven's School" loading="lazy"></iframe>
+                            <div onclick="enableIframeInteraction(this)"
+                                 data-cursor-label="Interact"
+                                 class="iframe-shield absolute inset-0 bg-gradient-to-t from-black/70 via-black/15 to-transparent flex items-end justify-between p-6 cursor-pointer transition-opacity duration-300">
+                                <span class="px-4 py-2 rounded-full bg-black/75 backdrop-blur-md border border-white/15 text-xs font-semibold text-white flex items-center gap-2">
+                                    <i data-lucide="mouse-pointer-click" class="w-4 h-4 text-qclay-lime"></i>
+                                    Click to Interact with Live Site
+                                </span>
+                                <span class="px-3 py-1 rounded-full bg-qclay-peach text-zinc-950 font-mono text-xs font-extrabold">03</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="lg:col-span-5 flex flex-col gap-5">
+                    <div class="flex items-center justify-between">
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-3.5 py-1 text-xs font-bold uppercase tracking-wider rounded-full bg-qclay-peach/15 text-qclay-peach border border-qclay-peach/30">Education</span>
+                            <span class="px-3.5 py-1 text-xs font-bold uppercase tracking-wider rounded-full bg-zinc-900 text-zinc-300 border border-zinc-800">Digital Portal</span>
+                        </div>
+                        <span class="font-mono text-4xl font-black text-zinc-800">03</span>
+                    </div>
+                    <h3 class="text-3xl sm:text-4xl font-extrabold tracking-tight">St. Moven's School</h3>
+                    <p class="text-zinc-400 text-base sm:text-lg leading-relaxed">
+                        An engaging educational portal connecting students, parents, and faculty with streamlined academic resource access, admissions information, and campus event tracking.
+                    </p>
+                    <div class="grid grid-cols-2 gap-4 py-4 border-y border-zinc-800/80 text-xs font-mono">
+                        <div>
+                            <span class="text-zinc-500 block">DELIVERABLES</span>
+                            <span class="text-zinc-200 font-semibold">Education Portal, UX/UI</span>
+                        </div>
+                        <div>
+                            <span class="text-zinc-500 block">STATUS</span>
+                            <span class="text-qclay-lime font-semibold">● Live in Production</span>
+                        </div>
+                    </div>
+                    <div class="flex flex-wrap gap-4 pt-2">
+                        <a href="https://stmovensschool.com" target="_blank" rel="noopener noreferrer" data-cursor-label="Visit Site ↗" class="px-7 py-3.5 rounded-full bg-white text-zinc-950 font-extrabold text-sm hover:bg-qclay-peach transition-all inline-flex items-center gap-2">
+                            <span>Visit Live Website</span>
+                            <i data-lucide="arrow-up-right" class="w-4 h-4"></i>
+                        </a>
+                    </div>
+                </div>
+            </article>
+
+            <!-- PROJECT 04: Ewana Environmental Consultant (Reversed, Typo Fixed) -->
+            <article class="project-card reveal-up group grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center" data-category="platform">
+                <div class="lg:col-span-5 flex flex-col gap-5 order-2 lg:order-1">
+                    <div class="flex items-center justify-between">
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-3.5 py-1 text-xs font-bold uppercase tracking-wider rounded-full bg-qclay-amber/15 text-qclay-amber border border-qclay-amber/30">Environmental & Engineering</span>
+                            <span class="px-3.5 py-1 text-xs font-bold uppercase tracking-wider rounded-full bg-zinc-900 text-zinc-300 border border-zinc-800">Platform</span>
+                        </div>
+                        <span class="font-mono text-4xl font-black text-zinc-800">04</span>
+                    </div>
+                    <h3 class="text-3xl sm:text-4xl font-extrabold tracking-tight">Ewana Environmental Consultant</h3>
+                    <p class="text-zinc-400 text-base sm:text-lg leading-relaxed">
+                        A specialized platform for Environmental Consulting Limited dedicated to sustainable solutions — integrating environmental engineering, hydrogeology, industrial supply, and regulatory compliance.
+                    </p>
+                    <div class="grid grid-cols-2 gap-4 py-4 border-y border-zinc-800/80 text-xs font-mono">
+                        <div>
+                            <span class="text-zinc-500 block">DELIVERABLES</span>
+                            <span class="text-zinc-200 font-semibold">Web Platform, Brand UI, CMS</span>
+                        </div>
+                        <div>
+                            <span class="text-zinc-500 block">STATUS</span>
+                            <span class="text-qclay-lime font-semibold">● Live in Production</span>
+                        </div>
+                    </div>
+                    <div class="flex flex-wrap gap-4 pt-2">
+                        <a href="https://ewanaenvironmental.com/" target="_blank" rel="noopener noreferrer" data-cursor-label="Visit Site ↗" class="px-7 py-3.5 rounded-full bg-white text-zinc-950 font-extrabold text-sm hover:bg-qclay-amber transition-all inline-flex items-center gap-2">
+                            <span>Visit Live Website</span>
+                            <i data-lucide="arrow-up-right" class="w-4 h-4"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="lg:col-span-7 order-1 lg:order-2">
+                    <div class="rounded-[2rem] bg-zinc-900 border border-zinc-800 overflow-hidden shadow-2xl">
+                        <div class="px-5 py-3.5 bg-zinc-950 border-b border-zinc-800 flex items-center justify-between gap-4">
+                            <div class="flex items-center gap-2">
+                                <span class="w-3 h-3 rounded-full bg-rose-500/80"></span>
+                                <span class="w-3 h-3 rounded-full bg-amber-500/80"></span>
+                                <span class="w-3 h-3 rounded-full bg-emerald-500/80"></span>
+                            </div>
+                            <div class="flex-1 max-w-sm px-3 py-1 rounded-lg bg-zinc-900 border border-zinc-800 text-xs font-mono text-zinc-400 truncate text-center">
+                                https://ewanaenvironmental.com
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <button type="button" onclick="toggleIframeLock(this)" class="px-3 py-1 rounded-md bg-qclay-amber/15 text-qclay-amber hover:bg-qclay-amber hover:text-zinc-950 text-xs font-bold transition-colors">
+                                    Unlock Scroll
+                                </button>
+                                <a href="https://ewanaenvironmental.com/" target="_blank" rel="noopener noreferrer" title="Open in new tab" class="p-1.5 text-zinc-400 hover:text-white">
+                                    <i data-lucide="external-link" class="w-4 h-4"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="relative aspect-video bg-zinc-950 overflow-hidden">
+                            <iframe src="https://ewanaenvironmental.com/" class="w-full h-full border-0 bg-white pointer-events-none" title="Ewana Environmental Consultant" loading="lazy"></iframe>
+                            <div onclick="enableIframeInteraction(this)"
+                                 data-cursor-label="Interact"
+                                 class="iframe-shield absolute inset-0 bg-gradient-to-t from-black/70 via-black/15 to-transparent flex items-end justify-between p-6 cursor-pointer transition-opacity duration-300">
+                                <span class="px-4 py-2 rounded-full bg-black/75 backdrop-blur-md border border-white/15 text-xs font-semibold text-white flex items-center gap-2">
+                                    <i data-lucide="mouse-pointer-click" class="w-4 h-4 text-qclay-lime"></i>
+                                    Click to Interact with Live Site
+                                </span>
+                                <span class="px-3 py-1 rounded-full bg-qclay-amber text-zinc-950 font-mono text-xs font-extrabold">04</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </article>
+
+        </div>
+    </section>
+
+    <!-- ===================================================================== -->
+    <!-- 9. INFINITE TECH STACK MARQUEE (QClay .following inspired)            -->
+    <!-- ===================================================================== -->
+    <div class="py-10 border-y border-zinc-800/80 bg-zinc-900/40 overflow-hidden select-none">
+        <div class="animate-marquee-left items-center gap-14">
+            <div class="flex items-center gap-14 px-7 text-2xl sm:text-3xl font-extrabold tracking-tight text-zinc-400">
+                <span class="hover:text-qclay-purple transition-colors">React</span><span>•</span>
+                <span class="hover:text-qclay-blue transition-colors">TypeScript</span><span>•</span>
+                <span class="hover:text-qclay-lime transition-colors">Node.js</span><span>•</span>
+                <span class="hover:text-white transition-colors">Next.js</span><span>•</span>
+                <span class="hover:text-qclay-purple transition-colors">PostgreSQL</span><span>•</span>
+                <span class="hover:text-qclay-amber transition-colors">PHP & MySQL</span><span>•</span>
+                <span class="hover:text-qclay-peach transition-colors">C# & WPF</span><span>•</span>
+                <span class="hover:text-qclay-mintAccent transition-colors">Excel VBA</span><span>•</span>
+                <span class="hover:text-qclay-blue transition-colors">Three.js</span><span>•</span>
+                <span class="hover:text-qclay-purple transition-colors">Figma UI/UX</span><span>•</span>
+                <span class="hover:text-qclay-amber transition-colors">AWS & Cloud</span><span>•</span>
+            </div>
+            <div class="flex items-center gap-14 px-7 text-2xl sm:text-3xl font-extrabold tracking-tight text-zinc-400">
+                <span class="hover:text-qclay-purple transition-colors">React</span><span>•</span>
+                <span class="hover:text-qclay-blue transition-colors">TypeScript</span><span>•</span>
+                <span class="hover:text-qclay-lime transition-colors">Node.js</span><span>•</span>
+                <span class="hover:text-white transition-colors">Next.js</span><span>•</span>
+                <span class="hover:text-qclay-purple transition-colors">PostgreSQL</span><span>•</span>
+                <span class="hover:text-qclay-amber transition-colors">PHP & MySQL</span><span>•</span>
+                <span class="hover:text-qclay-peach transition-colors">C# & WPF</span><span>•</span>
+                <span class="hover:text-qclay-mintAccent transition-colors">Excel VBA</span><span>•</span>
+                <span class="hover:text-qclay-blue transition-colors">Three.js</span><span>•</span>
+                <span class="hover:text-qclay-purple transition-colors">Figma UI/UX</span><span>•</span>
+                <span class="hover:text-qclay-amber transition-colors">AWS & Cloud</span><span>•</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===================================================================== -->
+    <!-- 10. STUDIO & FOUNDER SPOTLIGHT SECTION (#about)                       -->
+    <!--     Combines Matt Essentials philosophy + Chiiko Nswana profile       -->
+    <!-- ===================================================================== -->
+    <section id="about" class="py-24 md:py-36 px-6 md:px-12 max-w-[1440px] mx-auto relative z-10">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-14 items-center">
+            <!-- Left Column: Studio Story + Metrics + Founder Card -->
+            <div class="lg:col-span-6 reveal-up">
+                <span class="text-xs font-mono uppercase tracking-[0.25em] text-qclay-lime mb-4 block">04 / Studio & Leadership</span>
+                <h2 class="text-4xl sm:text-6xl font-extrabold tracking-tight leading-[1.06] mb-8">
+                    Engineering with <span class="text-qclay-purple">intention.</span>
+                </h2>
+                <div class="space-y-5 text-base sm:text-lg text-zinc-300 leading-relaxed">
+                    <p>
+                        At <strong class="text-white">Matt Essentials Solutions</strong>, our philosophy is simple: engineer software that not only performs flawlessly under pressure, but is a joy to use, maintain, and scale.
+                    </p>
+                    <p>
+                        Founded by <strong class="text-white">Chiiko Matthew Nswana</strong> — a Senior Software Developer with a rare academic foundation in <span class="text-qclay-purple font-semibold">Accounting & Finance</span> — we bridge the gap between analytical business logic, automated backend pipelines, and trend-setting UI/UX design.
+                    </p>
+                </div>
+
+                <!-- Founder Profile Card with Photo (about.JPG) & CV Links -->
+                <div class="mt-8 p-5 rounded-3xl bg-zinc-900/90 border border-zinc-800 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-5">
+                    <div class="flex items-center gap-4">
+                        <img src="about.JPG" alt="Chiiko Matthew Nswana" class="w-16 h-16 rounded-2xl object-cover border-2 border-qclay-purple" loading="lazy" />
+                        <div>
+                            <h3 class="font-extrabold text-lg text-white">Chiiko Matthew Nswana</h3>
+                            <p class="text-xs font-mono text-qclay-purple">Founder & Lead Full-Stack Engineer</p>
+                            <p class="text-xs text-zinc-400 mt-0.5">Software Engineering • Finance • Chawy Designs</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-2.5 w-full sm:w-auto">
+                        <a href="cv.html" class="flex-1 sm:flex-initial text-center px-5 py-2.5 rounded-full bg-qclay-purple text-zinc-950 font-extrabold text-xs hover:bg-white transition-colors">
+                            View Founder Profile ↗
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Key Metrics -->
+                <div class="mt-10 grid grid-cols-3 gap-6 border-t border-zinc-800/80 pt-8">
+                    <div>
+                        <h4 class="text-4xl sm:text-5xl font-extrabold text-white mb-1">50+</h4>
+                        <p class="text-xs text-zinc-400 uppercase tracking-wider font-mono">Projects Delivered</p>
+                    </div>
+                    <div>
+                        <h4 class="text-4xl sm:text-5xl font-extrabold text-qclay-lime mb-1">100%</h4>
+                        <p class="text-xs text-zinc-400 uppercase tracking-wider font-mono">Client Satisfaction</p>
+                    </div>
+                    <div>
+                        <h4 class="text-4xl sm:text-5xl font-extrabold text-qclay-purple mb-1">8+</h4>
+                        <p class="text-xs text-zinc-400 uppercase tracking-wider font-mono">Years Craft</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Column: Interactive Multi-Tab Code & Architecture Terminal -->
+            <div class="lg:col-span-6 reveal-up">
+                <div class="rounded-[2.5rem] bg-zinc-900 border border-zinc-800 p-6 sm:p-8 relative overflow-hidden shadow-2xl">
+                    <div class="absolute -top-24 -right-24 w-72 h-72 bg-qclay-purple/20 rounded-full blur-3xl pointer-events-none"></div>
+
+                    <!-- Terminal Header Tabs -->
+                    <div class="flex flex-wrap items-center justify-between gap-4 pb-5 mb-6 border-b border-zinc-800 relative z-10">
+                        <div class="flex items-center gap-2">
+                            <span class="w-3 h-3 rounded-full bg-rose-500"></span>
+                            <span class="w-3 h-3 rounded-full bg-amber-400"></span>
+                            <span class="w-3 h-3 rounded-full bg-emerald-500"></span>
+                        </div>
+                        <div class="flex gap-2 bg-zinc-950 p-1.5 rounded-xl border border-zinc-800 text-xs font-mono">
+                            <button type="button" onclick="switchCodeTab('studio')" class="code-tab-btn px-3 py-1.5 rounded-lg bg-qclay-purple text-zinc-950 font-bold transition-all" data-tab="studio">studio.ts</button>
+                            <button type="button" onclick="switchCodeTab('schema')" class="code-tab-btn px-3 py-1.5 rounded-lg text-zinc-400 hover:text-white transition-all" data-tab="schema">architecture.sql</button>
+                            <button type="button" onclick="switchCodeTab('automation')" class="code-tab-btn px-3 py-1.5 rounded-lg text-zinc-400 hover:text-white transition-all" data-tab="automation">workflow.cs</button>
+                        </div>
+                    </div>
+
+                    <!-- Tab 1: studio.ts -->
+                    <pre id="code-panel-studio" class="code-panel font-mono text-xs sm:text-sm leading-relaxed text-zinc-300 overflow-x-auto relative z-10"><code><span class="text-pink-400">const</span> <span class="text-qclay-purple font-bold">mattEssentials</span> = {
+  founder: <span class="text-qclay-lime">'Chiiko Matthew Nswana'</span>,
+  headquarters: <span class="text-qclay-lime">'Zambia • Global Delivery'</span>,
+  disciplines: [
+    <span class="text-qclay-amber">'Full-Stack Web Engineering'</span>,
+    <span class="text-qclay-amber">'UI/UX & Brand Systems'</span>,
+    <span class="text-qclay-amber">'Database & FinTech Automation'</span>
+  ],
+  qualityBar: <span class="text-qclay-blue">'Pixel Perfection & High Scale'</span>,
+};
+
+<span class="text-pink-400">export async function</span> <span class="text-qclay-blue">launchProduct</span>(idea) {
+  <span class="text-pink-400">const</span> architecture = <span class="text-pink-400">await</span> researchAndPrototype(idea);
+  <span class="text-pink-400">const</span> platform = <span class="text-pink-400">await</span> engineerAtScale(architecture);
+  <span class="text-pink-400">return</span> platform.deployWithZeroDowntime();
+}</code></pre>
+
+                    <!-- Tab 2: architecture.sql -->
+                    <pre id="code-panel-schema" class="code-panel hidden font-mono text-xs sm:text-sm leading-relaxed text-zinc-300 overflow-x-auto relative z-10"><code><span class="text-zinc-500">-- High-Performance Multi-Tenant Production Schema</span>
+<span class="text-pink-400">CREATE TABLE</span> <span class="text-qclay-purple">enterprise_projects</span> (
+  id <span class="text-qclay-amber">UUID PRIMARY KEY DEFAULT</span> gen_random_uuid(),
+  client_name <span class="text-qclay-amber">VARCHAR</span>(120) <span class="text-pink-400">NOT NULL</span>,
+  uptime_sla <span class="text-qclay-amber">NUMERIC</span>(5,2) <span class="text-pink-400">DEFAULT</span> <span class="text-qclay-lime">99.99</span>,
+  security_audit <span class="text-qclay-amber">VARCHAR</span>(32) <span class="text-pink-400">DEFAULT</span> <span class="text-qclay-lime">'PASSED'</span>,
+  deployed_at <span class="text-qclay-amber">TIMESTAMPTZ DEFAULT</span> NOW()
+);
+
+<span class="text-pink-400">CREATE INDEX</span> idx_projects_active
+  <span class="text-pink-400">ON</span> enterprise_projects(client_name);</code></pre>
+
+                    <!-- Tab 3: workflow.cs -->
+                    <pre id="code-panel-automation" class="code-panel hidden font-mono text-xs sm:text-sm leading-relaxed text-zinc-300 overflow-x-auto relative z-10"><code><span class="text-zinc-500">// Automated Financial & Enterprise Synchronization</span>
+<span class="text-pink-400">public class</span> <span class="text-qclay-purple">WorkflowEngine</span> {
+  <span class="text-pink-400">public async</span> Task&lt;ReportResult&gt; <span class="text-qclay-blue">SyncLedgerAsync</span>() {
+    <span class="text-pink-400">await</span> Database.OptimizeConnectionsAsync();
+    <span class="text-pink-400">var</span> metrics = <span class="text-pink-400">await</span> Analytics.ComputeRealTimeROI();
+    <span class="text-pink-400">return</span> ReportResult.Success(metrics);
+  }
+}</code></pre>
+
+                    <!-- Bottom Status Bar inside Terminal -->
+                    <div class="mt-6 pt-4 border-t border-zinc-800/80 flex items-center justify-between text-xs font-mono text-zinc-400 relative z-10">
+                        <span class="flex items-center gap-2">
+                            <span class="w-2 h-2 rounded-full bg-qclay-lime"></span>
+                            BUILD: PASSING (100%)
+                        </span>
+                        <span>TYPESCRIPT • SQL • C#</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===================================================================== -->
+    <!-- 11. QCLAY STARTUPS BANNER + INTERACTIVE PROJECT REQUEST FORM (#contact)-->
+    <!--     Faithful to QClay's `startups` & `reqForm` sections               -->
+    <!-- ===================================================================== -->
+    <section id="contact" class="py-24 md:py-32 px-6 md:px-12 bg-zinc-950 border-t border-zinc-800/80 relative overflow-hidden">
+        <!-- Ambient Background Glow -->
+        <div class="absolute bottom-0 right-0 w-[600px] h-[600px] bg-qclay-purple/10 rounded-full blur-[150px] pointer-events-none"></div>
+
+        <div class="max-w-[1440px] mx-auto">
+            <!-- QClay Startups Safe Space Banner -->
+            <div class="reveal-up mb-20 p-8 sm:p-12 rounded-[2.5rem] bg-gradient-to-r from-zinc-900 via-zinc-900/90 to-zinc-900 border border-zinc-800 flex flex-col lg:flex-row items-start lg:items-center justify-between gap-8">
+                <div>
+                    <span class="px-3.5 py-1.5 rounded-full bg-qclay-lime/15 text-qclay-lime font-mono text-xs font-bold uppercase tracking-wider">
+                        Startups & Enterprise Welcome
+                    </span>
+                    <h3 class="text-3xl sm:text-5xl font-extrabold tracking-tight mt-4 max-w-2xl leading-tight">
+                        Our studio is a safe space where <span class="text-qclay-purple">startups & enterprises</span> grow and shine.
+                    </h3>
+                </div>
+                <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 shrink-0">
+                    <a href="mailto:hello@mattessentials.online" class="px-7 py-4 rounded-full bg-zinc-950 hover:bg-zinc-800 text-white border border-zinc-700 font-bold text-sm flex items-center justify-center gap-2.5 transition-all">
+                        <i data-lucide="mail" class="w-4 h-4 text-qclay-purple"></i>
+                        <span>hello@mattessentials.online</span>
+                    </a>
+                </div>
+            </div>
+
+            <!-- QClay .req-form Two-Column Layout -->
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
+                <!-- Left Column: QClay Aside ("Have a great idea? Tell us about it.") -->
+                <aside class="lg:col-span-5 reveal-up flex flex-col justify-between space-y-10">
+                    <div>
+                        <span class="text-xs font-mono uppercase tracking-[0.25em] text-qclay-purple mb-3 block">05 / Initiate Collaboration</span>
+                        <h2 class="text-5xl sm:text-6xl font-extrabold tracking-tight leading-[1.05] mb-4">
+                            Have a <span class="text-qclay-lime">great idea?</span>
+                        </h2>
+                        <p class="text-2xl text-zinc-400 font-medium">Tell us about it.</p>
+                    </div>
+
+                    <!-- Character / Studio Video Card -->
+                    <div class="p-6 rounded-3xl bg-zinc-900/90 border border-zinc-800 flex items-center gap-5">
+                        <div class="w-20 h-20 rounded-2xl overflow-hidden border border-zinc-700 shrink-0">
+                            <video src="Q2.mp4" autoplay loop muted playsinline class="w-full h-full object-cover"></video>
+                        </div>
+                        <div>
+                            <div class="flex items-center gap-2 text-xs font-mono text-qclay-lime mb-1">
+                                <span class="w-2 h-2 rounded-full bg-qclay-lime animate-pulse"></span>
+                                DIRECT ENGINEER RESPONSE
+                            </div>
+                            <p class="text-sm text-zinc-200 font-semibold">Clients trust Matt Essentials Solutions</p>
+                            <p class="text-xs text-zinc-400 mt-1">Typical response time: under 24 hours.</p>
+                        </div>
+                    </div>
+
+                    <!-- Direct Contact Channels -->
+                    <div class="space-y-6 pt-4 border-t border-zinc-800/80">
+                        <div>
+                            <span class="text-xs font-mono uppercase tracking-widest text-zinc-500 block mb-2">Direct Studio Email</span>
+                            <a href="mailto:hello@mattessentials.online" class="text-xl sm:text-2xl font-extrabold text-white hover:text-qclay-purple transition-colors underline decoration-qclay-purple/50 underline-offset-8">
+                                hello@mattessentials.online
+                            </a>
+                        </div>
+                        <div>
+                            <span class="text-xs font-mono uppercase tracking-widest text-zinc-500 block mb-2">Founder Direct Email</span>
+                            <a href="mailto:chiikonswana@gmail.com" class="text-base font-bold text-zinc-300 hover:text-qclay-lime transition-colors">
+                                chiikonswana@gmail.com
+                            </a>
+                        </div>
+                        <div>
+                            <span class="text-xs font-mono uppercase tracking-widest text-zinc-500 block mb-3">Follow & Explore</span>
+                            <div class="flex flex-wrap gap-3">
+                                <a href="https://github.com/CMN-Triple-111/" target="_blank" rel="noopener noreferrer" class="px-4 py-2.5 rounded-full bg-zinc-900 hover:bg-white hover:text-zinc-950 border border-zinc-800 text-xs font-bold transition-all flex items-center gap-2">
+                                    <i data-lucide="github" class="w-4 h-4"></i> GitHub
+                                </a>
+                                <a href="cv.html" class="px-4 py-2.5 rounded-full bg-zinc-900 hover:bg-qclay-purple hover:text-zinc-950 border border-zinc-800 text-xs font-bold transition-all flex items-center gap-2">
+                                    <i data-lucide="user-check" class="w-4 h-4"></i> Chiiko Nswana Profile
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </aside>
+
+                <!-- Right Column: QClay Interactive Pill Selector Request Form -->
+                <div class="lg:col-span-7 reveal-up">
+                    <form id="qclay-project-form" class="p-8 sm:p-12 rounded-[2.5rem] bg-zinc-900/70 border border-zinc-800 shadow-2xl space-y-10" novalidate>
+                        <!-- 1. "I'm interested in..." Multi-Select Pills -->
+                        <div>
+                            <label class="block text-lg sm:text-xl font-extrabold text-white mb-4">
+                                I'm interested in... <span class="text-xs font-mono font-normal text-zinc-400 ml-2">(Select all that apply)</span>
+                            </label>
+                            <div class="flex flex-wrap gap-3">
+                                <label>
+                                    <input type="checkbox" name="interest" value="Web Development" class="qclay-pill-input sr-only" checked>
+                                    <span class="qclay-pill-label">Web Development</span>
+                                </label>
+                                <label>
+                                    <input type="checkbox" name="interest" value="App from scratch" class="qclay-pill-input sr-only">
+                                    <span class="qclay-pill-label">App from scratch</span>
+                                </label>
+                                <label>
+                                    <input type="checkbox" name="interest" value="UX/UI Design" class="qclay-pill-input sr-only">
+                                    <span class="qclay-pill-label">UX/UI Design</span>
+                                </label>
+                                <label>
+                                    <input type="checkbox" name="interest" value="Backend & Database" class="qclay-pill-input sr-only">
+                                    <span class="qclay-pill-label">Backend & Database</span>
+                                </label>
+                                <label>
+                                    <input type="checkbox" name="interest" value="Process Automation (VBA / C#)" class="qclay-pill-input sr-only">
+                                    <span class="qclay-pill-label">Process Automation (VBA / C#)</span>
+                                </label>
+                                <label>
+                                    <input type="checkbox" name="interest" value="Branding" class="qclay-pill-input sr-only">
+                                    <span class="qclay-pill-label">Branding</span>
+                                </label>
+                                <label>
+                                    <input type="checkbox" name="interest" value="Maintenance & Scale" class="qclay-pill-input sr-only">
+                                    <span class="qclay-pill-label">Maintenance & Scale</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <!-- 2.Name & Email Inputs -->
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                            <div>
+                                <label for="client-name" class="block text-xs font-mono uppercase tracking-wider text-zinc-400 mb-2">Name & Company *</label>
+                                <input type="text" id="client-name" name="name" required placeholder="John from Acme Corp"
+                                       class="w-full px-5 py-4 rounded-2xl bg-zinc-950 border border-zinc-800 focus:border-qclay-purple focus:outline-none text-white placeholder-zinc-600 transition-colors">
+                            </div>
+                            <div>
+                                <label for="client-email" class="block text-xs font-mono uppercase tracking-wider text-zinc-400 mb-2">Your Email *</label>
+                                <input type="email" id="client-email" name="email" required placeholder="john@company.com"
+                                       class="w-full px-5 py-4 rounded-2xl bg-zinc-950 border border-zinc-800 focus:border-qclay-purple focus:outline-none text-white placeholder-zinc-600 transition-colors">
+                            </div>
+                        </div>
+
+                        <!-- 3. Project Budget (USD) Single-Select Pills -->
+                        <div>
+                            <label class="block text-lg sm:text-xl font-extrabold text-white mb-4">
+                                Project budget (USD)
+                            </label>
+                            <div class="flex flex-wrap gap-3">
+                                <label>
+                                    <input type="radio" name="budget" value="≤ $2K" class="qclay-pill-input sr-only">
+                                    <span class="qclay-pill-label">≤ $2K</span>
+                                </label>
+                                <label>
+                                    <input type="radio" name="budget" value="$2K–$5K" class="qclay-pill-input sr-only" checked>
+                                    <span class="qclay-pill-label">$2K–$5K</span>
+                                </label>
+                                <label>
+                                    <input type="radio" name="budget" value="$5K–$10K" class="qclay-pill-input sr-only">
+                                    <span class="qclay-pill-label">$5K–$10K</span>
+                                </label>
+                                <label>
+                                    <input type="radio" name="budget" value="$10K–$25K" class="qclay-pill-input sr-only">
+                                    <span class="qclay-pill-label">$10K–$25K</span>
+                                </label>
+                                <label>
+                                    <input type="radio" name="budget" value="> $25K" class="qclay-pill-input sr-only">
+                                    <span class="qclay-pill-label">&gt; $25K</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <!-- 4. Project Details -->
+                        <div>
+                            <label for="client-project" class="block text-xs font-mono uppercase tracking-wider text-zinc-400 mb-2">Tell us more about your project</label>
+                            <textarea id="client-project" name="project" rows="4" placeholder="Share your goals, timeline, or technical requirements..."
+                                      class="w-full px-5 py-4 rounded-2xl bg-zinc-950 border border-zinc-800 focus:border-qclay-purple focus:outline-none text-white placeholder-zinc-600 transition-colors resize-none"></textarea>
+                        </div>
+
+                        <p id="form-error" class="hidden text-sm font-semibold text-rose-400"></p>
+
+                        <!-- 5. QClay Submit Button ("Bring your ideas to life / Submit the request") -->
+                        <div class="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-6 pt-2">
+                            <button type="submit"
+                                    data-magnetic
+                                    data-cursor-label="Send Request"
+                                    class="px-10 py-5 rounded-full bg-white hover:bg-qclay-lime text-zinc-950 font-extrabold text-base sm:text-lg tracking-tight transition-all duration-300 flex items-center justify-center gap-3 shadow-[0_15px_40px_rgba(255,255,255,0.12)] group">
+                                <span>Bring your ideas to life</span>
+                                <span class="w-8 h-8 rounded-full bg-zinc-950 text-white flex items-center justify-center group-hover:translate-x-1 transition-transform">
+                                    <i data-lucide="arrow-up-right" class="w-4 h-4"></i>
+                                </span>
+                            </button>
+                            <span class="text-xs font-mono text-zinc-500 text-center sm:text-right">
+                                100% Confidential • NDA Ready
+                            </span>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Footer Bottom Bar -->
+            <footer class="mt-24 pt-10 border-t border-zinc-800/80 flex flex-col md:flex-row justify-between items-center gap-6 text-sm text-zinc-400">
+                <div class="flex items-center gap-3">
+                    <img src="matt_logo.png" alt="Matt Essentials Logo" class="w-7 h-9 object-contain" />
+                    <span class="font-bold text-white">Matt Essentials Solutions</span>
+                    <span class="text-zinc-600">|</span>
+                    <span>Lusaka, Zambia • Global Digital Studio</span>
+                </div>
+
+                <div class="flex flex-wrap items-center gap-6 text-xs font-mono uppercase tracking-wider">
+                    <a href="#home" class="hover:text-white transition-colors">Top ↑</a>
+                    <a href="#work" class="hover:text-white transition-colors">Works</a>
+                    <a href="cv.html" class="text-qclay-purple hover:text-white transition-colors">Founder CV</a>
+                    <a href="https://github.com/CMN-Triple-111/" target="_blank" rel="noopener noreferrer" class="hover:text-white transition-colors">GitHub</a>
+                </div>
+
+                <p class="text-zinc-500 text-xs" id="copyright-year"></p>
+            </footer>
+        </div>
+    </section>
+
+    <!-- ===================================================================== -->
+    <!-- 12. QCLAY "THANK YOU! 🤝" MODAL & SHOWREEL LIGHTBOX MODAL             -->
+    <!-- ===================================================================== -->
+    <div id="thank-you-modal" class="qclay-modal fixed inset-0 z-50 bg-zinc-950/90 backdrop-blur-xl flex items-center justify-center p-6">
+        <div class="max-w-xl w-full rounded-[2.5rem] bg-white text-zinc-950 p-8 sm:p-12 relative shadow-2xl text-center">
+            <button type="button" onclick="closeThankYouModal()" aria-label="Close modal" class="absolute top-6 right-6 w-11 h-11 rounded-full bg-zinc-100 hover:bg-zinc-200 flex items-center justify-center text-zinc-900 transition-colors">
+                <i data-lucide="x" class="w-5 h-5"></i>
+            </button>
+            <div class="w-16 h-16 rounded-2xl bg-qclay-purple flex items-center justify-center text-3xl mx-auto mb-6">
+                🤝
+            </div>
+            <h3 class="text-3xl sm:text-4xl font-extrabold tracking-tight mb-4">Thank You!</h3>
+            <p class="text-zinc-600 text-base sm:text-lg leading-relaxed mb-6">
+                Your project brief is ready 😉 Click below to dispatch it directly to <strong class="text-zinc-950">hello@mattessentials.online</strong> — we will respond within 24 hours.
+            </p>
+            <div id="modal-summary" class="text-left p-4 rounded-2xl bg-zinc-100 text-xs font-mono text-zinc-700 mb-6 space-y-1"></div>
+            <div class="flex flex-col sm:flex-row gap-3 justify-center">
+                <a id="modal-mailto-link" href="mailto:hello@mattessentials.online" class="px-8 py-4 rounded-full bg-zinc-950 text-white font-extrabold text-sm hover:bg-zinc-800 transition-all inline-flex items-center justify-center gap-2">
+                    <i data-lucide="send" class="w-4 h-4"></i>
+                    <span>Send via Email App Now</span>
+                </a>
+                <button type="button" onclick="closeThankYouModal()" class="px-6 py-4 rounded-full bg-zinc-200 text-zinc-900 font-bold text-sm hover:bg-zinc-300 transition-all">
+                    Close
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Showreel Fullscreen Modal -->
+    <div id="reel-modal" class="qclay-modal fixed inset-0 z-50 bg-black/95 backdrop-blur-2xl flex flex-col items-center justify-center p-4 sm:p-10">
+        <div class="w-full max-w-6xl flex justify-between items-center mb-4">
+            <div class="flex items-center gap-3">
+                <span class="px-3 py-1 rounded-full bg-qclay-lime text-zinc-950 font-mono text-xs font-extrabold uppercase">Showreel</span>
+                <button type="button" onclick="switchReelVideo('Q1.mp4')" class="px-4 py-1.5 rounded-full bg-zinc-800 hover:bg-qclay-purple hover:text-zinc-950 text-xs font-bold transition-colors">Reel 01 (Design & Web)</button>
+                <button type="button" onclick="switchReelVideo('Q2.mp4')" class="px-4 py-1.5 rounded-full bg-zinc-800 hover:bg-qclay-purple hover:text-zinc-950 text-xs font-bold transition-colors">Reel 02 (Solutions & UX)</button>
+            </div>
+            <button type="button" onclick="closeReelModal()" class="w-11 h-11 rounded-full bg-zinc-900 hover:bg-white hover:text-zinc-950 text-white flex items-center justify-center transition-colors">
+                <i data-lucide="x" class="w-5 h-5"></i>
+            </button>
+        </div>
+        <div class="w-full max-w-6xl aspect-video rounded-3xl overflow-hidden border border-zinc-800 bg-zinc-950 shadow-2xl">
+            <video id="modal-reel-player" src="Q1.mp4" controls autoplay loop playsinline class="w-full h-full object-cover"></video>
+        </div>
+    </div>
+
+    <!-- ===================================================================== -->
+    <!-- 13. SCRIPTS: QClay Motion, Lerp Cursor, Sticky Scroll & Interactions  -->
+    <!-- ===================================================================== -->
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            // 1. Initialize Icons & Dates
-            if(window.lucide) lucide.createIcons();
-            document.getElementById('copyright-year').textContent = `© ${new Date().getFullYear()} Matt Essentials Solutions. All rights reserved.`;
+            // 1. Initialize Lucide Icons & Copyright Year
+            if (window.lucide) lucide.createIcons();
+            const year = new Date().getFullYear();
+            const copyrightEl = document.getElementById('copyright-year');
+            if (copyrightEl) copyrightEl.textContent = `All rights reserved © Matt Essentials Solutions ${year}`;
+            document.querySelectorAll('.year-span').forEach(el => el.textContent = year);
 
-            // 2. Navigation & Mobile Menu Logic
-            const navbar = document.getElementById('navbar');
-            const mobileMenuBtn = document.getElementById('mobile-menu-btn');
-            const mobileMenu = document.getElementById('mobile-menu');
-            const menuIcon = document.getElementById('menu-icon');
-            const closeIcon = document.getElementById('close-icon');
-            let isMenuOpen = false;
+            // 2. QClay Lerp Custom Cursor & Magnetic Elements
+            const cursorPoint = document.getElementById('cursor-point');
+            const cursorRing = document.getElementById('cursor-ring');
+            const cursorLabel = document.getElementById('cursor-label');
+            let mouseX = window.innerWidth / 2, mouseY = window.innerHeight / 2;
+            let ringX = mouseX, ringY = mouseY;
 
-            const toggleMenu = () => {
-                isMenuOpen = !isMenuOpen;
-                mobileMenu.classList.toggle('translate-x-full', !isMenuOpen);
-                mobileMenu.classList.toggle('translate-x-0', isMenuOpen);
-                menuIcon.classList.toggle('hidden', isMenuOpen);
-                closeIcon.classList.toggle('hidden', !isMenuOpen);
-            };
-
-            mobileMenuBtn.addEventListener('click', toggleMenu);
-            document.querySelectorAll('.mobile-link').forEach(link => link.addEventListener('click', toggleMenu));
-
-            // 3. Eye Tracking Logic (Optimized with requestAnimationFrame)
-            const container = document.getElementById('eyeContainer');
-            const eyes = document.querySelectorAll('.eye');
-            const pupils = document.querySelectorAll('.pupil');
-            const eyeBox = document.getElementById('eyeBox');
-            let mouseX = 0, mouseY = 0, ticking = false;
-
-            if(container && eyeBox) {
-                container.addEventListener('mousemove', (e) => {
-                    mouseX = e.clientX; mouseY = e.clientY;
-                    if (!ticking) {
-                        requestAnimationFrame(updateEyes);
-                        ticking = true;
-                    }
-                });
-
-                container.addEventListener('mouseleave', () => {
-                    if (eyeBox.classList.contains('cross')) return;
-                    pupils.forEach(pupil => pupil.style.transform = 'translate(0, 0)');
-                });
-
-                container.addEventListener('click', () => {
-                    eyeBox.classList.toggle('cross');
-                    if (!eyeBox.classList.contains('cross')) {
-                        pupils.forEach(pupil => pupil.style.transform = 'translate(0, 0)');
-                    }
-                });
-
-                function updateEyes() {
-                    if (eyeBox.classList.contains('cross')) { ticking = false; return; }
-                    eyes.forEach((eye, index) => {
-                        const pupil = pupils[index];
-                        const rect = eye.getBoundingClientRect();
-                        const centerX = rect.left + rect.width / 2;
-                        const centerY = rect.top + rect.height / 2;
-                        const deltaX = mouseX - centerX;
-                        const deltaY = mouseY - centerY;
-                        const angle = Math.atan2(deltaY, deltaX);
-                        const distance = Math.min(12, Math.hypot(deltaX, deltaY)); // Max eye travel distance
-                        const x = Math.cos(angle) * distance;
-                        const y = Math.sin(angle) * distance;
-                        pupil.style.transform = `translate(${x}px, ${y}px)`;
-                    });
-                    ticking = false;
+            window.addEventListener('mousemove', (e) => {
+                mouseX = e.clientX;
+                mouseY = e.clientY;
+                if (cursorPoint) {
+                    cursorPoint.style.left = `${mouseX}px`;
+                    cursorPoint.style.top = `${mouseY}px`;
                 }
+            }, { passive: true });
+
+            function renderCursor() {
+                ringX += (mouseX - ringX) * 0.14;
+                ringY += (mouseY - ringY) * 0.14;
+                if (cursorRing) {
+                    cursorRing.style.left = `${ringX}px`;
+                    cursorRing.style.top = `${ringY}px`;
+                }
+                requestAnimationFrame(renderCursor);
+            }
+            requestAnimationFrame(renderCursor);
+
+            // Hover & Contextual Label triggers
+            document.querySelectorAll('a, button, label, [data-cursor-label]').forEach(el => {
+                el.addEventListener('mouseenter', () => {
+                    const customLabel = el.getAttribute('data-cursor-label');
+                    if (customLabel && cursorLabel) {
+                        cursorLabel.textContent = customLabel;
+                        document.body.classList.add('cursor-labeled');
+                    } else {
+                        document.body.classList.add('cursor-hover');
+                    }
+                });
+                el.addEventListener('mouseleave', () => {
+                    document.body.classList.remove('cursor-hover', 'cursor-labeled');
+                });
+            });
+
+            // QClay Magnetic Pull (useStickToMouse equivalent)
+            document.querySelectorAll('[data-magnetic]').forEach(el => {
+                el.addEventListener('mousemove', (e) => {
+                    if (window.innerWidth < 1024) return;
+                    const rect = el.getBoundingClientRect();
+                    const x = (e.clientX - (rect.left + rect.width / 2)) * 0.25;
+                    const y = (e.clientY - (rect.top + rect.height / 2)) * 0.25;
+                    el.style.transform = `translate3d(${x}px, ${y}px, 0)`;
+                });
+                el.addEventListener('mouseleave', () => {
+                    el.style.transform = 'translate3d(0, 0, 0)';
+                });
+            });
+
+            // 3. QClay Full-Screen Menu Overlay & Dynamic Preview Card
+            const burgerBtn = document.getElementById('burger-btn');
+            const burgerLabel = document.getElementById('burger-label');
+            const qclayMenu = document.getElementById('qclay-menu');
+            let menuOpen = false;
+
+            function toggleMenu(forceState) {
+                menuOpen = typeof forceState === 'boolean' ? forceState : !menuOpen;
+                burgerBtn.classList.toggle('open', menuOpen);
+                qclayMenu.classList.toggle('open', menuOpen);
+                if (burgerLabel) burgerLabel.textContent = menuOpen ? 'Close' : 'menu';
+                document.body.style.overflow = menuOpen ? 'hidden' : '';
             }
 
-            // 4. Scroll Tracking Logic (Nav Style, Horizontal Section, Animations)
-            const horizWrapper = document.getElementById('horizontal-wrapper');
-            const horizTrack = document.getElementById('horiz-track');
-            const child1h1 = document.querySelector('.child-1-h1');
-            const v1 = document.getElementById('designVideo1');
-            const v2 = document.getElementById('designVideo2');
+            if (burgerBtn) burgerBtn.addEventListener('click', () => toggleMenu());
+            document.querySelectorAll('.menu-nav-item').forEach(link => {
+                link.addEventListener('click', () => toggleMenu(false));
+                link.addEventListener('mouseenter', () => {
+                    const card = document.getElementById('menu-preview-card');
+                    const tag = document.getElementById('menu-preview-tag');
+                    const title = document.getElementById('menu-preview-title');
+                    const video = document.getElementById('menu-preview-video');
+                    if (card && link.dataset.previewColor) card.style.backgroundColor = link.dataset.previewColor;
+                    if (tag && link.dataset.previewTag) tag.textContent = link.dataset.previewTag;
+                    if (title && link.dataset.previewTitle) title.textContent = link.dataset.previewTitle;
+                    if (video && link.dataset.previewVideo && !video.src.endsWith(link.dataset.previewVideo)) {
+                        video.src = link.dataset.previewVideo;
+                        video.play().catch(() => {});
+                    }
+                });
+            });
+
+            // 4. QClay SVG Eye Tracking
+            const eyeWidget = document.getElementById('qclay-eye-widget');
+            const pupilGroup = document.getElementById('qclay-pupil-group');
+            let eyeCrossed = false;
+
+            if (eyeWidget && pupilGroup) {
+                window.addEventListener('mousemove', (e) => {
+                    if (eyeCrossed) return;
+                    const rect = eyeWidget.getBoundingClientRect();
+                    const cx = rect.left + rect.width / 2;
+                    const cy = rect.top + rect.height / 2;
+                    const angle = Math.atan2(e.clientY - cy, e.clientX - cx);
+                    const dist = Math.min(11, Math.hypot(e.clientX - cx, e.clientY - cy) / 25);
+                    const tx = Math.cos(angle) * dist;
+                    const ty = Math.sin(angle) * dist;
+                    pupilGroup.style.transform = `translate3d(${tx}px, ${ty}px, 0)`;
+                }, { passive: true });
+
+                eyeWidget.addEventListener('click', () => {
+                    eyeCrossed = !eyeCrossed;
+                    pupilGroup.style.transform = eyeCrossed ? 'translate3d(0px, -7px, 0) scale(1.18)' : 'translate3d(0, 0, 0)';
+                });
+            }
+
+            // 5. Scroll Choreography: Navbar, Hero Showreel Scale, Horizontal Cards & Pill Videos
+            const navbar = document.getElementById('navbar');
+            const heroReelWrapper = document.getElementById('hero-reel-wrapper');
+            const heroReelCard = document.getElementById('hero-reel-card');
+            const aboutSection = document.getElementById('about-cards');
+            const aboutTrack = document.getElementById('about-horiz-track');
+            const pillVideos = document.querySelectorAll('.about-pill-video');
             let scrollTicking = false;
+
+            function onScrollFrame() {
+                const scrollY = window.scrollY;
+                const winH = window.innerHeight;
+                const winW = window.innerWidth;
+
+                // A. Navbar glassmorphism
+                if (navbar) {
+                    if (scrollY > 40) {
+                        navbar.classList.add('py-3', 'bg-zinc-950/85', 'backdrop-blur-xl', 'border-b', 'border-zinc-800/80');
+                        navbar.classList.remove('py-5');
+                    } else {
+                        navbar.classList.add('py-5');
+                        navbar.classList.remove('py-3', 'bg-zinc-950/85', 'backdrop-blur-xl', 'border-b', 'border-zinc-800/80');
+                    }
+                }
+
+                // B. QClay Hero Showreel Scale-on-Scroll (scales from 0.90 to 1.0)
+                if (heroReelWrapper && heroReelCard) {
+                    const rect = heroReelWrapper.getBoundingClientRect();
+                    const progress = Math.max(0, Math.min(1, (winH - rect.top) / (winH * 0.85)));
+                    const scale = 0.90 + progress * 0.10;
+                    heroReelCard.style.transform = `scale(${scale.toFixed(4)})`;
+                }
+
+                // C. QClay "What About Matt Essentials?" Horizontal Scroll + Pill Video Slide
+                if (aboutSection && aboutTrack) {
+                    if (winW >= 768) {
+                        const rect = aboutSection.getBoundingClientRect();
+                        const scrollable = rect.height - winH;
+                        const maxTranslate = Math.max(0, aboutTrack.scrollWidth - winW + 96);
+
+                        if (rect.top <= 0 && rect.bottom >= winH) {
+                            const progress = Math.abs(rect.top) / scrollable;
+                            const translateX = progress * maxTranslate;
+                            aboutTrack.style.transform = `translate3d(-${translateX}px, 0, 0)`;
+
+                            // Parallax slide for each card's pill video (authentic QClay Ut card effect)
+                            pillVideos.forEach((pill, idx) => {
+                                const shift = Math.max(-40, Math.min(40, (progress - idx * 0.28) * 90));
+                                pill.style.transform = `translate3d(${shift}px, 0, 0)`;
+                            });
+                        } else if (rect.top > 0) {
+                            aboutTrack.style.transform = 'translate3d(0, 0, 0)';
+                        } else {
+                            aboutTrack.style.transform = `translate3d(-${maxTranslate}px, 0, 0)`;
+                        }
+                    } else {
+                        aboutTrack.style.transform = 'none';
+                    }
+                }
+
+                scrollTicking = false;
+            }
 
             window.addEventListener('scroll', () => {
                 if (!scrollTicking) {
-                    window.requestAnimationFrame(() => {
-                        handleScroll();
-                        scrollTicking = false;
-                    });
+                    requestAnimationFrame(onScrollFrame);
                     scrollTicking = true;
                 }
-            });
+            }, { passive: true });
+            window.addEventListener('resize', onScrollFrame);
+            onScrollFrame();
 
-            function handleScroll() {
-                const scrollY = window.scrollY;
-                
-                // Navbar styles
-                if (scrollY > 50) {
-                    navbar.classList.add('py-4', 'bg-zinc-950/80', 'backdrop-blur-lg', 'border-b', 'border-zinc-800');
-                    navbar.classList.remove('py-6', 'bg-transparent');
-                } else {
-                    navbar.classList.add('py-6', 'bg-transparent');
-                    navbar.classList.remove('py-4', 'bg-zinc-950/80', 'backdrop-blur-lg', 'border-b', 'border-zinc-800');
-                }
-
-                // Horizontal Scroll Logic (Native Sticky Calculation)
-                if(horizWrapper && horizTrack && window.innerWidth >= 768) { // Only run on md+ screens
-                    const rect = horizWrapper.getBoundingClientRect();
-                    const winH = window.innerHeight;
-                    const containerHeight = rect.height - winH;
-                    
-                    // Are we inside the sticky scrolling area?
-                    if (rect.top <= 0 && rect.bottom >= winH) {
-                        const progress = Math.abs(rect.top) / containerHeight;
-                        
-                        // 1. Move track horizontally (0 to -200vw for 3 panels)
-                        const moveX = progress * 200; 
-                        horizTrack.style.transform = `translateX(-${moveX}vw)`;
-                        
-                        // 2. Text animation for panel 1
-                        if(progress > 0.05) child1h1.classList.add('visible');
-                        else child1h1.classList.remove('visible');
-
-                        // 3. Parallax effect for videos inside their panels
-                        // Panel 2 is active mostly between progress 0.33 and 0.66
-                        if(v1) {
-                            const v1Prog = Math.max(0, Math.min(1, (progress - 0.2) * 2));
-                            v1.style.transform = `translateX(${v1Prog * 60}px) scale(${1 + v1Prog * 0.05})`;
-                        }
-                        // Panel 3 is active mostly between progress 0.66 and 1.0
-                        if(v2) {
-                            const v2Prog = Math.max(0, Math.min(1, (progress - 0.6) * 2));
-                            v2.style.transform = `translateX(${v2Prog * 60}px) scale(${1 + v2Prog * 0.05})`;
-                        }
-                    } else if (rect.top > 0) {
-                        horizTrack.style.transform = `translateX(0vw)`;
-                    } else {
-                        horizTrack.style.transform = `translateX(-200vw)`;
+            // 6. Scroll Reveal Observer
+            const revealObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('in-view');
                     }
-                }
-            }
-            
-            // Initial call to set positions
-            handleScroll(); 
+                });
+            }, { threshold: 0.12 });
+            document.querySelectorAll('.reveal-up').forEach(el => revealObserver.observe(el));
 
-            // 5. Popup Interaction Observer (Replaces buggy scroll trigger)
-            const popupOverlay = document.getElementById('popup-overlay');
-            const scene2 = document.getElementById('scene2');
-            const trigger = document.getElementById('trigger-section4');
-            let popupTriggered = false;
+            // 7. QClay Project Request Form Handling
+            const projectForm = document.getElementById('qclay-project-form');
+            const formError = document.getElementById('form-error');
 
-            if(trigger && popupOverlay) {
-                const popupObserver = new IntersectionObserver((entries) => {
-                    entries.forEach(entry => {
-                        if (entry.isIntersecting && !popupTriggered) {
-                            popupTriggered = true;
-                            
-                            // Show Overlay
-                            popupOverlay.classList.add('visible');
-                            
-                            // Trigger scene 2 animation after 800ms
-                            setTimeout(() => {
-                                document.getElementById('scene1').style.opacity = 0;
-                                scene2.classList.add('active');
-                            }, 800);
+            if (projectForm) {
+                projectForm.addEventListener('submit', (e) => {
+                    e.preventDefault();
+                    const name = document.getElementById('client-name').value.trim();
+                    const email = document.getElementById('client-email').value.trim();
+                    const project = document.getElementById('client-project').value.trim();
+                    const interests = Array.from(projectForm.querySelectorAll('input[name="interest"]:checked')).map(i => i.value);
+                    const budgetInput = projectForm.querySelector('input[name="budget"]:checked');
+                    const budget = budgetInput ? budgetInput.value : 'Not specified';
 
-                            // Hide popup completely and resume flow
-                            setTimeout(() => {
-                                popupOverlay.classList.remove('visible');
-                            }, 2300);
+                    if (!name || !email) {
+                        if (formError) {
+                            formError.textContent = 'Please provide both your Name & Email address so we can reply.';
+                            formError.classList.remove('hidden');
                         }
-                    });
-                }, { threshold: 0.5 });
-                
-                popupObserver.observe(trigger);
+                        return;
+                    }
+                    if (formError) formError.classList.add('hidden');
+
+                    const interestList = interests.length ? interests.join(', ') : 'General Inquiry';
+                    const subject = encodeURIComponent(`Project Inquiry from ${name} — Matt Essentials Solutions`);
+                    const body = encodeURIComponent(
+                        `Hello Matt Essentials Solutions,\n\n` +
+                        `Name / Company: ${name}\n` +
+                        `Email: ${email}\n` +
+                        `Interested In: ${interestList}\n` +
+                        `Estimated Budget: ${budget}\n\n` +
+                        `Project Overview:\n${project || 'Let us discuss on a call.'}\n`
+                    );
+
+                    const mailtoUrl = `mailto:hello@mattessentials.online?cc=chiikonswana@gmail.com&subject=${subject}&body=${body}`;
+                    const mailtoLink = document.getElementById('modal-mailto-link');
+                    const summaryBox = document.getElementById('modal-summary');
+
+                    if (mailtoLink) mailtoLink.href = mailtoUrl;
+                    if (summaryBox) {
+                        summaryBox.innerHTML = `
+                            <div><strong>CLIENT:</strong> ${name} (${email})</div>
+                            <div><strong>SERVICES:</strong> ${interestList}</div>
+                            <div><strong>BUDGET:</strong> ${budget}</div>
+                        `;
+                    }
+
+                    document.getElementById('thank-you-modal').classList.add('active');
+                });
             }
         });
+
+        // Stage Switcher for "WE CREATE" Section
+        const stageLabels = [
+            'STAGE 01 • INTUITIVE UX & SYSTEM ARCHITECTURE',
+            'STAGE 02 • HOLISTIC UI & DESIGN SYSTEM TOKENS',
+            'STAGE 03 • FULL-STACK & MOBILE PRODUCTION SCALE'
+        ];
+        function setCreateStage(index) {
+            document.querySelectorAll('.stage-panel').forEach((panel, i) => {
+                if (i === index) {
+                    panel.classList.remove('hidden');
+                    panel.classList.add('grid');
+                } else {
+                    panel.classList.add('hidden');
+                    panel.classList.remove('grid');
+                }
+            });
+            document.querySelectorAll('.stage-btn').forEach((btn, i) => {
+                if (i === index) {
+                    btn.className = 'stage-btn px-5 py-2.5 rounded-full text-xs sm:text-sm font-bold transition-all bg-qclay-purple text-zinc-950';
+                } else {
+                    btn.className = 'stage-btn px-5 py-2.5 rounded-full text-xs sm:text-sm font-bold transition-all text-zinc-300 hover:text-white';
+                }
+            });
+            const badge = document.getElementById('create-stage-badge');
+            if (badge && stageLabels[index]) badge.textContent = stageLabels[index];
+        }
+
+        // Portfolio Category Filter
+        function filterProjects(category) {
+            document.querySelectorAll('.project-card').forEach(card => {
+                if (category === 'all' || card.dataset.category === category) {
+                    card.classList.remove('hidden');
+                } else {
+                    card.classList.add('hidden');
+                }
+            });
+            document.querySelectorAll('.work-filter-btn').forEach(btn => {
+                if (btn.dataset.filter === category) {
+                    btn.className = 'work-filter-btn px-4 py-2 rounded-full text-xs font-bold uppercase tracking-wider bg-white text-zinc-950 transition-all';
+                } else {
+                    btn.className = 'work-filter-btn px-4 py-2 rounded-full text-xs font-bold uppercase tracking-wider bg-zinc-900 text-zinc-400 hover:text-white border border-zinc-800 transition-all';
+                }
+            });
+        }
+
+        // Scroll-Safe Iframe Interaction Toggle
+        function enableIframeInteraction(shieldEl) {
+            const container = shieldEl.parentElement;
+            const iframe = container.querySelector('iframe');
+            if (iframe) iframe.classList.remove('pointer-events-none');
+            shieldEl.classList.add('opacity-0', 'pointer-events-none');
+        }
+        function toggleIframeLock(btnEl) {
+            const card = btnEl.closest('.rounded-\\[2rem\\]');
+            const iframe = card.querySelector('iframe');
+            const shield = card.querySelector('.iframe-shield');
+            if (!iframe || !shield) return;
+            const isLocked = iframe.classList.contains('pointer-events-none');
+            if (isLocked) {
+                iframe.classList.remove('pointer-events-none');
+                shield.classList.add('opacity-0', 'pointer-events-none');
+                btnEl.textContent = 'Lock Scroll';
+            } else {
+                iframe.classList.add('pointer-events-none');
+                shield.classList.remove('opacity-0', 'pointer-events-none');
+                btnEl.textContent = 'Unlock Scroll';
+            }
+        }
+
+        // Studio Code Terminal Tabs
+        function switchCodeTab(tabName) {
+            ['studio', 'schema', 'automation'].forEach(name => {
+                const panel = document.getElementById(`code-panel-${name}`);
+                if (panel) panel.classList.toggle('hidden', name !== tabName);
+            });
+            document.querySelectorAll('.code-tab-btn').forEach(btn => {
+                if (btn.dataset.tab === tabName) {
+                    btn.className = 'code-tab-btn px-3 py-1.5 rounded-lg bg-qclay-purple text-zinc-950 font-bold transition-all';
+                } else {
+                    btn.className = 'code-tab-btn px-3 py-1.5 rounded-lg text-zinc-400 hover:text-white transition-all';
+                }
+            });
+        }
+
+        // Modals
+        function closeThankYouModal() {
+            document.getElementById('thank-you-modal').classList.remove('active');
+        }
+        function openReelModal() {
+            const modal = document.getElementById('reel-modal');
+            const player = document.getElementById('modal-reel-player');
+            if (modal) modal.classList.add('active');
+            if (player) player.play().catch(() => {});
+        }
+        function closeReelModal() {
+            const modal = document.getElementById('reel-modal');
+            const player = document.getElementById('modal-reel-player');
+            if (modal) modal.classList.remove('active');
+            if (player) player.pause();
+        }
+        function switchReelVideo(src) {
+            const player = document.getElementById('modal-reel-player');
+            if (player) {
+                player.src = src;
+                player.play().catch(() => {});
+            }
+        }
     </script>
 </body>
 </html>

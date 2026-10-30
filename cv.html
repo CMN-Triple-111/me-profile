@@ -1,829 +1,444 @@
-<!doctype html>
-<html lang="en" dir="ltr">
-  <head>
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
     <meta charset="UTF-8" />
-    <title>Chiiko Matthew Nswana | Software Developer Portfolio</title>
-    <link rel="icon" href="/matt_logo.png" type="image/png">
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
-    />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  </head>
-  <body>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
+    <meta name="description" content="Chiiko Matthew Nswana — Software Developer & Founder of Matt Essentials Solutions. Bridging Finance and Technology in Zambia." />
+    <title>Chiiko Matthew Nswana | Software Developer Portfolio & CV</title>
+    <link rel="icon" href="matt_logo.png" type="image/png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest" defer></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+                        mono: ['"JetBrains Mono"', 'monospace'],
+                    },
+                    colors: {
+                        qclay: {
+                            black: '#070709',
+                            purple: '#dad2f4',
+                            blush: '#f7f4f4',
+                            peach: '#f7c3b4',
+                            mint: '#effbf9',
+                            mintAccent: '#79d2a6',
+                            amber: '#fce38a',
+                            lime: '#8de746',
+                            blue: '#42a4ff',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
     <style>
-      /* Google Font CDN Link */
-      @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Ubuntu:wght@400;500;700&display=swap");
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-        text-decoration: none;
-        scroll-behavior: smooth;
-      }
-
-      /* Custom Scroll Bar CSS */
-      ::-webkit-scrollbar {
-        width: 10px;
-      }
-      ::-webkit-scrollbar-track {
-        background: #f1f1f1;
-      }
-      ::-webkit-scrollbar-thumb {
-        background: #6e93f7;
-        border-radius: 12px;
-        transition: all 0.3s ease;
-      }
-      ::-webkit-scrollbar-thumb:hover {
-        background: #4070f4;
-      }
-
-      /* navbar styling */
-      nav {
-        position: fixed;
-        width: 100%;
-        padding: 20px 0;
-        z-index: 998;
-        transition: all 0.3s ease;
-        font-family: "Ubuntu", sans-serif;
-      }
-      nav.sticky {
-        background: #4070f4;
-        padding: 13px 0;
-      }
-      nav .navbar {
-        width: 90%;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        margin: auto;
-      }
-      nav .navbar .logo a {
-        font-weight: 500;
-        font-size: 35px;
-        color: #4070f4;
-      }
-      nav.sticky .navbar .logo a {
-        color: #fff;
-      }
-      nav .navbar .menu {
-        display: flex;
-        position: relative;
-      }
-      nav .navbar .menu li {
-        list-style: none;
-        margin: 0 8px;
-      }
-      .navbar .menu a {
-        font-size: 18px;
-        font-weight: 500;
-        color: #0e2431;
-        padding: 6px 0;
-        transition: all 0.4s ease;
-      }
-      .navbar .menu a:hover {
-        color: #4070f4;
-      }
-      nav.sticky .menu a {
-        color: #fff;
-      }
-      nav.sticky .menu a:hover {
-        color: #0e2431;
-      }
-      .navbar .media-icons a {
-        color: #4070f4;
-        font-size: 18px;
-        margin: 0 6px;
-      }
-      nav.sticky .media-icons a {
-        color: #fff;
-      }
-
-      /* Side Navigation Menu Button CSS */
-      nav .menu-btn,
-      .navbar .menu .cancel-btn {
-        position: absolute;
-        color: #fff;
-        right: 30px;
-        top: 20px;
-        font-size: 20px;
-        cursor: pointer;
-        transition: all 0.3s ease;
-        display: none;
-      }
-      nav .menu-btn {
-        color: #4070f4;
-      }
-      nav.sticky .menu-btn {
-        color: #fff;
-      }
-      .navbar .menu .menu-btn {
-        color: #fff;
-      }
-      .backgroundIMG {
-        position: absolute;
-        top: 100px;
-        right: 0px;
-        width: 400px;
-        object-fit: cover;
-      }
-      @media screen and (max-width: 720px) {
-        .backgroundIMG {
-          width: 150px;
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background: #070709;
+            color: #fafafa;
+            overflow-x: hidden;
         }
-      }
-
-      /* home section styling */
-      .home {
-        height: 100vh;
-        width: 100%;
-        background-color: #f4f7fc; /* Fallback color */
-        background-size: cover;
-        background-position: center;
-        background-attachment: fixed;
-        font-family: "Ubuntu", sans-serif;
-      }
-      .home .home-content {
-        width: 90%;
-        height: 100%;
-        margin: auto;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-      }
-      .home .text-one {
-        font-size: 25px;
-        color: #0e2431;
-      }
-      .home .text-two {
-        color: #0e2431;
-        font-size: 75px;
-        font-weight: 600;
-        margin-left: -3px;
-      }
-      .home .text-three {
-        font-size: 40px;
-        margin: 5px 0;
-        color: #4070f4;
-      }
-      .home .text-four {
-        font-size: 23px;
-        margin: 5px 0;
-        color: #0e2431;
-      }
-      .home .button {
-        margin: 14px 0;
-      }
-      .home .button button {
-        outline: none;
-        padding: 8px 16px;
-        border-radius: 6px;
-        font-size: 25px;
-        font-weight: 400;
-        background: #4070f4;
-        color: #fff;
-        cursor: pointer;
-        border: 2px solid transparent;
-        transition: all 0.4s ease;
-      }
-      .home .button button:hover {
-        border-color: #4070f4;
-        background-color: #fff;
-        color: #4070f4;
-      }
-
-      /* About Section Styling */
-      section {
-        position: relative;
-        z-index: 1;
-        padding-top: 40px;
-        background: white;
-      }
-      section .content {
-        width: 80%;
-        margin: 40px auto;
-        font-family: "Poppins", sans-serif;
-      }
-      .about .about-details {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-      }
-      section .title {
-        display: flex;
-        justify-content: center;
-        margin-bottom: 40px;
-      }
-      section .title span {
-        color: #0e2431;
-        font-size: 30px;
-        font-weight: 600;
-        position: relative;
-        padding-bottom: 8px;
-      }
-      section .title span::before,
-      section .title span::after {
-        content: "";
-        position: absolute;
-        height: 3px;
-        width: 100%;
-        background: #4070f4;
-        left: 0;
-        bottom: 0;
-      }
-      section .title span::after {
-        bottom: -7px;
-        width: 70%;
-        left: 50%;
-        transform: translateX(-50%);
-      }
-      .about .about-details .left {
-        width: 45%;
-      }
-      .about .left img {
-        height: 400px;
-        width: 400px;
-        object-fit: cover;
-        border-radius: 12px;
-        background-color: #ccc; /* Placeholder for profile picture */
-      }
-      .about-details .right {
-        width: 55%;
-      }
-      section .topic {
-        color: #0e2431;
-        font-size: 25px;
-        font-weight: 500;
-        margin-bottom: 10px;
-      }
-      .about-details .right p {
-        text-align: justify;
-        color: #0e2431;
-        line-height: 1.6;
-      }
-      section .button {
-        margin: 16px 0;
-      }
-      section .button button {
-        outline: none;
-        padding: 8px 16px;
-        border-radius: 4px;
-        font-size: 20px; /* adjusted for the icon */
-        font-weight: 400;
-        background: #4070f4;
-        color: #fff;
-        border: 2px solid transparent;
-        cursor: pointer;
-        transition: all 0.4s ease;
-        display: flex;
-        align-items: center;
-        gap: 10px;
-      }
-      section .button button:hover {
-        border-color: #4070f4;
-        background-color: #fff;
-        color: #4070f4;
-      }
-
-      /* My Skills CSS */
-      .skills {
-        background: #f0f8ff;
-      }
-      .skills .content {
-        padding: 40px 0;
-      }
-      .skills .skills-details {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-      }
-      .skills-details .text {
-        width: 50%;
-      }
-      .skills-details p {
-        color: #0e2431;
-        text-align: justify;
-        line-height: 1.6;
-      }
-      .skills .skills-details .experience {
-        display: flex;
-        align-items: center;
-        margin: 20px 10px;
-      }
-      .skills-details .experience .num {
-        color: #0e2431;
-        font-size: 80px;
-      }
-      .skills-details .experience .exp {
-        color: #0e2431;
-        margin-left: 20px;
-        font-size: 18px;
-        font-weight: 500;
-        margin: 0 6px;
-      }
-      .skills-details .boxes {
-        width: 45%;
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: space-between;
-      }
-      .skills-details .box {
-        width: calc(100% / 2 - 20px);
-        margin: 20px 0;
-      }
-      .skills-details .boxes .topic {
-        font-size: 20px;
-        color: #4070f4;
-        display: flex;
-        align-items: center;
-        gap: 8px;
-      }
-      .skills-details .boxes .per {
-        font-size: 50px;
-        color: #4070f4;
-      }
-
-      /* My Services CSS */
-      .services .boxes {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: space-between;
-      }
-      .services .boxes .box {
-        margin: 20px 0;
-        width: calc(100% / 3 - 20px);
-        text-align: center;
-        border-radius: 12px;
-        padding: 30px 10px;
-        box-shadow: 0 5px 10px rgba(0, 0, 0, 0.12);
-        cursor: default;
-        transition: all 0.4s ease;
-      }
-      .services .boxes .box:hover {
-        background: #4070f4;
-        color: #fff;
-      }
-      .services .boxes .box .icon {
-        height: 50px;
-        width: 50px;
-        background: #4070f4;
-        border-radius: 50%;
-        text-align: center;
-        line-height: 50px;
-        font-size: 18px;
-        color: #fff;
-        margin: 0 auto 10px auto;
-        transition: all 0.4s ease;
-      }
-      .boxes .box:hover .icon {
-        background-color: #fff;
-        color: #4070f4;
-      }
-      .services .boxes .box:hover .topic,
-      .services .boxes .box:hover p {
-        color: #fff;
-        transition: all 0.4s ease;
-      }
-
-      /* Contact Me CSS */
-      .contact {
-        background: #f0f8ff;
-      }
-      .contact .content {
-        margin: 0 auto;
-        padding: 30px 0;
-      }
-      .contact .text {
-        width: 80%;
-        text-align: center;
-        margin: auto;
-      }
-
-      /* Footer CSS */
-      footer {
-        background: #4070f4;
-        padding: 15px 0;
-        text-align: center;
-        font-family: "Poppins", sans-serif;
-      }
-      footer .text span {
-        font-size: 17px;
-        font-weight: 400;
-        color: #fff;
-      }
-      footer .text span a {
-        font-weight: 500;
-        color: #fff;
-      }
-      footer .text span a:hover {
-        text-decoration: underline;
-      }
-
-      /* Scroll TO Top Button CSS */
-      .scroll-button a {
-        position: fixed;
-        bottom: 20px;
-        right: 20px;
-        color: #fff;
-        background: #4070f4;
-        padding: 7px 12px;
-        font-size: 18px;
-        border-radius: 6px;
-        box-shadow: rgba(0, 0, 0, 0.15);
-        display: none;
-      }
-
-      /* Responsive Media Query */
-      @media (max-width: 1190px) {
-        section .content {
-          width: 85%;
+        ::selection {
+            background: #dad2f4;
+            color: #070709;
         }
-      }
-      @media (max-width: 1000px) {
-        .about .about-details {
-          justify-content: center;
-          flex-direction: column;
+        @media (pointer: fine) {
+            .custom-cursor__point {
+                position: fixed;
+                top: 0; left: 0;
+                width: 8px; height: 8px;
+                background: #8de746;
+                border-radius: 50%;
+                transform: translate(-50%, -50%);
+                pointer-events: none;
+                z-index: 10000;
+            }
+            .custom-cursor__ring {
+                position: fixed;
+                top: 0; left: 0;
+                width: 38px; height: 38px;
+                border: 1.5px solid rgba(218, 210, 244, 0.55);
+                border-radius: 9999px;
+                transform: translate(-50%, -50%);
+                pointer-events: none;
+                z-index: 9999;
+                transition: width 0.25s ease, height 0.25s ease, background-color 0.25s ease;
+            }
+            body.cursor-hover .custom-cursor__ring {
+                width: 62px; height: 62px;
+                background: rgba(218, 210, 244, 0.16);
+                border-color: #dad2f4;
+            }
         }
-        .about .about-details .left {
-          display: flex;
-          justify-content: center;
-          width: 100%;
+        .q-roll-link {
+            position: relative;
+            display: inline-flex;
+            overflow: hidden;
+            line-height: 1.25;
         }
-        .about-details .right {
-          width: 90%;
-          margin: 40px 0;
+        .q-roll-link span {
+            display: inline-block;
+            transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
         }
-        .services .boxes .box {
-          margin: 20px 0;
-          width: calc(100% / 2 - 20px);
+        .q-roll-link::after {
+            content: attr(data-text);
+            position: absolute;
+            top: 100%; left: 0;
+            color: #dad2f4;
+            transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
         }
-      }
-      @media (max-width: 900px) {
-        .about .left img {
-          height: 350px;
-          width: 350px;
+        .q-roll-link:hover span,
+        .q-roll-link:hover::after {
+            transform: translateY(-100%);
         }
-      }
-
-      @media (max-width: 750px) {
-        nav .navbar {
-          width: 90%;
-        }
-        nav .navbar .menu {
-          position: fixed;
-          left: -100%;
-          top: 0;
-          background: #0e2431;
-          height: 100vh;
-          max-width: 400px;
-          width: 100%;
-          padding-top: 60px;
-          flex-direction: column;
-          align-items: center;
-          transition: all 0.5s ease;
-        }
-        .navbar.active .menu {
-          left: 0;
-        }
-        nav .navbar .menu a {
-          font-size: 23px;
-          display: block;
-          color: #fff;
-          margin: 10px 0;
-        }
-        nav.sticky .menu a:hover {
-          color: #4070f4;
-        }
-        nav .navbar .media-icons {
-          display: none;
-        }
-        nav .menu-btn,
-        .navbar .menu .cancel-btn {
-          display: block;
-        }
-        .home .text-two {
-          font-size: 65px;
-        }
-        .home .text-three {
-          font-size: 35px;
-        }
-        .skills .skills-details {
-          align-items: center;
-          justify-content: center;
-          flex-direction: column;
-        }
-        .skills-details .text {
-          width: 100%;
-          margin-bottom: 50px;
-        }
-        .skills-details .boxes {
-          justify-content: center;
-          align-items: center;
-          width: 100%;
-        }
-        .services .boxes .box {
-          margin: 20px 0;
-          width: 100%;
-        }
-        .contact .text {
-          width: 100%;
-        }
-      }
-      @media (max-width: 500px) {
-        .home .text-two {
-          font-size: 40px;
-        }
-        .home .text-three {
-          font-size: 33px;
-        }
-        .skills-details .boxes .per {
-          font-size: 40px;
-        }
-      }
     </style>
+</head>
+<body class="min-h-screen bg-qclay-black text-zinc-50 antialiased">
 
-    <div class="scroll-button">
-      <a href="#home"><i class="fas fa-arrow-up"></i></a>
+    <!-- Custom Cursor -->
+    <div class="hidden lg:block" aria-hidden="true">
+        <div id="cursor-point" class="custom-cursor__point"></div>
+        <div id="cursor-ring" class="custom-cursor__ring"></div>
     </div>
 
-    <nav>
-      <div class="navbar">
-        <div class="logo"><a href="#">Chiiko.</a></div>
-        <ul class="menu">
-          <li><a href="#home">Home</a></li>
-          <li><a href="#about">About</a></li>
-          <li><a href="#skills">Skills</a></li>
-          <li><a href="#services">Services</a></li>
-          <li><a href="#contact">Contact</a></li>
-          <div class="cancel-btn">
-            <i class="fas fa-times"></i>
-          </div>
-        </ul>
-        <div class="media-icons">
-          <a href="#"><i class="fab fa-linkedin-in"></i></a>
-          <a href="https://github.com/CMN-Triple-111/"
-            ><i class="fab fa-github"></i
-          ></a>
-        </div>
-      </div>
-      <div class="menu-btn">
-        <i class="fas fa-bars"></i>
-      </div>
-    </nav>
+    <!-- Top Navigation -->
+    <header id="navbar" class="fixed top-0 left-0 w-full z-50 py-4 bg-zinc-950/85 backdrop-blur-xl border-b border-zinc-800/80">
+        <div class="max-w-7xl mx-auto px-6 md:px-12 flex justify-between items-center">
+            <div class="flex items-center gap-4">
+                <a href="index.html" class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-zinc-900 hover:bg-qclay-purple hover:text-zinc-950 border border-zinc-800 text-xs font-bold transition-all">
+                    <i data-lucide="arrow-left" class="w-3.5 h-3.5"></i>
+                    <span>Studio Home</span>
+                </a>
+                <a href="#home" class="font-extrabold text-xl tracking-tight text-white">
+                    Chiiko<span class="text-qclay-purple">.</span>
+                </a>
+            </div>
 
-    <section class="home" id="home">
-      <div class="home-content">
-        <div class="text">
-          <div class="text-one">Hello,</div>
-          <div class="text-two">I'm Chiiko Nswana</div>
-          <div class="text-three">Software Developer</div>
-          <div class="text-four">Based in Zambia</div>
-        </div>
-        <div class="button">
-          <a href="#contact"><button>Hire Me</button></a>
-        </div>
-      </div>
+            <nav class="hidden md:flex items-center gap-8 text-sm font-semibold text-zinc-300">
+                <a href="#home" class="q-roll-link" data-text="Home"><span>Home</span></a>
+                <a href="#about" class="q-roll-link" data-text="About"><span>About</span></a>
+                <a href="#skills" class="q-roll-link" data-text="Technical Stack"><span>Technical Stack</span></a>
+                <a href="#services" class="q-roll-link" data-text="Expertise"><span>Expertise</span></a>
+                <a href="#contact" class="q-roll-link" data-text="Contact"><span>Contact</span></a>
+            </nav>
 
-      <img class="backgroundIMG" src="background.png" loading="lazy" />
+            <div class="flex items-center gap-3">
+                <a href="https://github.com/CMN-Triple-111/" target="_blank" rel="noopener noreferrer" aria-label="GitHub" class="w-10 h-10 rounded-full bg-zinc-900 hover:bg-white hover:text-zinc-950 border border-zinc-800 flex items-center justify-center transition-colors">
+                    <i data-lucide="github" class="w-4 h-4"></i>
+                </a>
+                <a href="#contact" class="px-5 py-2.5 rounded-full bg-qclay-lime text-zinc-950 font-extrabold text-xs sm:text-sm inline-flex items-center gap-2 hover:scale-105 transition-transform shadow-lg">
+                    <i data-lucide="mail" class="w-4 h-4"></i>
+                    <span>Let's Talk</span>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section (#home) -->
+    <section id="home" class="relative pt-36 pb-20 md:pt-44 md:pb-28 px-6 md:px-12 max-w-7xl mx-auto overflow-hidden">
+        <div class="absolute top-12 right-10 w-[450px] h-[450px] bg-qclay-purple/15 rounded-full blur-[130px] -z-10 pointer-events-none"></div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+            <div class="lg:col-span-7">
+                <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-zinc-900 border border-zinc-800 text-xs font-mono uppercase tracking-wider text-qclay-lime mb-6">
+                    <span class="w-2 h-2 rounded-full bg-qclay-lime animate-pulse"></span>
+                    Software Developer • Based in Zambia
+                </div>
+                <p class="text-xl text-zinc-400 font-medium mb-2">Hello, I'm</p>
+                <h1 class="text-5xl sm:text-7xl font-extrabold tracking-tight leading-[1.04] mb-4">
+                    Chiiko Matthew<br />
+                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-qclay-purple via-indigo-300 to-qclay-mintAccent">Nswana.</span>
+                </h1>
+                <p class="text-2xl sm:text-3xl font-bold text-zinc-200 mb-6">
+                    Full-Stack Software Developer & Founder of Matt Essentials Solutions
+                </p>
+                <p class="text-zinc-400 text-base sm:text-lg max-w-2xl leading-relaxed mb-10">
+                    Combining a rigorous academic foundation in <strong class="text-white">Accounting & Finance</strong> with full-stack software engineering, database architecture, and UI/UX design craft.
+                </p>
+                <div class="flex flex-wrap gap-4">
+                    <a href="#contact" class="px-8 py-4 rounded-full bg-white text-zinc-950 font-extrabold text-sm hover:bg-qclay-purple transition-all inline-flex items-center gap-2">
+                        <span>Hire Me / Let's Chat</span>
+                        <i data-lucide="arrow-up-right" class="w-4 h-4"></i>
+                    </a>
+                    <a href="index.html#work" class="px-8 py-4 rounded-full bg-zinc-900 hover:bg-zinc-800 text-white border border-zinc-700 font-bold text-sm inline-flex items-center gap-2 transition-all">
+                        <i data-lucide="layers" class="w-4 h-4 text-qclay-lime"></i>
+                        <span>View Studio Works</span>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Right Visual with background.png & about.JPG -->
+            <div class="lg:col-span-5 relative flex justify-center">
+                <div class="relative w-full max-w-md aspect-[4/5] rounded-[2.75rem] bg-qclay-purple p-4 overflow-hidden shadow-2xl">
+                    <img src="about.JPG" alt="Chiiko Matthew Nswana" class="w-full h-full object-cover rounded-[2.25rem]" />
+                    <img src="background.png" alt="" class="absolute -bottom-6 -right-6 w-36 h-36 object-contain pointer-events-none opacity-90" />
+                    <div class="absolute bottom-6 left-6 right-6 p-4 rounded-2xl bg-zinc-950/90 backdrop-blur-md border border-white/10 text-white flex items-center justify-between">
+                        <div>
+                            <p class="text-xs font-mono text-qclay-lime uppercase">Experience</p>
+                            <p class="font-extrabold text-lg">03+ Years Production Dev</p>
+                        </div>
+                        <span class="px-3 py-1 rounded-full bg-qclay-purple text-zinc-950 font-mono text-xs font-extrabold">ZAMBIA</span>
+                    </div>
+                </div>
+            </div>
+        </div>
     </section>
 
-    <section class="about" id="about">
-      <div class="content">
-        <div class="title"><span>About Me</span></div>
-        <div class="about-details">
-          <div class="left">
-            <img src="about.JPG" alt="Chiiko Nswana Profile" loading="lazy"/>
-          </div>
-          <div class="right">
-            <div class="topic">Bridging Finance and Technology</div>
-            <p>
-              I am a results-driven Software Developer with a unique academic
-              foundation in Accounting and Finance. I specialize in building
-              robust web applications, dynamic user interfaces, and automated
-              backend systems. My experience ranges from deploying full-stack
-              platforms and optimizing high-traffic database schemas to
-              engineering complex Excel VBA scripts that streamline
-              administrative workflows.
-            </p>
-            <br />
-            <p>
-              Whether I am developing custom WPF interface controls, managing
-              web deployment environments, or drafting brand identities for
-              businesses, I apply a meticulous, analytical approach to solve
-              complex problems and deliver exceptional digital experiences.
-            </p>
-            <div class="button">
-              <a
-                href="Chiiko_Nswana_CV.pdf"
-                download="Chiiko_Nswana_CV.pdf"
-                style="text-decoration: none"
-              >
-                <button>Download CV <i class="fas fa-download"></i></button>
-              </a>
+    <!-- About Section (#about) -->
+    <section id="about" class="py-20 px-6 md:px-12 bg-zinc-900/40 border-y border-zinc-800/80">
+        <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+            <div class="lg:col-span-5">
+                <div class="p-8 rounded-[2.5rem] bg-[#effbf9] text-zinc-950 shadow-xl">
+                    <span class="px-3 py-1 rounded-full bg-zinc-950/10 text-xs font-mono font-bold uppercase">Unique Edge</span>
+                    <h2 class="text-3xl sm:text-4xl font-extrabold tracking-tight mt-4 mb-4">
+                        Bridging Finance and Technology
+                    </h2>
+                    <p class="text-zinc-800 text-sm sm:text-base leading-relaxed mb-6">
+                        My dual background in Accounting & Finance and Software Engineering allows me to translate complex financial, operational, and business workflows into automated, audit-ready software systems.
+                    </p>
+                    <div class="grid grid-cols-2 gap-4 pt-4 border-t border-zinc-950/10">
+                        <div>
+                            <p class="text-3xl font-black">03+</p>
+                            <p class="text-xs font-mono uppercase text-zinc-700">Years Dev Experience</p>
+                        </div>
+                        <div>
+                            <p class="text-3xl font-black">50+</p>
+                            <p class="text-xs font-mono uppercase text-zinc-700">Solutions Built</p>
+                        </div>
+                    </div>
+                </div>
             </div>
-          </div>
+
+            <div class="lg:col-span-7 space-y-6">
+                <span class="text-xs font-mono uppercase tracking-[0.25em] text-qclay-purple block">01 / Biography</span>
+                <h3 class="text-3xl sm:text-5xl font-extrabold tracking-tight">Analytical precision meets creative execution.</h3>
+                <p class="text-zinc-300 text-base sm:text-lg leading-relaxed">
+                    I am a results-driven Software Developer specializing in building robust web applications, dynamic user interfaces, and automated backend systems. My experience ranges from deploying full-stack platforms and optimizing high-traffic database schemas to engineering complex Excel VBA scripts that streamline administrative workflows.
+                </p>
+                <p class="text-zinc-400 text-base sm:text-lg leading-relaxed">
+                    Whether I am developing custom C# WPF interface controls, managing web deployment environments, or drafting brand identities for businesses through <strong class="text-white">Chawy Designs</strong> and <strong class="text-white">Matt Essentials Solutions</strong>, I apply a meticulous, analytical approach to solve complex problems and deliver exceptional digital experiences.
+                </p>
+            </div>
         </div>
-      </div>
     </section>
 
-    <section class="skills" id="skills">
-      <div class="content">
-        <div class="title"><span>My Technical Stack</span></div>
-        <div class="skills-details">
-          <div class="text">
-            <div class="topic">Development & Design Tools</div>
-            <p>
-              I have a comprehensive toolkit that allows me to handle both
-              frontend and backend development seamlessly. By leveraging the
-              latest frameworks and maintaining a strong grip on database
-              architectures, I ensure that all the systems I build are secure,
-              scalable, and responsive.
+    <!-- Technical Stack Section (#skills — QClay Pastel + Dark Bento Cards) -->
+    <section id="skills" class="py-24 px-6 md:px-12 max-w-7xl mx-auto">
+        <div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-14 gap-6">
+            <div>
+                <span class="text-xs font-mono uppercase tracking-[0.25em] text-qclay-lime mb-3 block">02 / My Technical Stack</span>
+                <h2 class="text-4xl sm:text-5xl font-extrabold tracking-tight">Development & Design Toolkit</h2>
+            </div>
+            <p class="text-zinc-400 max-w-md text-sm sm:text-base">
+                A comprehensive full-stack toolkit ensuring every system is secure, scalable, and responsive.
             </p>
-            <div class="experience">
-              <div class="num">03+</div>
-              <div class="exp">
-                Years Of <br />
-                Development Experience
-              </div>
-            </div>
-          </div>
-          <div class="boxes">
-            <div class="box">
-              <div class="topic"><i class="fab fa-php"></i> PHP & MySQL</div>
-              <div class="per">90%</div>
-            </div>
-            <div class="box">
-              <div class="topic"><i class="fab fa-js"></i> JS & Three.js</div>
-              <div class="per">85%</div>
-            </div>
-            <div class="box">
-              <div class="topic"><i class="fab fa-windows"></i> C# & WPF</div>
-              <div class="per">80%</div>
-            </div>
-            <div class="box">
-              <div class="topic"><i class="fab fa-html5"></i> HTML/CSS</div>
-              <div class="per">95%</div>
-            </div>
-            <div class="box">
-              <div class="topic">
-                <i class="fas fa-file-excel"></i> Excel VBA
-              </div>
-              <div class="per">90%</div>
-            </div>
-            <div class="box">
-              <div class="topic">
-                <i class="fab fa-figma"></i> Figma / UI Design
-              </div>
-              <div class="per">85%</div>
-            </div>
-          </div>
         </div>
-      </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div class="p-8 rounded-[2rem] bg-zinc-900 border border-zinc-800 hover:border-qclay-purple transition-all">
+                <div class="flex justify-between items-center mb-4">
+                    <span class="font-bold text-lg text-white">HTML5 / CSS3 / Tailwind</span>
+                    <span class="font-mono text-2xl font-extrabold text-qclay-purple">95%</span>
+                </div>
+                <div class="w-full h-2.5 rounded-full bg-zinc-800 overflow-hidden mb-3">
+                    <div class="h-full bg-qclay-purple rounded-full" style="width: 95%"></div>
+                </div>
+                <p class="text-xs text-zinc-400">Responsive layouts, semantic markup, modern animations & design systems.</p>
+            </div>
+
+            <div class="p-8 rounded-[2rem] bg-zinc-900 border border-zinc-800 hover:border-qclay-lime transition-all">
+                <div class="flex justify-between items-center mb-4">
+                    <span class="font-bold text-lg text-white">PHP & MySQL / SQL</span>
+                    <span class="font-mono text-2xl font-extrabold text-qclay-lime">90%</span>
+                </div>
+                <div class="w-full h-2.5 rounded-full bg-zinc-800 overflow-hidden mb-3">
+                    <div class="h-full bg-qclay-lime rounded-full" style="width: 90%"></div>
+                </div>
+                <p class="text-xs text-zinc-400">Normalized relational database schemas, backend APIs, and CMS platforms.</p>
+            </div>
+
+            <div class="p-8 rounded-[2rem] bg-zinc-900 border border-zinc-800 hover:border-qclay-amber transition-all">
+                <div class="flex justify-between items-center mb-4">
+                    <span class="font-bold text-lg text-white">Excel VBA & Access Sync</span>
+                    <span class="font-mono text-2xl font-extrabold text-qclay-amber">90%</span>
+                </div>
+                <div class="w-full h-2.5 rounded-full bg-zinc-800 overflow-hidden mb-3">
+                    <div class="h-full bg-qclay-amber rounded-full" style="width: 90%"></div>
+                </div>
+                <p class="text-xs text-zinc-400">Financial modeling, automated reporting macros, and database synchronization.</p>
+            </div>
+
+            <div class="p-8 rounded-[2rem] bg-zinc-900 border border-zinc-800 hover:border-qclay-blue transition-all">
+                <div class="flex justify-between items-center mb-4">
+                    <span class="font-bold text-lg text-white">JavaScript, React & Three.js</span>
+                    <span class="font-mono text-2xl font-extrabold text-qclay-blue">85%</span>
+                </div>
+                <div class="w-full h-2.5 rounded-full bg-zinc-800 overflow-hidden mb-3">
+                    <div class="h-full bg-qclay-blue rounded-full" style="width: 85%"></div>
+                </div>
+                <p class="text-xs text-zinc-400">Interactive SPAs, 3D WebGL experiences, TypeScript & modern frontend state.</p>
+            </div>
+
+            <div class="p-8 rounded-[2rem] bg-zinc-900 border border-zinc-800 hover:border-qclay-peach transition-all">
+                <div class="flex justify-between items-center mb-4">
+                    <span class="font-bold text-lg text-white">Figma / UI & Brand Design</span>
+                    <span class="font-mono text-2xl font-extrabold text-qclay-peach">85%</span>
+                </div>
+                <div class="w-full h-2.5 rounded-full bg-zinc-800 overflow-hidden mb-3">
+                    <div class="h-full bg-qclay-peach rounded-full" style="width: 85%"></div>
+                </div>
+                <p class="text-xs text-zinc-400">Wireframing, interactive prototyping, vector assets, and Chawy Designs branding.</p>
+            </div>
+
+            <div class="p-8 rounded-[2rem] bg-zinc-900 border border-zinc-800 hover:border-qclay-mintAccent transition-all">
+                <div class="flex justify-between items-center mb-4">
+                    <span class="font-bold text-lg text-white">C# & WPF Desktop Dev</span>
+                    <span class="font-mono text-2xl font-extrabold text-qclay-mintAccent">80%</span>
+                </div>
+                <div class="w-full h-2.5 rounded-full bg-zinc-800 overflow-hidden mb-3">
+                    <div class="h-full bg-qclay-mintAccent rounded-full" style="width: 80%"></div>
+                </div>
+                <p class="text-xs text-zinc-400">Custom Windows Presentation Foundation controls and desktop software suites.</p>
+            </div>
+        </div>
     </section>
 
-    <section class="services" id="services">
-      <div class="content">
-        <div class="title"><span>My Expertise</span></div>
-        <div class="boxes">
-          <div class="box">
-            <div class="icon">
-              <i class="fas fa-code"></i>
+    <!-- Services / Expertise Section (#services) -->
+    <section id="services" class="py-24 px-6 md:px-12 bg-zinc-900/30 border-t border-zinc-800/80">
+        <div class="max-w-7xl mx-auto">
+            <span class="text-xs font-mono uppercase tracking-[0.25em] text-qclay-purple mb-3 block">03 / Core Services</span>
+            <h2 class="text-4xl sm:text-5xl font-extrabold tracking-tight mb-14">My Expertise</h2>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="p-8 rounded-[2rem] bg-zinc-900 border border-zinc-800 hover:-translate-y-1.5 transition-all">
+                    <div class="w-12 h-12 rounded-2xl bg-qclay-purple text-zinc-950 flex items-center justify-center mb-6">
+                        <i data-lucide="code-2" class="w-6 h-6"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Web Development</h3>
+                    <p class="text-zinc-400 text-sm leading-relaxed">
+                        Building responsive, dynamic single-page applications and web interfaces using modern frameworks, PHP, and JavaScript.
+                    </p>
+                </div>
+
+                <div class="p-8 rounded-[2rem] bg-zinc-900 border border-zinc-800 hover:-translate-y-1.5 transition-all">
+                    <div class="w-12 h-12 rounded-2xl bg-qclay-lime text-zinc-950 flex items-center justify-center mb-6">
+                        <i data-lucide="database" class="w-6 h-6"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Database Architecture</h3>
+                    <p class="text-zinc-400 text-sm leading-relaxed">
+                        Designing optimized, secure MySQL & PostgreSQL database schemas and seamless API endpoints for complex, high-traffic applications.
+                    </p>
+                </div>
+
+                <div class="p-8 rounded-[2rem] bg-zinc-900 border border-zinc-800 hover:-translate-y-1.5 transition-all">
+                    <div class="w-12 h-12 rounded-2xl bg-qclay-amber text-zinc-950 flex items-center justify-center mb-6">
+                        <i data-lucide="file-spreadsheet" class="w-6 h-6"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Process Automation</h3>
+                    <p class="text-zinc-400 text-sm leading-relaxed">
+                        Engineering robust Excel VBA scripts synchronized with Access databases to streamline financial and administrative workflows.
+                    </p>
+                </div>
+
+                <div class="p-8 rounded-[2rem] bg-zinc-900 border border-zinc-800 hover:-translate-y-1.5 transition-all">
+                    <div class="w-12 h-12 rounded-2xl bg-qclay-peach text-zinc-950 flex items-center justify-center mb-6">
+                        <i data-lucide="palette" class="w-6 h-6"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Brand Identity</h3>
+                    <p class="text-zinc-400 text-sm leading-relaxed">
+                        Producing comprehensive logo concepts, design briefs, vector assets, and promotional materials through Chawy Designs.
+                    </p>
+                </div>
+
+                <div class="p-8 rounded-[2rem] bg-zinc-900 border border-zinc-800 hover:-translate-y-1.5 transition-all">
+                    <div class="w-12 h-12 rounded-2xl bg-qclay-blue text-zinc-950 flex items-center justify-center mb-6">
+                        <i data-lucide="figma" class="w-6 h-6"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">UI/UX Prototyping</h3>
+                    <p class="text-zinc-400 text-sm leading-relaxed">
+                        Designing custom interface controls, web page mockups, and application layouts focused on user-centered experiences.
+                    </p>
+                </div>
+
+                <div class="p-8 rounded-[2rem] bg-zinc-900 border border-zinc-800 hover:-translate-y-1.5 transition-all">
+                    <div class="w-12 h-12 rounded-2xl bg-qclay-mintAccent text-zinc-950 flex items-center justify-center mb-6">
+                        <i data-lucide="server" class="w-6 h-6"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Server Management</h3>
+                    <p class="text-zinc-400 text-sm leading-relaxed">
+                        Deploying applications, configuring Bluehost & cloud server environments, and managing web hosting infrastructures.
+                    </p>
+                </div>
             </div>
-            <div class="topic">Web Development</div>
-            <p>
-              Building responsive, dynamic single-page applications and web
-              interfaces using modern frameworks, PHP, and JavaScript.
-            </p>
-          </div>
-          <div class="box">
-            <div class="icon">
-              <i class="fas fa-database"></i>
-            </div>
-            <div class="topic">Database Architecture</div>
-            <p>
-              Designing optimized, secure MySQL database schemas and seamless
-              API endpoints for complex, high-traffic applications.
-            </p>
-          </div>
-          <div class="box">
-            <div class="icon">
-              <i class="fas fa-file-excel"></i>
-            </div>
-            <div class="topic">Process Automation</div>
-            <p>
-              Engineering robust Excel VBA scripts synchronized with Access
-              databases to streamline financial and administrative workflows.
-            </p>
-          </div>
-          <div class="box">
-            <div class="icon">
-              <i class="fas fa-paint-brush"></i>
-            </div>
-            <div class="topic">Brand Identity</div>
-            <p>
-              Producing comprehensive logo concepts, design briefs, vector
-              assets, and promotional materials through Chawy Designs.
-            </p>
-          </div>
-          <div class="box">
-            <div class="icon">
-              <i class="fab fa-figma"></i>
-            </div>
-            <div class="topic">UI/UX Prototyping</div>
-            <p>
-              Designing custom interface controls, web page mockups, and
-              application layouts focused on user-centered experiences.
-            </p>
-          </div>
-          <div class="box">
-            <div class="icon">
-              <i class="fas fa-server"></i>
-            </div>
-            <div class="topic">Server Management</div>
-            <p>
-              Deploying applications, configuring Bluehost server environments,
-              and managing web hosting infrastructures.
-            </p>
-          </div>
         </div>
-      </div>
     </section>
 
-    <section class="contact" id="contact">
-      <div class="content">
-        <div class="title"><span>Contact Me</span></div>
-        <div class="text">
-          <div class="topic">Have A Project In Mind?</div>
-          <p>
-            Whether you need a scalable backend system built from scratch, a
-            sleek web interface, or an automated data pipeline to streamline
-            your business operations, I can help you bridge the gap between
-            concept and code. Let's discuss your requirements.
-          </p>
-          <div class="button">
-            <a href="mailto:chiikonswana@gmail.com"
-              ><button>Let's Chat</button></a
-            >
-          </div>
+    <!-- Contact Section (#contact) -->
+    <section id="contact" class="py-24 px-6 md:px-12 max-w-5xl mx-auto text-center">
+        <div class="p-10 sm:p-16 rounded-[3rem] bg-gradient-to-b from-zinc-900 to-zinc-950 border border-zinc-800 shadow-2xl">
+            <span class="px-4 py-1.5 rounded-full bg-qclay-purple/15 text-qclay-purple font-mono text-xs uppercase tracking-widest">
+                Available for Opportunities & Consulting
+            </span>
+            <h2 class="text-4xl sm:text-6xl font-extrabold tracking-tight mt-6 mb-6">
+                Have a Project in Mind?
+            </h2>
+            <p class="text-zinc-400 text-base sm:text-lg max-w-2xl mx-auto leading-relaxed mb-10">
+                Whether you need a scalable backend system built from scratch, a sleek web interface, or an automated data pipeline to streamline your business operations, I can help you bridge the gap between concept and code.
+            </p>
+            <div class="flex flex-wrap justify-center gap-4">
+                <a href="mailto:chiikonswana@gmail.com" class="px-8 py-4 rounded-full bg-qclay-lime text-zinc-950 font-extrabold text-base hover:scale-105 transition-transform inline-flex items-center gap-2.5">
+                    <i data-lucide="mail" class="w-5 h-5"></i>
+                    <span>chiikonswana@gmail.com</span>
+                </a>
+                <a href="mailto:hello@mattessentials.online" class="px-8 py-4 rounded-full bg-white text-zinc-950 font-extrabold text-base hover:bg-qclay-purple transition-colors inline-flex items-center gap-2.5">
+                    <i data-lucide="briefcase" class="w-5 h-5"></i>
+                    <span>hello@mattessentials.online</span>
+                </a>
+                <a href="index.html#contact" class="px-8 py-4 rounded-full bg-zinc-900 hover:bg-zinc-800 text-white border border-zinc-700 font-bold text-base inline-flex items-center gap-2">
+                    <span>Open Interactive Project Planner</span>
+                    <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                </a>
+            </div>
         </div>
-      </div>
     </section>
 
-    <footer>
-      <div class="text">
-        <span
-          >Created By <a href="#">Chiiko Matthew Nswana</a> | &#169; 2026 All
-          Rights Reserved</span
-        >
-      </div>
+    <footer class="py-10 border-t border-zinc-800/80 text-center text-sm text-zinc-500">
+        <div class="max-w-7xl mx-auto px-6 flex flex-col sm:flex-row justify-between items-center gap-4">
+            <span>Created By <a href="index.html" class="text-white font-bold hover:text-qclay-purple">Chiiko Matthew Nswana</a> | © 2026 All Rights Reserved</span>
+            <a href="index.html" class="text-qclay-purple hover:underline">← Back to Matt Essentials Solutions</a>
+        </div>
     </footer>
 
     <script>
-      // Sticky Navigation Menu JS Code
-      let nav = document.querySelector("nav");
-      let scrollBtn = document.querySelector(".scroll-button a");
+        document.addEventListener('DOMContentLoaded', () => {
+            if (window.lucide) lucide.createIcons();
 
-      window.onscroll = function () {
-        if (document.documentElement.scrollTop > 20) {
-          nav.classList.add("sticky");
-          scrollBtn.style.display = "block";
-        } else {
-          nav.classList.remove("sticky");
-          scrollBtn.style.display = "none";
-        }
-      };
+            const point = document.getElementById('cursor-point');
+            const ring = document.getElementById('cursor-ring');
+            let mx = window.innerWidth / 2, my = window.innerHeight / 2;
+            let rx = mx, ry = my;
+            window.addEventListener('mousemove', (e) => {
+                mx = e.clientX; my = e.clientY;
+                if (point) { point.style.left = `${mx}px`; point.style.top = `${my}px`; }
+            }, { passive: true });
+            function loop() {
+                rx += (mx - rx) * 0.15;
+                ry += (my - ry) * 0.15;
+                if (ring) { ring.style.left = `${rx}px`; ring.style.top = `${ry}px`; }
+                requestAnimationFrame(loop);
+            }
+            requestAnimationFrame(loop);
 
-      // Side NavIgation Menu JS Code
-      let body = document.querySelector("body");
-      let navBar = document.querySelector(".navbar");
-      let menuBtn = document.querySelector(".menu-btn");
-      let cancelBtn = document.querySelector(".cancel-btn");
-
-      menuBtn.onclick = function () {
-        navBar.classList.add("active");
-        menuBtn.style.opacity = "0";
-        menuBtn.style.pointerEvents = "none";
-        body.style.overflow = "hidden";
-        scrollBtn.style.pointerEvents = "none";
-      };
-
-      cancelBtn.onclick = function () {
-        navBar.classList.remove("active");
-        menuBtn.style.opacity = "1";
-        menuBtn.style.pointerEvents = "auto";
-        body.style.overflow = "auto";
-        scrollBtn.style.pointerEvents = "auto";
-      };
-
-      // Side Navigation Bar Close While We Click On Navigation Links
-      let navLinks = document.querySelectorAll(".menu li a");
-      for (var i = 0; i < navLinks.length; i++) {
-        navLinks[i].addEventListener("click", function () {
-          navBar.classList.remove("active");
-          menuBtn.style.opacity = "1";
-          menuBtn.style.pointerEvents = "auto";
+            document.querySelectorAll('a, button').forEach(el => {
+                el.addEventListener('mouseenter', () => document.body.classList.add('cursor-hover'));
+                el.addEventListener('mouseleave', () => document.body.classList.remove('cursor-hover'));
+            });
         });
-      }
     </script>
-  </body>
+</body>
 </html>
