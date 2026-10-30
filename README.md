@@ -11,5 +11,5 @@ Official web platform and founder portfolio for **Matt Essentials Solutions** (`
   - **"What About Matt Essentials?" Horizontal Scroll Section**: 3 QClay pastel cards (`#dad2f4`, `#effbf9`, `#fce38a`) with double decorative circles and parallax pill videos that work on both desktop (sticky horizontal track) and mobile.
   - **"WE CREATE" Kinetic Marquee & 3-Stage Interface Showcase**: Interactive switcher between *01. UX & Wireframe*, *02. Holistic UI System*, and *03. Full-Stack & Mobile* with floating collaborator cursors and a 6-card Core Expertise bento grid.
   - **Selected Works Live Browser Frames**: Interactive production previews for **GNS Corporations**, **ZYOA Organization**, **St. Moven's School**, and **Ewana Environmental Consultant** with scroll-guard shields and one-click live interaction.
-  - **QClay Interactive Project Request Form**: Multi-select service pills, budget range pills, validation, and a celebratory **"Thank You! 🤝"** modal.
+  - **QClay Interactive Project Request Form**: Multi-select service pills, ZMW budget range pills, validation, and a celebratory **"Thank You! 🤝"** modal.
 - [`cv.html`](./cv.html) — **Chiiko Matthew Nswana Developer Portfolio & Profile**.

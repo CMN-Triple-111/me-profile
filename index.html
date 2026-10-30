@@ -547,10 +547,7 @@
         <div class="max-w-[1440px] w-full mx-auto my-auto grid grid-cols-1 lg:grid-cols-12 gap-12 items-center py-8">
             <!-- Left: Socials & Direct Links -->
             <div class="lg:col-span-3 flex flex-col gap-4 order-2 lg:order-1">
-                <span class="text-xs font-mono uppercase tracking-[0.25em] text-zinc-500 mb-2">Social & Profiles</span>
-                <a href="https://github.com/CMN-Triple-111/" target="_blank" rel="noopener noreferrer" class="text-lg font-semibold text-zinc-300 hover:text-qclay-lime flex items-center gap-2 transition-colors w-fit">
-                    GitHub <i data-lucide="arrow-up-right" class="w-4 h-4"></i>
-                </a>
+                <span class="text-xs font-mono uppercase tracking-[0.25em] text-zinc-500 mb-2">Direct & Profiles</span>
                 <a href="cv.html" class="text-lg font-semibold text-zinc-300 hover:text-qclay-purple flex items-center gap-2 transition-colors w-fit">
                     Chiiko Nswana — Portfolio <i data-lucide="file-text" class="w-4 h-4"></i>
                 </a>
@@ -1747,17 +1744,8 @@
                             </a>
                         </div>
                         <div>
-                            <span class="text-xs font-mono uppercase tracking-widest text-zinc-500 block mb-2">Founder Direct Email</span>
-                            <a href="mailto:chiikonswana@gmail.com" class="text-base font-bold text-zinc-300 hover:text-qclay-lime transition-colors">
-                                chiikonswana@gmail.com
-                            </a>
-                        </div>
-                        <div>
-                            <span class="text-xs font-mono uppercase tracking-widest text-zinc-500 block mb-3">Follow & Explore</span>
+                            <span class="text-xs font-mono uppercase tracking-widest text-zinc-500 block mb-3">Explore</span>
                             <div class="flex flex-wrap gap-3">
-                                <a href="https://github.com/CMN-Triple-111/" target="_blank" rel="noopener noreferrer" class="px-4 py-2.5 rounded-full bg-zinc-900 hover:bg-white hover:text-zinc-950 border border-zinc-800 text-xs font-bold transition-all flex items-center gap-2">
-                                    <i data-lucide="github" class="w-4 h-4"></i> GitHub
-                                </a>
                                 <a href="cv.html" class="px-4 py-2.5 rounded-full bg-zinc-900 hover:bg-qclay-purple hover:text-zinc-950 border border-zinc-800 text-xs font-bold transition-all flex items-center gap-2">
                                     <i data-lucide="user-check" class="w-4 h-4"></i> Chiiko Nswana Profile
                                 </a>
@@ -1820,31 +1808,31 @@
                             </div>
                         </div>
 
-                        <!-- 3. Project Budget (USD) Single-Select Pills -->
+                        <!-- 3. Project Budget (ZMW) Single-Select Pills -->
                         <div>
                             <label class="block text-lg sm:text-xl font-extrabold text-white mb-4">
-                                Project budget (USD)
+                                Project budget (ZMW)
                             </label>
                             <div class="flex flex-wrap gap-3">
                                 <label>
-                                    <input type="radio" name="budget" value="≤ $2K" class="qclay-pill-input sr-only">
-                                    <span class="qclay-pill-label">≤ $2K</span>
+                                    <input type="radio" name="budget" value="≤ ZMW 5,000" class="qclay-pill-input sr-only">
+                                    <span class="qclay-pill-label">≤ ZMW 5,000</span>
                                 </label>
                                 <label>
-                                    <input type="radio" name="budget" value="$2K–$5K" class="qclay-pill-input sr-only" checked>
-                                    <span class="qclay-pill-label">$2K–$5K</span>
+                                    <input type="radio" name="budget" value="ZMW 5,000–15,000" class="qclay-pill-input sr-only" checked>
+                                    <span class="qclay-pill-label">ZMW 5,000–15,000</span>
                                 </label>
                                 <label>
-                                    <input type="radio" name="budget" value="$5K–$10K" class="qclay-pill-input sr-only">
-                                    <span class="qclay-pill-label">$5K–$10K</span>
+                                    <input type="radio" name="budget" value="ZMW 15,000–35,000" class="qclay-pill-input sr-only">
+                                    <span class="qclay-pill-label">ZMW 15,000–35,000</span>
                                 </label>
                                 <label>
-                                    <input type="radio" name="budget" value="$10K–$25K" class="qclay-pill-input sr-only">
-                                    <span class="qclay-pill-label">$10K–$25K</span>
+                                    <input type="radio" name="budget" value="ZMW 35,000–75,000" class="qclay-pill-input sr-only">
+                                    <span class="qclay-pill-label">ZMW 35,000–75,000</span>
                                 </label>
                                 <label>
-                                    <input type="radio" name="budget" value="> $25K" class="qclay-pill-input sr-only">
-                                    <span class="qclay-pill-label">&gt; $25K</span>
+                                    <input type="radio" name="budget" value="> ZMW 75,000" class="qclay-pill-input sr-only">
+                                    <span class="qclay-pill-label">&gt; ZMW 75,000</span>
                                 </label>
                             </div>
                         </div>
@@ -1890,7 +1878,6 @@
                     <a href="#home" class="hover:text-white transition-colors">Top ↑</a>
                     <a href="#work" class="hover:text-white transition-colors">Works</a>
                     <a href="cv.html" class="text-qclay-purple hover:text-white transition-colors">Founder CV</a>
-                    <a href="https://github.com/CMN-Triple-111/" target="_blank" rel="noopener noreferrer" class="hover:text-white transition-colors">GitHub</a>
                 </div>
 
                 <p class="text-zinc-500 text-xs" id="copyright-year"></p>
@@ -2184,7 +2171,7 @@
                         `Project Overview:\n${project || 'Let us discuss on a call.'}\n`
                     );
 
-                    const mailtoUrl = `mailto:hello@mattessentials.online?cc=chiikonswana@gmail.com&subject=${subject}&body=${body}`;
+                    const mailtoUrl = `mailto:hello@mattessentials.online?subject=${subject}&body=${body}`;
                     const mailtoLink = document.getElementById('modal-mailto-link');
                     const summaryBox = document.getElementById('modal-summary');
 
